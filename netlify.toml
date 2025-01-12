@@ -1,0 +1,8 @@
+[build]
+  functions = "netlify/functions"
+[dev]
+  port = 8080
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
