@@ -7,6 +7,8 @@ import CategorySection from '../components/category-section'
 import TagSection from '../components/tag-section'
 import { RouteComponentProps, useLocation } from '@reach/router'
 import { useUxComicData } from '../hooks/use-uxcomic-data'
+import { HeadFC } from "gatsby"
+import CoverImage from '../static/hello.jpg';
 
 interface IUXComicPageProps extends RouteComponentProps {
   categoryUrl?: string
@@ -32,6 +34,8 @@ const UXComicPage: React.FC<React.PropsWithChildren<IUXComicPageProps>> = ({
   const { loadTags } = useUxComicData()
 
   const location = useLocation()
+
+  console.log(CoverImage)
 
   /**
    * USEEFFECTS
@@ -119,23 +123,23 @@ const UXComicPage: React.FC<React.PropsWithChildren<IUXComicPageProps>> = ({
   )
 }
 
-// export const Head: HeadFC = ({ location, params, data, pageContext }) => {
-//   return (
-//     <>
-//       <title>UXComic</title>
-//       <meta property="og:title" content="UXcomic" />
-//       <meta property="og:description" content="UXcomic" />
-//       <meta
-//         property="og:image"
-//         content="https://prod-files-secure.s3.us-west-2.amazonaws.com/bbbed9fd-0db9-45f7-8f82-bd0944c25a2d/df9019ef-3650-4c5e-8d06-815ff268d5d8/Lets_your_work_speak_themselves_be_like.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45HZZMZUHI%2F20240923%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240923T093734Z&X-Amz-Expires=3600&X-Amz-Signature=d0687184912fa7b743510e718e7b60034c8c9a45d46aa7375de8f47d783d3ad0&X-Amz-SignedHeaders=host&x-id=GetObject"
-//       />
-//       <meta property="og:type" content="article" />
-//       <meta
-//         property="og:url"
-//         content={`https://deploy-preview-2--hungvuongg71.netlify.app/`}
-//       />
-//     </>
-//   )
-// }
+export const Head: HeadFC = () => {
+  return (
+    <>
+      <title>{process.env.GATSBY_HOME_PAGE_TITLE || 'UXcomic'}</title>
+      <meta property="og:title" content={process.env.GATSBY_HOME_PAGE_TITLE || 'UXcomic'} />
+      <meta property="og:description" content={process.env.GATSBY_HOME_PAGE_DESC || 'Tụi mình ở đây để chia sẻ các kiến thức, góc nhìn cá nhân về hành trình làm nghề UX/UI.'} />
+      <meta
+        property="og:image"
+        content={process.env.GATSBY_WEB_ROOT_URL + CoverImage}
+      />
+      <meta property="og:type" content="article" />
+      <meta
+        property="og:url"
+        content={process.env.GATSBY_WEB_ROOT_URL}
+      />
+    </>
+  )
+}
 
 export default UXComicPage
