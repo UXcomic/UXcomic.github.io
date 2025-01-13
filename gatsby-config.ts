@@ -20,7 +20,7 @@ const config: GatsbyConfig = {
         background_color: `#FFF`,
         theme_color: `#FBEDE0`,
         display: `standalone`,
-        icon: `src/static/images/icon.jpg`,
+        icon: `src/static/icon.jpg`,
       }
     }
     // {

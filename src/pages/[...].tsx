@@ -8,6 +8,7 @@ import TagSection from '../components/tag-section'
 import { RouteComponentProps, useLocation } from '@reach/router'
 import { useUxComicData } from '../hooks/use-uxcomic-data'
 import { HeadFC } from "gatsby"
+import CoverImage from '../static/hello.jpg';
 
 interface IUXComicPageProps extends RouteComponentProps {
   categoryUrl?: string
@@ -33,6 +34,8 @@ const UXComicPage: React.FC<React.PropsWithChildren<IUXComicPageProps>> = ({
   const { loadTags } = useUxComicData()
 
   const location = useLocation()
+
+  console.log(CoverImage)
 
   /**
    * USEEFFECTS
@@ -128,7 +131,7 @@ export const Head: HeadFC = () => {
       <meta property="og:description" content={process.env.GATSBY_HOME_PAGE_DESC || 'Tụi mình ở đây để chia sẻ các kiến thức, góc nhìn cá nhân về hành trình làm nghề UX/UI.'} />
       <meta
         property="og:image"
-        content={process.env.GATSBY_HOME_PAGE_COVER || '/images/hello.jpg'}
+        content={process.env.GATSBY_WEB_ROOT_URL + CoverImage}
       />
       <meta property="og:type" content="article" />
       <meta
