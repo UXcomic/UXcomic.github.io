@@ -4,17 +4,17 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('../fonts/Inter/Inter-VariableFont_opsz\,wght.ttf');
+  src: url('../static/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf');
 }
 
 @font-face {
   font-family: 'Calistoga';
-  src: url('../fonts/Calistoga/Calistoga-Regular.ttf');
+  src: url('../static/fonts/Calistoga/Calistoga-Regular.ttf');
 }
 
 @font-face {
   font-family: 'Oi';
-  src: url('../fonts/Oi/Oi-Regular.ttf');
+  src: url('../static/fonts/Oi/Oi-Regular.ttf');
 }
 
 body {

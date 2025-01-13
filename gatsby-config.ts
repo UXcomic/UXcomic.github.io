@@ -2,8 +2,8 @@ import type { GatsbyConfig } from 'gatsby'
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `UXComic`,
-    siteUrl: `http://localhost:8080`,
+    title: `${process.env.GATSBY_HOME_PAGE_TITLE}`,
+    siteUrl: `${process.env.GATSBY_WEB_ROOT_URL}`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
