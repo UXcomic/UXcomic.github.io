@@ -135,7 +135,6 @@ export const Head: HeadFC = () => {
         property="og:url"
         content={process.env.GATSBY_WEB_ROOT_URL}
       />
-      <link rel="shortcut icon" type="image/jpg" href="/src/images/hello.jpg" />
     </>
   )
 }

@@ -11,6 +11,18 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     'gatsby-plugin-postcss',
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: `${process.env.GATSBY_HOME_PAGE_TITLE}`,
+        short_name: `${process.env.GATSBY_HOME_PAGE_TITLE}`,
+        start_url: `/`,
+        background_color: `#FFF`,
+        theme_color: `#FBEDE0`,
+        display: `standalone`,
+        icon: `src/static/images/icon.jpg`,
+      }
+    }
     // {
     //   resolve: `gatsby-plugin-create-client-paths`,
     //   options: { prefixes: [`/*`] },
