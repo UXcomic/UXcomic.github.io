@@ -74,7 +74,7 @@ const PostSection: React.FC<React.PropsWithChildren<IPostSectionProps>> = ({
       navigator
         .share({
           title: selectedPost.title,
-          text: selectedPost.title,
+          text: '',
           url: `${process.env.GATSBY_WEB_ROOT_URL}/bai-viet/${pathSegments[0]}/${pathSegments[1]}/${pathSegments[2]}/`, // URL của bài viết
         })
         .then(() => console.log('Chia sẻ thành công!'))
