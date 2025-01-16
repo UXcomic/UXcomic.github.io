@@ -17,8 +17,6 @@ const config: GatsbyConfig = {
         name: `${process.env.GATSBY_HOME_PAGE_TITLE}`,
         short_name: `${process.env.GATSBY_HOME_PAGE_TITLE}`,
         start_url: `/`,
-        background_color: `#FFF`,
-        theme_color: `#FBEDE0`,
         display: `standalone`,
         icon: `src/static/icon.jpg`,
       }
