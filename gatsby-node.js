@@ -1,7 +1,6 @@
 const path = require('path')
 const notion = require('./utilities/notion-sdk-helper')
 const contentHelper = require('./utilities/notion-content-helper')
-const _ = require('lodash')
 
 /**
  * GATSBY CREATE NODES
@@ -14,124 +13,9 @@ exports.sourceNodes = async ({
 }) => {
   const { createNode, createTypes } = actions
 
-  createTypes(`
-    type NotionCategory {
-      id: String
-      title: String
-      icon: String
-      url: String
-    }
-
-    type NotionTag {
-      id: String
-      name: String
-      title: String
-      order: Int
-      databaseId: String
-      categoryId: String
-      url: String
-    }
-
-    type NotionData {
-      value: String
-      caption: String
-    }
-
-    type NotionContent {
-      id: String
-      type: String
-      data: NotionData
-    }
-
-    type NotionPostBase {
-      id: String
-      title: String
-      publish: String
-      cover: String
-      type: String
-      createdTime: String
-      url: String
-      tag: NotionTag
-      category: NotionCategory
-      content: [NotionContent]
-    }
-
-    type NotionPost implements Node @dontInfer {
-      post: NotionPostBase
-    }
-  `)
-
-  let notionPosts = []
-
-  contentHelper.removeAllImages()
-
-  // Get Categories
-  const categories = await getCategories()
-  for (let i = 0; i < categories.length; i++) {
-    let tmpPost = {}
-    const category = categories[i]
-    tmpPost.category = category
-
-    // Get Tags
-    const tags = await getTags(category.id)
-    for (let j = 0; j < tags.length; j++) {
-      const tag = tags[j]
-      tmpPost.tag = tag
-
-      // Get Posts
-      let posts = await getPosts(tag.databaseId, tag.name, tag.id, category.id)
-      for (let k = 0; k < posts.length; k++) {
-        let tmpContent = []
-        let post = posts[k]
-        tmpContent = await getContent(post.id)
-
-        if (!tmpContent.length) continue
-
-        // Set Post Cover By First Image of Content
-        post.cover = process.env.GATSBY_THUMBNAIL_DEFAULT
-        const firstImg = tmpContent.find((cnt) => cnt.type === 'image')
-        if (firstImg) {
-          post.cover = firstImg.data.value // Get first image in content
-          tmpContent = tmpContent.filter((cnt) => cnt.id !== firstImg.id) // Remove first image because of cover post
-        }
-
-        // Get CallOut Items
-        for (let u = 0; u < tmpContent.length; u++) {
-          let cnt = tmpContent[u]
-          if (cnt.type === 'callout') {
-            let tmpData = JSON.parse(cnt.data.value)
-            tmpData.items = await getContent(cnt.id)
-            cnt.data.value = JSON.stringify(tmpData)
-          }
-        }
-
-        post.content = tmpContent
-      }
-
-      posts = posts
-        .filter((post) => !!post?.id)
-        .map((post) => ({ ...post, ...tmpPost }))
-
-      notionPosts.push(...posts)
-    }
-  }
-
-  // Node Posts
-  notionPosts.forEach((post) => {
-    // Create node each post
-    createNode({
-      id: createNodeId(`NotionPost-${post.id}`),
-      parent: null,
-      children: [],
-      internal: {
-        type: 'NotionPost', // Node name
-        contentDigest: createContentDigest(post),
-      },
-      // Save into GraphQL
-      post,
-      // More properties from Notion API
-    })
-  })
+  createUXComicTypes(createTypes)
+  await contentHelper.removeAllImages()
+  await processNotionPosts(createNode, createNodeId, createContentDigest)
 }
 
 /**
@@ -185,26 +69,124 @@ exports.createPages = async ({ graphql, actions }) => {
 
   let notionPosts = result.data.allNotionPost.nodes
 
-  notionPosts.forEach(({ post }) => {
-    createPage({
-      path: `/bai-viet/${post.category.url}/${post.tag.url}/${post.url}`,
-      component: path.resolve(`./src/templates/post-template.tsx`),
-      context: {
-        id: post.id,
-        title: post.title,
-        description: post.content?.find((cnt) => cnt.type === 'paragraph')?.data
-          .value,
-        cover: post.cover,
-        tagId: post.tag.id,
-        categoryId: post.category.id,
-      },
+  notionPosts
+    .filter((post) => !!post.category && !!post.tag)
+    .forEach(({ post }) => {
+      createPage({
+        path: `/bai-viet/${post.category.url}/${post.tag.url}/${post.url}`,
+        component: path.resolve(`./src/templates/post-template.tsx`),
+        context: {
+          id: post.id,
+          title: post.title,
+          description: post.content?.find((cnt) => cnt.type === 'paragraph')
+            ?.data.value,
+          cover: post.cover,
+          tagId: post.tag.id,
+          categoryId: post.category.id,
+        },
+      })
     })
-  })
 }
 
 /**
  * PRIVATE FUNCTIONS
  */
+const createUXComicTypes = (createTypes) => {
+  createTypes(`
+    type NotionCategory {
+      id: String
+      title: String
+      icon: String
+      url: String
+    }
+
+    type NotionTag {
+      id: String
+      name: String
+      title: String
+      order: Int
+      databaseId: String
+      categoryId: String
+      url: String
+    }
+
+    type NotionData {
+      value: String
+      caption: String
+    }
+
+    type NotionContent {
+      id: String
+      type: String
+      data: NotionData
+    }
+
+    type NotionPostBase {
+      id: String
+      title: String
+      publish: String
+      cover: String
+      type: String
+      createdTime: String
+      url: String
+      tag: NotionTag
+      category: NotionCategory
+      content: [NotionContent]
+    }
+
+    type NotionPost implements Node @dontInfer {
+      post: NotionPostBase
+    }
+  `)
+}
+
+const processNotionPosts = async (
+  createNode,
+  createNodeId,
+  createContentDigest
+) => {
+  let notionPosts = []
+  notionPosts.push(await getIntroPost()) // Push Intro Post
+
+  const categories = await getCategories() // Get Categories
+  for (let i = 0; i < categories.length; i++) {
+    let tmpPost = {}
+    const category = categories[i]
+    tmpPost.category = category
+
+    const tags = await getTags(category.id) // Get Tags
+    for (let j = 0; j < tags.length; j++) {
+      const tag = tags[j]
+      tmpPost.tag = tag
+
+      let posts = await getPosts(tag.databaseId, tag.name) // Get Posts
+
+      for (let k = 0; k < posts.length; k++) await includePostContents(posts[k]) // Get Contents
+
+      posts = posts
+        .filter((post) => !!post?.id)
+        .map((post) => ({ ...post, ...tmpPost }))
+
+      notionPosts.push(...posts)
+    }
+  }
+
+  notionPosts.forEach((post) => {
+    // Create node each post
+    createNode({
+      id: createNodeId(`NotionPost-${post.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: 'NotionPost', // Node name
+        contentDigest: createContentDigest(post),
+      },
+      // Save into GraphQL
+      post,
+    })
+  })
+}
+
 const getCategories = async () => {
   try {
     const rootBlockChildren = await notion.blocks.children.list({
@@ -219,10 +201,6 @@ const getCategories = async () => {
     const categoriesResponse = await notion.databases.query({
       database_id: database.id,
       sorts: [
-        // {
-        //   property: 'Name',
-        //   direction: 'ascending',
-        // },
         {
           property: 'Number',
           direction: 'ascending',
@@ -236,7 +214,9 @@ const getCategories = async () => {
         id: item.id,
         title: item.properties?.Name?.title[0].plain_text,
         icon: item.icon?.emoji,
-        url: generateUrl(item.properties?.Name?.title[0].plain_text),
+        url: contentHelper.generateUrl(
+          item.properties?.Name?.title[0].plain_text
+        ),
       }))
 
     return data
@@ -261,16 +241,7 @@ const getTags = async (blockId) => {
       ] || null
     const queryResponse = await notion.databases.query({
       database_id: database.id,
-      sorts: [
-        // {
-        //   property: 'Name',
-        //   direction: 'ascending',
-        // },
-        // {
-        //   property: 'Number',
-        //   direction: 'ascending',
-        // },
-      ],
+      sorts: [],
     })
 
     const tags = queryResponse.results
@@ -286,7 +257,7 @@ const getTags = async (blockId) => {
           order: order,
           databaseId: database.id,
           categoryId: blockId,
-          url: generateUrl(title),
+          url: contentHelper.generateUrl(title),
         }
       })
       .filter((item) => item?.id !== undefined)
@@ -303,7 +274,7 @@ const getTags = async (blockId) => {
   }
 }
 
-const getPosts = async (databaseId, tagName, tagId, categoryId) => {
+const getPosts = async (databaseId, tagName) => {
   try {
     if (!databaseId || !tagName) return []
 
@@ -311,12 +282,6 @@ const getPosts = async (databaseId, tagName, tagId, categoryId) => {
       database_id: databaseId,
       filter: {
         and: [
-          // {
-          //   property: 'Publish',
-          //   checkbox: {
-          //     equals: true,
-          //   },
-          // },
           {
             property: 'Tag',
             select: {
@@ -326,10 +291,6 @@ const getPosts = async (databaseId, tagName, tagId, categoryId) => {
         ],
       },
       sorts: [
-        // {
-        //   property: 'Created time',
-        //   direction: 'descending',
-        // },
         {
           timestamp: 'last_edited_time',
           direction: 'descending',
@@ -343,7 +304,9 @@ const getPosts = async (databaseId, tagName, tagId, categoryId) => {
       publish: item.properties?.Publish?.checkbox,
       type: item.properties?.Type?.select?.name,
       createdTime: item.created_time,
-      url: generateUrl(item.properties?.Name?.title[0].plain_text),
+      url: contentHelper.generateUrl(
+        item.properties?.Name?.title[0].plain_text
+      ),
       content: [],
     }))
 
@@ -353,6 +316,59 @@ const getPosts = async (databaseId, tagName, tagId, categoryId) => {
 
     return []
   }
+}
+
+const getIntroPost = async () => {
+  let introPage = await notion.pages.retrieve({
+    page_id:
+      process.env.GATSBY_INTRO_PAGE_ID ||
+      '10f5d164-78d8-804f-b8ea-e2a265424273',
+  })
+
+  let introPost = {
+    id:
+      process.env.GATSBY_INTRO_PAGE_ID ||
+      '10f5d164-78d8-804f-b8ea-e2a265424273',
+    title: introPage.properties?.title?.title[0]?.plain_text,
+    publish: 'true',
+    createdTime: introPage.created_time,
+    content: [],
+  }
+
+  introPost.url = contentHelper.generateUrl(
+    introPage.properties?.title?.title[0].plain_text
+  )
+
+  await includePostContents(introPost)
+
+  return introPost
+}
+
+const includePostContents = async (post) => {
+  let tmpContent = []
+  tmpContent = await getContent(post.id)
+
+  if (!tmpContent.length) return
+
+  // Set Post Cover By First Image of Content
+  post.cover = process.env.GATSBY_THUMBNAIL_DEFAULT
+  const firstImg = tmpContent.find((cnt) => cnt.type === 'image')
+  if (firstImg) {
+    post.cover = firstImg.data.value // Get first image in content
+    tmpContent = tmpContent.filter((cnt) => cnt.id !== firstImg.id) // Remove first image because of cover post
+  }
+
+  // Get CallOut Items
+  for (let u = 0; u < tmpContent.length; u++) {
+    let cnt = tmpContent[u]
+    if (cnt.type === 'callout') {
+      let tmpData = JSON.parse(cnt.data.value)
+      tmpData.items = await getContent(cnt.id)
+      cnt.data.value = JSON.stringify(tmpData)
+    }
+  }
+
+  post.content = tmpContent
 }
 
 const getContent = async (blockId) => {
@@ -390,24 +406,4 @@ const getContent = async (blockId) => {
 
     return []
   }
-}
-
-/**
- *
- * @param {string} value Value
- * @returns string
- */
-const generateUrl = (value) => {
-  let converted = removeVietnameseTones(value)
-  converted = _.kebabCase(converted)
-  return converted
-}
-
-const removeVietnameseTones = (str) => {
-  return str
-    .normalize('NFD') // Chuyển đổi sang dạng Normalization Form D
-    .replace(/[\u0300-\u036f]/g, '') // Loại bỏ các dấu kết hợp (combining diacritical marks)
-    .replace(/đ/g, 'd') // Thay thế chữ "đ" thường
-    .replace(/Đ/g, 'D') // Thay thế chữ "Đ" hoa
-    .replace(/[^a-zA-Z0-9\s]/g, '') // Loại bỏ các ký tự đặc biệt (tuỳ chọn)
 }
