@@ -17,6 +17,7 @@ const CategoryManager: React.FC = () => {
 
   const getUniqueCategories = () => {
     const categories = posts
+      .filter(({ post }) => post.id !== process.env.GATSBY_INTRO_PAGE_ID)
       .map(({ post }) => post.category)
       .filter(
         (category, index, self) =>

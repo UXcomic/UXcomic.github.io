@@ -23,8 +23,8 @@ const PostManager: React.FC = () => {
                 publish: post.publish,
                 type: post.type,
                 createdTime: post.createdTime,
-                tagId: post.tag.id,
-                categoryId: post.category.id,
+                tagId: post.tag?.id,
+                categoryId: post.category?.id,
                 content: post.content,
                 url: post.url,
               })

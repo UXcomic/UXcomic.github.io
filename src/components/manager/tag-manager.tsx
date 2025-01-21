@@ -17,6 +17,7 @@ const TagManager: React.FC = () => {
 
   const getUniqueTags = () => {
     const tags = posts
+      .filter(({ post }) => post.id !== process.env.GATSBY_INTRO_PAGE_ID)
       .map(({ post }) => post.tag)
       .filter(
         (tag, index, self) =>

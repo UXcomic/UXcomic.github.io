@@ -95,29 +95,6 @@ const PostSection: React.FC<React.PropsWithChildren<IPostSectionProps>> = ({
 
   return (
     <>
-      {/* {!isGrid && (
-        <div className="relative flex items-center justify-center h-96">
-          {props.map(({ x, y, rot, scale }, i) => (
-            <UxComicFlashCard
-              id={posts[i].id}
-              title={posts[i].title}
-              imageUrl={posts[i].cover}
-              type={posts[i].type}
-              key={i}
-              i={i}
-              x={x}
-              y={y}
-              rot={rot}
-              scale={scale}
-              bind={bind}
-              trans={trans}
-              onEnableDrag={enableDrag}
-              onClick={handleLoadContent}
-            ></UxComicFlashCard>
-          ))}
-        </div>
-      )} */}
-
       {isGrid && (
         <div className="grid grid-cols-2 grid-flow-row auto-rows-max auto-cols-max gap-4 items-start h-full py-4 px-2 overflow-x-hidden overflow-y-scroll no-scrollbar">
           {posts.map((post) => (
@@ -129,38 +106,6 @@ const PostSection: React.FC<React.PropsWithChildren<IPostSectionProps>> = ({
           ))}
         </div>
       )}
-
-      {/* {posts.length > 0 && (
-        <div
-          className={`flex justify-center space-x-10 py-3 ${!isGrid ? '' : 'absolute bottom-4 w-full z-10'}`}
-        >
-          {!isGrid && (
-            <>
-              <Button
-                className="inline-flex items-center justify-center w-12 h-12 bg-white bg-opacity-75 rounded-full border-2 border-solid border-white active:opacity-50"
-                onClick={undoFlashCard}
-              >
-                <ArrowUturnLeftIcon className="w-6 h-6" />
-              </Button>
-              <Button
-                className="inline-flex items-center justify-center w-12 h-12 bg-white bg-opacity-75 rounded-full border-2 border-solid border-white"
-                onClick={() => dispatch(setIsGrid(true))}
-              >
-                <Squares2X2Icon className="w-6 h-6" />
-              </Button>
-            </>
-          )}
-
-          {isGrid && (
-            <Button
-              className="inline-flex items-center justify-center w-16 h-16 bg-white bg-opacity-75 rounded-full border-2 border-solid border-white"
-              onClick={() => dispatch(setIsGrid(false))}
-            >
-              <XMarkIcon className="w-6 h-6" />
-            </Button>
-          )}
-        </div>
-      )} */}
 
       {selectedPost && (
         <UxComicDialog
