@@ -10,7 +10,6 @@ const AboutSection: React.FC<
 
   const handleGoToAboutPage = () => {
     setOpenDialog((state) => !state)
-    console.log('111')
   }
 
   return (
