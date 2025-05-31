@@ -61,8 +61,17 @@ const PostSection: React.FC<React.PropsWithChildren<IPostSectionProps>> = ({
     const postId = event.currentTarget.id
     const loadedPost = posts.find((post) => post.id === postId)
     setSelectedPost(loadedPost)
+
+    const newPath = `/${selectedCategory?.url}/${selectedTag?.url}/${loadedPost?.url}`
     setOpenDialog(true)
-    navigate(`/${selectedCategory?.url}/${selectedTag?.url}/${loadedPost?.url}`)
+
+    ;(window as any).gtag('event', 'page_view', {
+      page_path: newPath,
+      page_location: window.location.href,
+      page_title: document.title,
+    })
+
+    navigate(newPath)
   }
 
   const handleShareLink = () => {

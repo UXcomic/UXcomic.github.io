@@ -19,8 +19,17 @@ const config: GatsbyConfig = {
         start_url: `/`,
         display: `standalone`,
         icon: `src/static/icon.jpg`,
-      }
-    }
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-gtag',
+      options: {
+        trackingIds: ['G-110TZYN4K8'],
+        pluginConfig: {
+          head: true,
+        },
+      },
+    },
     // {
     //   resolve: `gatsby-plugin-create-client-paths`,
     //   options: { prefixes: [`/*`] },
