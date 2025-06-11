@@ -31,13 +31,16 @@ const CategorySection: React.FC<
 
   return (
     <>
-      <label className="flex items-center justify-center w-8 h-8 text-[22px]">
-        {selectedCategory?.icon}
-      </label>
-      <h1 className="ml-2 title-1" onClick={() => setOpen(true)}>
-        {selectedCategory?.title}
-      </h1>
-      <ChevronDownIcon className="size-5 ml-2" />
+      <div
+        className="flex justify-center items-center cursor-pointer"
+        onClick={() => setOpen(true)}
+      >
+        <label className="flex items-center justify-center w-8 h-8 text-[22px]">
+          {selectedCategory?.icon}
+        </label>
+        <h1 className="ml-2 title-1">{selectedCategory?.title}</h1>
+        <ChevronDownIcon className="size-5 ml-2" />
+      </div>
       <UxComicDrawer open={open} setOpen={setOpen}>
         <>
           <div className="flex items-center justify-between h-16">
