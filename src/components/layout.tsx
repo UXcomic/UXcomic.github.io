@@ -15,7 +15,7 @@ const Layout: React.FC<React.PropsWithChildren<ILayoutProps>> = ({
       <PostManager />
 
       <div className="container mx-auto h-dvh w-screen bg-uxcomic-bg">
-        <main className="flex flex-col h-dvh overflow-x-hidden">
+        <main className="flex flex-col h-dvh overflow-x-hidden max-w-96 mx-auto">
           {children || 'No Content'}
         </main>
       </div>

@@ -25,7 +25,7 @@ const UxComicDialog: React.FC<React.PropsWithChildren<IDialogProps>> = ({
         <div className="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
           <DialogPanel
             transition
-            className="flex w-full transform text-left text-base transition data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in md:my-8 md:max-w-2xl md:px-4 data-[closed]:md:translate-y-0 data-[closed]:md:scale-95 lg:max-w-4xl"
+            className="flex w-full transform text-left text-base transition data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in md:max-w-md md:px-4 data-[closed]:md:translate-y-0 data-[closed]:md:scale-95 lg:max-w-md"
           >
             <div className="relative w-full h-dvh overflow-y-auto overflow-x-hidden px-4 pb-20 shadow-2xl bg-uxcomic-bg">
               <button
