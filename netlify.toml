@@ -1,9 +1,0 @@
-[build]
-  functions = "netlify/functions"
-[dev]
-  framework = "gatsby"
-  port = 8080
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
