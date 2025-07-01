@@ -1,0 +1,70 @@
+[
+  {
+    "category": "technical",
+    "tag": "ui-relevant"
+  },
+  {
+    "category": "technical",
+    "tag": "functionality"
+  },
+  {
+    "category": "technical",
+    "tag": "data"
+  },
+  {
+    "category": "cheat-sheet",
+    "tag": "design"
+  },
+  {
+    "category": "cheat-sheet",
+    "tag": "think"
+  },
+  {
+    "category": "cheat-sheet",
+    "tag": "other"
+  },
+  {
+    "category": "collaboration",
+    "tag": "communication"
+  },
+  {
+    "category": "collaboration",
+    "tag": "workflow"
+  },
+  {
+    "category": "collaboration",
+    "tag": "understanding"
+  },
+  {
+    "category": "fundamental",
+    "tag": "product"
+  },
+  {
+    "category": "fundamental",
+    "tag": "user"
+  },
+  {
+    "category": "fundamental",
+    "tag": "design"
+  },
+  {
+    "category": "fundamental",
+    "tag": "random"
+  },
+  {
+    "category": "design",
+    "tag": "understand"
+  },
+  {
+    "category": "design",
+    "tag": "think"
+  },
+  {
+    "category": "design",
+    "tag": "build"
+  },
+  {
+    "category": "design",
+    "tag": "measure"
+  }
+]
