@@ -1,5 +1,9 @@
 @use "normalize.css/normalize.css"
 @use "tailwindcss"
+@use "@angular/material/prebuilt-themes/azure-blue.css"
+@use "@angular/material" as mat
+@use "./app/styles/colors"
+@use "./app/styles/typography"
 
 @font-face
   font-family: 'Inter'
@@ -9,19 +13,36 @@
   font-family: 'Calistoga'
   src: url('../public/font/Calistoga-Regular.ttf') format("truetype")
 
-@font-face
-  font-family: 'Material Symbols Outlined'
-  src: url('../public/font/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf') format("truetype")
+body
+  color: colors.$color-text-primary
 
-.material-symbols-outlined
-  font-family: 'Material Symbols Outlined'
-  font-weight: normal
-  font-style: normal
-  font-size: 24px
-  display: inline-block
-  line-height: 1
-  text-transform: none
-  letter-spacing: normal
-  word-wrap: normal
-  white-space: nowrap
-  direction: ltr
+.ux
+  &__category
+    &-list-dialog
+      &-container
+        .mat-mdc-dialog-surface
+          border-radius: 0
+        .mat-mdc-dialog-content
+          background: colors.$color-bg
+      &-title
+        @extend %title-1
+        color: rgba(0, 0, 0, 0.9)
+      &-icon-close
+        &.mat-mdc-icon-button
+          width: 48px
+          height: 48px
+          color: black
+          display: flex
+          align-items: center
+          justify-content: center
+          background: rgba(255, 255, 255, 0.75)
+          backdrop-filter: blur(16px)
+          .mat-mdc-button-persistent-ripple
+            border: 2px solid white
+
+    &-icon
+      @extend %title-1
+
+    &-name
+      @extend %title-1
+      @extend %font-bold
