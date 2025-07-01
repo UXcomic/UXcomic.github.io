@@ -90,7 +90,7 @@ async function fetchPosts() {
     const publishedPostsData = data.results.filter(
       (post) => post.properties.Publish.checkbox
     );
-    // await fetchContents(publishedPostsData);
+    await fetchContents(publishedPostsData);
     postsData.push(...publishedPostsData);
   }
 }
@@ -231,11 +231,10 @@ function toSlug(title) {
 }
 
 function createJsonFiles() {
-  // processCreateCategoriesAndTagsFile();
-  // processPostsFile();
+  processCreateCategoriesAndTagsFile();
+  processPostsFile();
   processBlogRoutesFile();
   processPostRoutesFile();
-  // generateRoutesTxtFile();
 }
 
 function processCreateCategoriesAndTagsFile() {
@@ -264,22 +263,4 @@ function processPostRoutesFile() {
   const outputPath = path.join(outputDir, "postRoutes.json");
   fs.writeFileSync(outputPath, JSON.stringify(postRoutes, null, 2));
   console.log(`✅ Saved ${postRoutes.length} routes to ${outputPath}`);
-}
-
-function generateRoutesTxtFile() {
-  const transformedBlogRoutes = blogRoutes.map(
-    (route) => `/blog/${route.category}/${route.tag}`
-  );
-
-  const transformedPostRoutes = postRoutes.map(
-    (route) => `/post/${route.slug}`
-  );
-
-  const allRoutes = [...transformedBlogRoutes, ...transformedPostRoutes];
-  const uniqueRoutes = [...new Set(allRoutes)];
-  const outputPath = path.join(__dirname, "../public/data/routes.txt");
-
-  fs.writeFileSync(outputPath, uniqueRoutes.join("\n"));
-
-  console.log(`✅ Saved ${uniqueRoutes.length} unique routes to ${outputPath}`);
 }
