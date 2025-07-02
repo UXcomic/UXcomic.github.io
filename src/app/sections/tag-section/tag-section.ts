@@ -1,6 +1,6 @@
-import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core'
 import { Tag } from '../../models/tag'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { CommonModule } from '@angular/common'
 
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common'
   templateUrl: './tag-section.html',
   styleUrl: './tag-section.sass',
 })
-export class TagSection implements OnInit, OnDestroy {
+export class TagSection implements OnInit, OnChanges, OnDestroy {
   @Input() tags?: Tag[]
 
   protected categoryParam?: string
@@ -19,20 +19,33 @@ export class TagSection implements OnInit, OnDestroy {
   protected selected?: Tag
 
   private route = inject(ActivatedRoute)
+  private router = inject(Router)
   private paramMapSubscription: Subscription | undefined
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     this.paramMapSubscription = this.route.paramMap.subscribe((params) => {
       this.categoryParam = params.get('category') || 'null'
       this.tagParam = params.get('tag') || 'null'
+
+      this.selected = this.tags?.find((t) => t.slug === this.tagParam)
     })
   }
 
-  ngOnInit(): void {
-    this.selected = this.tags?.find((t) => t.slug === this.tagParam)
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['tags'] && this.tags && this.tagParam) {
+      this.selected = this.tags.find((t) => t.slug === this.tagParam)
+    }
   }
 
   ngOnDestroy(): void {
     if (this.paramMapSubscription) this.paramMapSubscription.unsubscribe()
+  }
+
+  goToTag(tag: Tag) {
+    if (!tag) return
+
+    this.router.navigateByUrl(`/blog/${this.categoryParam}/${tag.slug}`)
   }
 }

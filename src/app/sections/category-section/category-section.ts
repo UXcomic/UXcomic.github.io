@@ -1,10 +1,11 @@
 import { Component, inject, Input, OnInit } from '@angular/core'
 import { FlowbiteService } from '../../services/flowbite.service'
-import { initFlowbite } from 'flowbite'
 import { DrawerTopComponent } from '../../components/drawer-top-component/drawer-top-component'
 import { Category } from '../../models/category'
 import CategoryData from '../../../../public/data/categoriesAndTags.json'
 import { CommonModule } from '@angular/common'
+import { Router } from '@angular/router'
+import { initFlowbite } from 'flowbite'
 
 @Component({
   selector: 'app-category-section',
@@ -19,10 +20,18 @@ export class CategorySection implements OnInit {
   protected categories: Category[] = CategoryData
 
   private flowbiteService = inject(FlowbiteService)
+  private router = inject(Router)
 
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite((flowbite) => {
       initFlowbite()
     })
+  }
+
+  goToCategory(category: Category) {
+    if (!category) return
+
+    const firstTagSlug = category.tags?.[0]?.slug || 'null'
+    this.router.navigateByUrl(`/blog/${category.slug}/${firstTagSlug}`)
   }
 }

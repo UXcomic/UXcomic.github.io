@@ -26,7 +26,9 @@ export class Blog implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute)
   private paramMapSubscription: Subscription | undefined
 
-  constructor() {
+  constructor() {}
+
+  ngOnInit(): void {
     this.paramMapSubscription = this.route.paramMap.subscribe((params) => {
       this.categoryParam = params.get('category')
       this.tagParam = params.get('tag')
@@ -41,8 +43,6 @@ export class Blog implements OnInit, OnDestroy {
       )
     })
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     if (this.paramMapSubscription) this.paramMapSubscription.unsubscribe()
