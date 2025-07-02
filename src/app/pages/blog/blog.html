@@ -1,4 +1,4 @@
-<app-header [category]="category"></app-header>
-<div *ngIf="!!category && category.tags?.length">
-  <app-tag-list-tab [tags]="category.tags"></app-tag-list-tab>
-</div>
+<section class="py-[8px]">
+  <app-category-section [selected]="category"></app-category-section>
+  <app-tag-section *ngIf="!!category" [tags]="category.tags"></app-tag-section>
+</section>

@@ -1,0 +1,38 @@
+<div
+  [id]="drawerId || 'drawer-top-example'"
+  class="ux-top-drawer__container fixed top-0 left-0 right-0 z-40 w-full px-[24px] py-[12px] transition-transform -translate-y-full bg-white rounded-b-[24px]"
+  tabindex="-1"
+  attr.aria-labelledby="{{ drawerId ? drawerId + '-label' : 'drawer-top-label' }}"
+>
+  <div class="flex justify-between items-center">
+    <span [id]="drawerId ? drawerId + '-label' : 'drawer-top-label'" class="ux-top-drawer__title">
+      {{title || 'Danh mục'}}
+    </span>
+    <button
+      type="button"
+      attr.data-drawer-hide="{{drawerId || 'drawer-top-example'}}"
+      attr.aria-controls="{{drawerId || 'drawer-top-example'}}"
+      class="w-[48px] h-[48px] bg-white/75 border-[2px] border-white rounded-full flex items-center justify-center"
+    >
+      <svg
+        class="w-6 h-6"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18 17.94 6M18 18 6.06 6"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <ng-content></ng-content>
+</div>

@@ -3,17 +3,17 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import BlogRoutes from '../../../../public/data/blogRoutes.json'
 import CategoriesData from '../../../../public/data/categoriesAndTags.json'
-import { Header } from '../../components/header/header'
 import { Category } from '../../models/category'
-import { TagListTab } from '../../components/tag-list-tab/tag-list-tab'
 import { CommonModule } from '@angular/common'
+import { CategorySection } from '../../sections/category-section/category-section'
+import { TagSection } from '../../sections/tag-section/tag-section'
 
 const DEFAULT_ROUTE = `/blog/${BlogRoutes[0].category}/${BlogRoutes[0].tag}`
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [Header, TagListTab, CommonModule],
+  imports: [CommonModule, CategorySection, TagSection],
   templateUrl: './blog.html',
   styleUrl: './blog.sass',
 })

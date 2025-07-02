@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryListDialog } from './category-list-dialog';
+import { DrawerTopComponent } from './drawer-top-component';
 
-describe('CategoryListDialog', () => {
-  let component: CategoryListDialog;
-  let fixture: ComponentFixture<CategoryListDialog>;
+describe('DrawerTopComponent', () => {
+  let component: DrawerTopComponent;
+  let fixture: ComponentFixture<DrawerTopComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CategoryListDialog]
+      imports: [DrawerTopComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CategoryListDialog);
+    fixture = TestBed.createComponent(DrawerTopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

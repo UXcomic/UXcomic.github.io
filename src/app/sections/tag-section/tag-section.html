@@ -1,0 +1,14 @@
+<ul class="tag-section__container mt-[12px] px-[24px] flex flex-nowrap text-center overflow-x-auto">
+  @for(t of tags; track t.id) {
+  <li class="tag-section__item me-[8px] last:me-[0px]">
+    <a
+      [href]="`/blog/${categoryParam}/${t.slug}`"
+      class="tag-section__item-link inline-block px-[12px] py-[8px] border-[1px] border-black/20 rounded-[8px]"
+      [class.active]="t.slug === selected?.slug"
+      attr.aria-current="{{t.slug === selected?.slug ? 'page' : null}}"
+    >
+      {{t.name}}
+    </a>
+  </li>
+  }
+</ul>

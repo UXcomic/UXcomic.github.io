@@ -1,9 +1,10 @@
 @use "normalize.css/normalize.css"
 @use "tailwindcss"
-@use "@angular/material/prebuilt-themes/azure-blue.css"
-@use "@angular/material" as mat
 @use "./app/styles/colors"
 @use "./app/styles/typography"
+@use "flowbite/src/themes/default"
+@plugin "flowbite/plugin"
+@source "../node_modules/flowbite"
 
 @font-face
   font-family: 'Inter'
@@ -18,41 +19,3 @@ body
 
 main
   background-color: colors.$color-bg
-
-.ux
-  &__category
-    &-list-dialog
-      &-container
-        .mat-mdc-dialog-surface
-          border-radius: 0
-          border-bottom-left-radius: 24px
-          border-bottom-right-radius: 24px
-        .mat-mdc-dialog-content
-          background: colors.$color-bg
-          padding: 8px 24px 12px 24px !important
-      &-title
-        @extend %title-1
-        color: rgba(0, 0, 0, 0.9)
-      &-icon-close
-        &.mat-mdc-icon-button
-          width: 48px
-          height: 48px
-          color: rgb(0, 0, 0)
-          display: flex
-          align-items: center
-          justify-content: center
-          background: rgba(255, 255, 255, 0.75)
-          backdrop-filter: blur(16px)
-          .mat-mdc-button-persistent-ripple
-            border: 2px solid white
-      &-item
-        border-bottom-color: colors.$color-divider
-        &-title
-          @extend %body-lg
-          @extend %font-bold
-    &-icon
-      @extend %title-1
-
-    &-name
-      @extend %title-1
-      @extend %font-bold

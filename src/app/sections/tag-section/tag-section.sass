@@ -1,0 +1,14 @@
+@use '../../styles/colors'
+@use '../../styles/typography'
+
+.tag-section
+  &__container
+    @extend %body-md
+    @extend %font-bold
+    color: colors.$color-text-tertiary
+
+  &__item
+    &-link
+      &.active
+        border-color: colors.$color-text-primary
+        color: colors.$color-text-primary

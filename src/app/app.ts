@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { Component, inject, OnInit } from '@angular/core'
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router'
 import BlogRoutes from '../../public/data/blogRoutes.json'
 
