@@ -3,17 +3,21 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import BlogRoutes from '../../../../public/data/blogRoutes.json'
 import CategoriesData from '../../../../public/data/categoriesAndTags.json'
+import PostsData from '../../../../public/data/posts.json'
 import { Category } from '../../models/category'
 import { CommonModule } from '@angular/common'
 import { CategorySection } from '../../sections/category-section/category-section'
 import { TagSection } from '../../sections/tag-section/tag-section'
+import { Post } from '../../models/post'
+import { getPostInformation } from '../../utils/post-helper'
+import { PostsSection } from '../../sections/posts-section/posts-section'
 
 const DEFAULT_ROUTE = `/blog/${BlogRoutes[0].category}/${BlogRoutes[0].tag}`
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [CommonModule, CategorySection, TagSection],
+  imports: [CommonModule, CategorySection, TagSection, PostsSection],
   templateUrl: './blog.html',
   styleUrl: './blog.sass',
 })
@@ -21,6 +25,7 @@ export class Blog implements OnInit, OnDestroy {
   protected categoryParam: string | null = null
   protected tagParam: string | null = null
   protected category?: Category
+  protected posts?: Post[]
 
   private router = inject(Router)
   private route = inject(ActivatedRoute)
@@ -41,10 +46,25 @@ export class Blog implements OnInit, OnDestroy {
       this.category = CategoriesData.find(
         (item) => item.slug === this.categoryParam && item.tags.findIndex((tag) => tag.slug === this.tagParam) > -1,
       )
+
+      this.getPosts()
     })
   }
 
   ngOnDestroy(): void {
     if (this.paramMapSubscription) this.paramMapSubscription.unsubscribe()
+  }
+
+  private getPosts() {
+    const currentTag = this.category?.tags?.find((t) => t.slug === this.tagParam)
+
+    this.posts = (PostsData as any[])
+      .filter((p) => p.properties.Tag.select.id === currentTag?.id)
+      .map((p) => ({
+        id: p.id,
+        cover: p.content.find((c: any) => c.type === 'image').image.file.url,
+        level: getPostInformation(p.properties.Type.select.name),
+        title: p.properties.Name.title[0].text.content,
+      }))
   }
 }
