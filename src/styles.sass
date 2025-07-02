@@ -16,14 +16,20 @@
 body
   color: colors.$color-text-primary
 
+main
+  background-color: colors.$color-bg
+
 .ux
   &__category
     &-list-dialog
       &-container
         .mat-mdc-dialog-surface
           border-radius: 0
+          border-bottom-left-radius: 24px
+          border-bottom-right-radius: 24px
         .mat-mdc-dialog-content
           background: colors.$color-bg
+          padding: 8px 24px 12px 24px !important
       &-title
         @extend %title-1
         color: rgba(0, 0, 0, 0.9)
@@ -31,7 +37,7 @@ body
         &.mat-mdc-icon-button
           width: 48px
           height: 48px
-          color: black
+          color: rgb(0, 0, 0)
           display: flex
           align-items: center
           justify-content: center
@@ -39,7 +45,11 @@ body
           backdrop-filter: blur(16px)
           .mat-mdc-button-persistent-ripple
             border: 2px solid white
-
+      &-item
+        border-bottom-color: colors.$color-divider
+        &-title
+          @extend %body-lg
+          @extend %font-bold
     &-icon
       @extend %title-1
 

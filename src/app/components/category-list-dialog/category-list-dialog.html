@@ -1,8 +1,21 @@
 <div matDialogContent>
-  <div *ngIf="selectedCategory" class="flex items-center justify-between">
+  <div *ngIf="selectedCategory" class="flex items-center justify-between h-[44px]">
     <span class="ux__category-list-dialog-title">Danh mục</span>
-    <button matIconButton class="ux__category-list-dialog-icon-close">
+    <button (click)="dialogRef.close()" matIconButton class="ux__category-list-dialog-icon-close">
       <mat-icon aria-hidden="false" aria-label="Close" fontIcon="close"></mat-icon>
     </button>
   </div>
+  <mat-list role="list">
+    @for(c of categories; track c) {
+    <mat-list-item role="listitem" class="ux__category-list-dialog-item !p-[0px] !h-[60px] border-b-[1px]">
+      <div (click)="redirectToCategory(c)" class="flex justify-between">
+        <div class="flex gap-[8px]">
+          <span class="text-[22px]">{{c.icon}}</span>
+          <span class="ux__category-list-dialog-item-title">{{c.name}}</span>
+        </div>
+        <mat-icon *ngIf="c.slug === selectedCategory?.slug" fontIcon="check"></mat-icon>
+      </div>
+    </mat-list-item>
+    }
+  </mat-list>
 </div>

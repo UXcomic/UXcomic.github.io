@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon'
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule],
   templateUrl: './header.html',
   styleUrl: './header.sass',

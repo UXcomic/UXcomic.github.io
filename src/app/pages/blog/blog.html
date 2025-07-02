@@ -1,2 +1,4 @@
 <app-header [category]="category"></app-header>
-<p class="pt-3">blog works!</p>
+<div *ngIf="!!category && category.tags?.length">
+  <app-tag-list-tab [tags]="category.tags"></app-tag-list-tab>
+</div>

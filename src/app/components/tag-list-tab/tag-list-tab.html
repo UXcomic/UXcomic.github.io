@@ -1,0 +1,5 @@
+<mat-tab-group mat-stretch-tabs="false">
+  @for(tag of tags; track $index) {
+  <mat-tab [label]="tag.name">Content...</mat-tab>
+  }
+</mat-tab-group>

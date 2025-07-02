@@ -5,12 +5,15 @@ import BlogRoutes from '../../../../public/data/blogRoutes.json'
 import CategoriesData from '../../../../public/data/categoriesAndTags.json'
 import { Header } from '../../components/header/header'
 import { Category } from '../../models/category'
+import { TagListTab } from '../../components/tag-list-tab/tag-list-tab'
+import { CommonModule } from '@angular/common'
 
 const DEFAULT_ROUTE = `/blog/${BlogRoutes[0].category}/${BlogRoutes[0].tag}`
 
 @Component({
   selector: 'app-blog',
-  imports: [Header],
+  standalone: true,
+  imports: [Header, TagListTab, CommonModule],
   templateUrl: './blog.html',
   styleUrl: './blog.sass',
 })
@@ -32,14 +35,14 @@ export class Blog implements OnInit, OnDestroy {
         this.router.navigateByUrl(DEFAULT_ROUTE)
         return
       }
+
+      this.category = CategoriesData.find(
+        (item) => item.slug === this.categoryParam && item.tags.findIndex((tag) => tag.slug === this.tagParam) > -1,
+      )
     })
   }
 
-  ngOnInit(): void {
-    this.category = CategoriesData.find(
-      (item) => item.slug === this.categoryParam && item.tags.findIndex((tag) => tag.slug === this.tagParam) > -1,
-    )
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     if (this.paramMapSubscription) this.paramMapSubscription.unsubscribe()
