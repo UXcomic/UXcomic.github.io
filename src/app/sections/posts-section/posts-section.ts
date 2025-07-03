@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component, Input } from '@angular/core'
 import { Post } from '../../models/post'
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-posts-section',
@@ -11,4 +12,6 @@ import { Post } from '../../models/post'
 })
 export class PostsSection {
   @Input() posts?: Post[]
+
+  protected config = environment
 }

@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl: '/uxcomic-v2',
+  baseUrl: 'https://uxcomic.github.io/uxcomic-v2',
 }
