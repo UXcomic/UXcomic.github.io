@@ -9,8 +9,9 @@ import { CommonModule } from '@angular/common'
 import { CategorySection } from '../../sections/category-section/category-section'
 import { TagSection } from '../../sections/tag-section/tag-section'
 import { Post } from '../../models/post'
-import { getPostInformation } from '../../utils/post-helper'
+import { convertPost } from '../../utils/post-helper'
 import { PostsSection } from '../../sections/posts-section/posts-section'
+import { slugify } from '../../utils/string-helper'
 
 const DEFAULT_ROUTE = `/blog/${BlogRoutes[0].category}/${BlogRoutes[0].tag}`
 
@@ -60,11 +61,6 @@ export class Blog implements OnInit, OnDestroy {
 
     this.posts = (PostsData as any[])
       .filter((p) => p.properties.Tag.select.id === currentTag?.id)
-      .map((p) => ({
-        id: p.id,
-        cover: p.content.find((c: any) => c.type === 'image').image.file.url,
-        level: getPostInformation(p.properties.Type.select.name),
-        title: p.properties.Name.title[0].text.content,
-      }))
+      .map((p) => convertPost(p))
   }
 }

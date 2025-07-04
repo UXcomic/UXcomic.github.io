@@ -1,0 +1,10 @@
+@use '../../styles/colors'
+@use '../../styles/typography'
+
+.post-content
+  &__title
+    @extend %notion-h1
+    @extend %font-calistoga
+  &__created-date
+    @extend %notion-caption
+    color: colors.$color-text-tertiary

@@ -29,6 +29,9 @@ dependencies:
   '@angular/ssr':
     specifier: ^20.0.2
     version: 20.0.4(@angular/common@20.0.5)(@angular/core@20.0.5)(@angular/platform-server@20.0.5)(@angular/router@20.0.5)
+  '@angular/youtube-player':
+    specifier: 20.0.5
+    version: 20.0.5(@angular/common@20.0.5)(@angular/core@20.0.5)(rxjs@7.8.2)
   '@notionhq/client':
     specifier: ^3.1.3
     version: 3.1.3
@@ -47,6 +50,9 @@ dependencies:
   flowbite:
     specifier: ^3.1.2
     version: 3.1.2
+  get-video-id:
+    specifier: ^4.1.7
+    version: 4.1.7
   normalize.css:
     specifier: ^8.0.1
     version: 8.0.1
@@ -510,6 +516,21 @@ packages:
       '@angular/router': 20.0.5(@angular/common@20.0.5)(@angular/core@20.0.5)(@angular/platform-browser@20.0.5)(rxjs@7.8.2)
       tslib: 2.8.1
 
+  /@angular/youtube-player@20.0.5(@angular/common@20.0.5)(@angular/core@20.0.5)(rxjs@7.8.2):
+    resolution: {integrity: sha512-3ai5QKW4CZO5Mx8mYBk31On2jrgG83VdgJActBfY9eufNLr4YdZ3HJy4svUgrYhb3ZIpUlQeAazbJuoNGb9b0w==}
+    peerDependencies:
+      '@angular/common': ^20.0.0 || ^21.0.0
+      '@angular/core': ^20.0.0 || ^21.0.0
+      rxjs: ^6.5.3 || ^7.4.0
+    dependencies:
+      '@angular/common': 20.0.5(@angular/core@20.0.5)(rxjs@7.8.2)
+      '@angular/core': 20.0.5(@angular/compiler@20.0.5)(rxjs@7.8.2)(zone.js@0.15.1)
+      '@types/youtube': 0.1.2
+      rxjs: 7.8.2
+      safevalues: 1.2.0
+      tslib: 2.8.1
+    dev: false
+
   /@babel/code-frame@7.27.1:
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
     engines: {node: '>=6.9.0'}
@@ -711,6 +732,11 @@ packages:
     dependencies:
       '@babel/types': 7.27.7
     dev: true
+
+  /@babel/runtime@7.27.6:
+    resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==}
+    engines: {node: '>=6.9.0'}
+    dev: false
 
   /@babel/template@7.27.2:
     resolution: {integrity: sha512-LPDZ85aEJyYSd18/DkjNh4/y1ntkE5KwUHWTiqgRxruuZL2F1yuHligVHLvcHY2vMHXttKFpJn6LwfI7cw7ODw==}
@@ -2315,6 +2341,10 @@ packages:
       '@types/send': 0.17.5
     dev: true
 
+  /@types/youtube@0.1.2:
+    resolution: {integrity: sha512-n1/KqusanheyQRWHamNZv8K3kydlRqyEsZEKxMTeNWXQTC15lZprITCUt+WgL1vAIvKHCjPBIWz/gf/KQLsB3g==}
+    dev: false
+
   /@vitejs/plugin-basic-ssl@2.0.0(vite@6.3.5):
     resolution: {integrity: sha512-gc9Tjg8bUxBVSTzeWT3Njc0Cl3PakHFKdNfABnZWiUgbxqmHDEn7uECv3fHVylxoYgNzAcmU7ZrILz+BwSo3sA==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
@@ -3447,6 +3477,13 @@ packages:
     dependencies:
       dunder-proto: 1.0.1
       es-object-atoms: 1.1.1
+
+  /get-video-id@4.1.7:
+    resolution: {integrity: sha512-bYHXe3BTbFbiViuNFyfFnZPnSDVWBu5N06p35LW7dD/ul4O1sdPSs3Brw8U/m5JlQUnkj3tht3luSz0k05vEYg==}
+    engines: {node: '>=16'}
+    dependencies:
+      '@babel/runtime': 7.27.6
+    dev: false
 
   /gh-pages@3.2.3:
     resolution: {integrity: sha512-jA1PbapQ1jqzacECfjUaO9gV8uBgU6XNMV0oXLtfCX3haGLe5Atq8BxlrADhbD6/UdG9j6tZLWAkAybndOXTJg==}
@@ -5075,6 +5112,10 @@ packages:
 
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+
+  /safevalues@1.2.0:
+    resolution: {integrity: sha512-zIsuhjYvJCjfsfjoim2ab6gLKFYAnTiDSJGh0cC3T44L/4kNLL90hBG2BzrXPrHA3f8Ms8FSJ1mljKH5dVR1cw==}
+    dev: false
 
   /sass@1.88.0:
     resolution: {integrity: sha512-sF6TWQqjFvr4JILXzG4ucGOLELkESHL+I5QJhh7CNaE+Yge0SI+ehCatsXhJ7ymU1hAFcIS3/PBpjdIbXoyVbg==}

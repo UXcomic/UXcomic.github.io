@@ -1,0 +1,15 @@
+@if (data.href) {
+<a
+  [href]="data.href"
+  target="_blank"
+  class="underline"
+  [class.ux-font-bold]="data.annotations.bold"
+  [class.font-italic]="data.annotations.italic"
+>
+  {{data.plain_text}}
+</a>
+} @else {
+<span [class.ux-font-bold]="data.annotations.bold" [class.font-italic]="data.annotations.italic">
+  {{data.plain_text}}
+</span>
+}

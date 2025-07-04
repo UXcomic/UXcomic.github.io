@@ -2,20 +2,6 @@
   class="px-[27px] py-[16px] grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-x-[16px] gap-y-[24px]"
 >
   @for(p of posts; track p.id) {
-  <div class="posts-section__post-container p-[4px] bg-white rounded-[6px]">
-    <div class="posts-section__post-content h-full border-[0.5px] rounded-[2px]">
-      <img [src]="`${config.baseUrl}${p.cover}`" [alt]="p.title" />
-      <div class="py-[16px] px-[8px] relative">
-        <div
-          class="posts-section__post-content-level-container bg-white inline-flex items-center h-[24px] absolute top-[-12px] left-[50%] translate-x-[-50%] px-[8px] py-[2px] border-[0.58px] rounded-full"
-        >
-          <span *ngFor="let num of [].constructor(p.level.length); let i = index" class="text-[10px]">
-            {{p.level.icon}}
-          </span>
-        </div>
-        <h4 class="posts-section__post-content-title text-[12px] text-center">{{p.title}}</h4>
-      </div>
-    </div>
-  </div>
+  <app-post-card-component [post]="p"></app-post-card-component>
   }
 </section>

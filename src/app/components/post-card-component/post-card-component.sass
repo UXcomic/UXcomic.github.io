@@ -1,0 +1,30 @@
+@use '../../styles/colors'
+@use '../../styles/typography'
+
+.post-card
+  &__container
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15)
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3)
+    &--sm
+      width: 90px
+      height: 130px
+      padding: 2px
+      border-radius: 2px
+      & .post-card__level
+        height: 18px
+        top: -9px
+        padding: 1px 3px
+        span
+          font-size: 6px
+      & .post-card__title
+        font-size: 8px
+        line-height: 10px
+
+  &__content
+    border-color: colors.$color-divider
+
+  &__level
+    border-color: colors.$color-divider
+
+  &__title
+    @extend %card-title-small

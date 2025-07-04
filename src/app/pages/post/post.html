@@ -1,1 +1,32 @@
-<p>post works!</p>
+<section *ngIf="!!post" class="pt-[24px]">
+  <button
+    (click)="goBack()"
+    type="button"
+    class="w-[48px] h-[48px] bg-white/75 border-[2px] border-white rounded-full flex items-center justify-center fixed right-[16px] top-[16px] backdrop-blur-[16px]"
+  >
+    <svg
+      class="w-6 h-6"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18 17.94 6M18 18 6.06 6"
+      />
+    </svg>
+  </button>
+  <app-post-card-component
+    [post]="post"
+    [small]="true"
+    [rotate]="true"
+    class="flex justify-center"
+  ></app-post-card-component>
+  <app-post-content-section [postContent]="post"></app-post-content-section>
+</section>

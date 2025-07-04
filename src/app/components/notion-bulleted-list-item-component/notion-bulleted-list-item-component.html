@@ -1,0 +1,13 @@
+<div *ngIf="!!data" class="flex flex-row gap-x-[8px] mb-[8px]">
+  <span class="flex-none w-[5px] h-[5px] bg-black rounded-full mt-[10px]"></span>
+  <div class="grow">
+    <span class="notion-bulleted-list-item__text">
+      @for(c of data.bulleted_list_item.rich_text; track $index) {
+      <app-notion-text-component [data]="c"></app-notion-text-component>
+      }
+    </span>
+    <ng-container *ngIf="data.children">
+      <ng-content></ng-content>
+    </ng-container>
+  </div>
+</div>

@@ -19,3 +19,13 @@ body
 
 main
   background-color: colors.$color-bg
+
+.ux
+  &-font-bold
+    @extend %font-bold
+  &-font-semibold
+    @extend %font-semibold
+
+.notion-video__player
+  .youtube-player-placeholder, iframe
+    width: 100% !important

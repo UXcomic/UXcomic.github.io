@@ -1,0 +1,5 @@
+<p class="notion-paragraph__text py-[8px]">
+  @for(r of data.paragraph.rich_text; track $index) {
+  <app-notion-text-component [data]="r"></app-notion-text-component>
+  }
+</p>
