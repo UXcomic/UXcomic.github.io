@@ -31,6 +31,8 @@ export class TagSection implements OnInit, OnChanges, OnDestroy {
 
       this.selected = this.tags?.find((t) => t.slug === this.tagParam)
     })
+
+    this.tags = this.tags?.sort((a, b) => a.order - b.order)
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -61,6 +61,7 @@ export class Blog implements OnInit, OnDestroy {
 
     this.posts = (PostsData as any[])
       .filter((p) => p.properties.Tag.select.id === currentTag?.id)
+      .sort((a, b) => a.created_time - b.created_time)
       .map((p) => convertPost(p))
   }
 }

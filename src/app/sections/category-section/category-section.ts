@@ -17,7 +17,7 @@ import { initFlowbite } from 'flowbite'
 export class CategorySection implements OnInit {
   @Input() selected?: Category
 
-  protected categories: Category[] = CategoryData
+  protected categories: Category[] = CategoryData.sort((a, b) => a.order - b.order)
 
   private flowbiteService = inject(FlowbiteService)
   private router = inject(Router)
