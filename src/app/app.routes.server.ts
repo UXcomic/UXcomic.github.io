@@ -3,6 +3,7 @@ import BlogRoutes from '../../public/data/blogRoutes.json'
 import PostRoutes from '../../public/data/postRoutes.json'
 
 export const serverRoutes: ServerRoute[] = [
+  { path: 'about', renderMode: RenderMode.Prerender },
   {
     path: 'blog/:category/:tag',
     renderMode: RenderMode.Prerender,

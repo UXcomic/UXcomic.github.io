@@ -1,25 +1,27 @@
 <section class="category-section__container px-[24px]">
-  <div
-    *ngIf="!!selected"
-    class="h-[44px] flex items-center gap-[8px]"
-    data-drawer-target="drawer-category-list"
-    data-drawer-show="drawer-category-list"
-    data-drawer-placement="top"
-    aria-controls="drawer-category-list"
-  >
-    <span class="text-[22px]">{{selected.icon}}</span>
-    <span class="category-section__title">{{selected.name}}</span>
-    <svg
-      class="w-[16px] h-[16px]"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      fill="none"
-      viewBox="0 0 24 24"
+  <div *ngIf="!!selected" class="h-[44px] flex justify-between items-center">
+    <div
+      class="grow flex items-center gap-[8px]"
+      data-drawer-target="drawer-category-list"
+      data-drawer-show="drawer-category-list"
+      data-drawer-placement="top"
+      aria-controls="drawer-category-list"
     >
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
-    </svg>
+      <span class="text-[22px]">{{selected.icon}}</span>
+      <span class="category-section__title">{{selected.name}}</span>
+      <svg
+        class="w-[16px] h-[16px]"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
+      </svg>
+    </div>
+    <h5 (click)="goToAbout()" class="text-[14px] underline">About</h5>
   </div>
   <app-drawer-top-component drawerId="drawer-category-list" title="Danh mục">
     <ul>

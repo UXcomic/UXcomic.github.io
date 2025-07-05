@@ -1,4 +1,4 @@
-<section class="py-[8px]">
+<section class="blog__header py-[8px] sticky top-[0px] z-[100]">
   <app-category-section [selected]="category"></app-category-section>
   <app-tag-section *ngIf="!!category" [tags]="category.tags"></app-tag-section>
 </section>

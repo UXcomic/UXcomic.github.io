@@ -6,7 +6,7 @@ import { Tag } from './tag'
 export interface Post extends Base {
   cover: string
   title: string
-  level: Level
+  level?: Level
   slug: string
   createdDate?: Date
   category?: Category

@@ -15,6 +15,7 @@ import { PostCardComponent } from '../../components/post-card-component/post-car
 })
 export class PostContentSection implements OnInit, OnChanges {
   @Input() postContent?: PostContent
+  @Input() hideTitle?: boolean
 
   protected config = environment
   protected relevantPosts?: any[] = []

@@ -11,7 +11,7 @@ const getRelevantPosts = (content: any[]) => {
 
   const relevantPostTitles = relevantItems.map((r) => r.paragraph.rich_text[0].plain_text)
   const posts = (PostData as any[]).filter((p: any) =>
-    relevantPostTitles.includes(p.properties.Name.title[0].plain_text),
+    relevantPostTitles.includes(p?.properties?.Name?.title?.[0]?.plain_text),
   )
 
   return { posts: posts.map((p) => convertPost(p)), contentItems: relevantItems }
@@ -33,15 +33,17 @@ const getCoverId = (post: any) => {
 const convertPost = (post: any): Post => ({
   id: post.id,
   cover: post.content.find((c: any) => c.type === 'image').image.file.url,
-  level: getPostLevelInformation(post.properties.Type.select.name),
-  title: post.properties.Name.title[0].text.content,
-  slug: slugify(post.properties.Name.title[0].text.content),
+  level: getPostLevelInformation(post?.properties?.Type?.select?.name),
+  title: post?.properties?.Name?.title?.[0]?.text?.content || post.properties.title.title[0].plain_text || '',
+  slug: slugify(post?.properties?.Name?.title?.[0]?.text?.content),
   createdDate: post.created_time,
   category: post.category,
   tag: post.tag,
 })
 
-const getPostLevelInformation = (value: string): Level => {
+const getPostLevelInformation = (value: string): Level | undefined => {
+  if (!value) return
+
   const splited = value.split(':')
   return {
     icon: splited[0],

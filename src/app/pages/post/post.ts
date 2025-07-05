@@ -37,7 +37,9 @@ export class Post implements OnInit, OnDestroy {
         return
       }
 
-      const pData = (PostData as any[]).find((p) => slugify(p.properties.Name.title[0].text.content) === this.slugParam)
+      const pData = (PostData as any[]).find(
+        (p) => slugify(p?.properties?.Name?.title?.[0]?.text?.content) === this.slugParam,
+      )
       this.post = convertPostContent(pData)
     })
   }

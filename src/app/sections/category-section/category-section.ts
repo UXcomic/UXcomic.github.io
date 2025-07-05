@@ -34,4 +34,8 @@ export class CategorySection implements OnInit {
     const firstTagSlug = category.tags?.[0]?.slug || 'null'
     this.router.navigateByUrl(`/blog/${category.slug}/${firstTagSlug}`)
   }
+
+  goToAbout() {
+    this.router.navigateByUrl('/about')
+  }
 }

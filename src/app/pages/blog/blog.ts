@@ -11,7 +11,6 @@ import { TagSection } from '../../sections/tag-section/tag-section'
 import { Post } from '../../models/post'
 import { convertPost } from '../../utils/post-helper'
 import { PostsSection } from '../../sections/posts-section/posts-section'
-import { slugify } from '../../utils/string-helper'
 
 const DEFAULT_ROUTE = `/blog/${BlogRoutes[0].category}/${BlogRoutes[0].tag}`
 
@@ -60,7 +59,7 @@ export class Blog implements OnInit, OnDestroy {
     const currentTag = this.category?.tags?.find((t) => t.slug === this.tagParam)
 
     this.posts = (PostsData as any[])
-      .filter((p) => p.properties.Tag.select.id === currentTag?.id)
+      .filter((p) => p.properties?.Tag?.select?.id === currentTag?.id)
       .sort((a, b) => a.created_time - b.created_time)
       .map((p) => convertPost(p))
   }

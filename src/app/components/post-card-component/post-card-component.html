@@ -9,6 +9,7 @@
     <img [src]="`${config.baseUrl}${post.cover}`" [alt]="post.title" />
     <div class="py-[16px] px-[8px] relative">
       <div
+        *ngIf="post.level"
         class="post-card__level bg-white inline-flex items-center justify-center h-[24px] absolute top-[-12px] left-[50%] translate-x-[-50%] px-[8px] py-[2px] border-[0.58px] rounded-full"
       >
         <span *ngFor="let num of [].constructor(post.level.length); let i = index" class="text-[10px]">

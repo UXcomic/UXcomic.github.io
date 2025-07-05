@@ -83,8 +83,10 @@ async function fetchPosts() {
   for (let i = 0; i < blogDatabaseIds.length; i++) {
     const databaseId = blogDatabaseIds[i]
     const data = await notion.databases.query({ database_id: databaseId })
+    const aboutPost = await notion.pages.retrieve({ page_id: process.env['NOTION_ABOUT_POST_ID'] })
     const publishedPostsData = data.results.filter((post) => post.properties.Publish.checkbox)
     addPostCategoryAndTag(publishedPostsData)
+    publishedPostsData.push(aboutPost)
     await fetchContents(publishedPostsData)
     postsData.push(...publishedPostsData)
   }

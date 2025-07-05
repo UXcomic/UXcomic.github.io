@@ -1,5 +1,5 @@
 <section *ngIf="!!postContent" class="pb-[12px]">
-  <div class="pt-[24px] pb-[16px] text-center">
+  <div *ngIf="!hideTitle" class="pt-[24px] pb-[16px] text-center">
     <h5 class="post-content__title">{{postContent.title}}</h5>
     <p class="post-content__created-date">{{postContent.createdDate | date:'longDate'}}</p>
   </div>
