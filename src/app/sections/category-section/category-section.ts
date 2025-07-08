@@ -6,6 +6,7 @@ import CategoryData from '../../../../public/data/categoriesAndTags.json'
 import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router'
 import { initFlowbite } from 'flowbite'
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-category-section',
@@ -18,6 +19,7 @@ export class CategorySection implements OnInit {
   @Input() selected?: Category
 
   protected categories: Category[] = CategoryData.sort((a, b) => a.order - b.order)
+  protected config = environment
 
   private flowbiteService = inject(FlowbiteService)
   private router = inject(Router)

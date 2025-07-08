@@ -6,20 +6,24 @@
   [class.post-card__container--sm]="small"
 >
   <div class="post-card__content h-full border-[0.5px] rounded-[2px]">
-    <img [src]="`${config.baseUrl}${post.cover}`" [alt]="post.title" />
-    <div class="py-[16px] px-[8px] relative">
+    <img [src]="`${config.baseUrl}${post.cover}`" [alt]="post.title" [class.h-[137px]]="small" [class.w-full]="small" />
+    <div
+      class="pt-[16px] pb-[8px] px-[8px] relative flex items-center justify-center"
+      [class.h-[56px]]="!small"
+      [class.h-[54px]]="small"
+    >
       <div
         *ngIf="post.level"
         class="post-card__level bg-white inline-flex items-center justify-center h-[24px] absolute top-[-12px] left-[50%] translate-x-[-50%] px-[8px] py-[2px] border-[0.58px] rounded-full"
       >
-        <span *ngFor="let num of [].constructor(post.level.length); let i = index" class="text-[10px]">
+        <span *ngFor="let num of [].constructor(post.level.length); let i = index" class="text-[12px]">
           {{post.level.icon}}
         </span>
-        <span *ngFor="let num of [].constructor(3 - post.level.length); let i = index" class="text-[10px] opacity-30">
+        <span *ngFor="let num of [].constructor(3 - post.level.length); let i = index" class="text-[12px] opacity-30">
           {{post.level.icon}}
         </span>
       </div>
-      <h4 class="post-card__title text-[12px] text-center">{{post.title}}</h4>
+      <h4 class="post-card__title text-[12px] text-center line-clamp-2">{{post.title}}</h4>
     </div>
   </div>
 </div>

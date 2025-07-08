@@ -95,14 +95,14 @@ async function fetchPosts() {
 function addPostCategoryAndTag(postsData) {
   for (let i = 0; i < postsData.length; i++) {
     const postData = postsData[i]
-    const postTagId = postData.properties.Tag.select.id
-    const { category, tag } = processAddCategoryAndTag(postTagId)
+    const postTagSlug = toSlug(postData.properties.Tag.select.name.split('-')[1])
+    const { category, tag } = processAddCategoryAndTag(postTagSlug)
     postData.category = category
     postData.tag = tag
   }
 }
 
-function processAddCategoryAndTag(postTagId) {
+function processAddCategoryAndTag(postTagSlug) {
   let categoryData = null
   let tagData = null
 
@@ -110,7 +110,7 @@ function processAddCategoryAndTag(postTagId) {
     const category = blogsData[i]
     for (let j = 0; j < category.tags.length; j++) {
       const tag = category.tags[j]
-      if (tag.id === postTagId) {
+      if (tag.slug === postTagSlug) {
         categoryData = category
         tagData = tag
         break

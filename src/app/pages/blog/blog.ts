@@ -48,6 +48,7 @@ export class Blog implements OnInit, OnDestroy {
       )
 
       this.getPosts()
+      this.filterTags()
     })
   }
 
@@ -59,8 +60,14 @@ export class Blog implements OnInit, OnDestroy {
     const currentTag = this.category?.tags?.find((t) => t.slug === this.tagParam)
 
     this.posts = (PostsData as any[])
-      .filter((p) => p.properties?.Tag?.select?.id === currentTag?.id)
+      .filter((p) => p.tag?.slug === currentTag?.slug)
       .sort((a, b) => a.created_time - b.created_time)
       .map((p) => convertPost(p))
+  }
+
+  private filterTags() {
+    if (!this.category || !this.category.tags) return
+
+    this.category.tags = this.category.tags.filter((t) => (PostsData as any[]).some((p) => p.tag?.slug === t?.slug))
   }
 }

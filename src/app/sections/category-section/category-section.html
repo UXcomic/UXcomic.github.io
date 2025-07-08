@@ -21,7 +21,7 @@
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
       </svg>
     </div>
-    <h5 (click)="goToAbout()" class="text-[14px] underline">About</h5>
+    <img [src]="`${config.baseUrl}/avatar.svg`" (click)="goToAbout()" />
   </div>
   <app-drawer-top-component drawerId="drawer-category-list" title="Danh mục">
     <ul>

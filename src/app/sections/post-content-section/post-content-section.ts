@@ -19,6 +19,8 @@ export class PostContentSection implements OnInit, OnChanges {
 
   protected config = environment
   protected relevantPosts?: any[] = []
+  protected like?: boolean = false
+  protected unlike?: boolean = false
 
   ngOnInit(): void {}
 
@@ -44,5 +46,15 @@ export class PostContentSection implements OnInit, OnChanges {
       text: this.postContent?.title,
       url: `${this.config.baseUrl}/post/${this.postContent?.slug}`,
     })
+  }
+
+  handleLikeClicked(action: string) {
+    if (action === 'like') {
+      this.like = !this.like
+      this.unlike = false
+    } else {
+      this.like = false
+      this.unlike = !this.unlike
+    }
   }
 }
