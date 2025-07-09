@@ -1,11 +1,11 @@
-<section *ngIf="!!post">
+<section *ngIf="!!post" class="max-w-[600px] mx-auto">
   <div class="h-[64px] px-[24px] pt-[8px]">
     <div class="h-[48px] flex items-center justify-between">
       <h5 class="about__title">{{post.title}}</h5>
       <button
         (click)="goBack()"
         type="button"
-        class="w-[48px] h-[48px] bg-white/75 border-[2px] border-white rounded-full flex items-center justify-center backdrop-blur-[16px] fixed top-[8px] right-[24px]"
+        class="w-[48px] h-[48px] bg-white/75 border-[2px] border-white rounded-full flex items-center justify-center backdrop-blur-[16px] fixed md:sticky md:ml-auto! top-[16px] right-[24px]"
       >
         <svg
           class="w-6 h-6"

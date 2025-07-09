@@ -60,7 +60,7 @@ export class Blog implements OnInit, OnDestroy {
     const currentTag = this.category?.tags?.find((t) => t.slug === this.tagParam)
 
     this.posts = (PostsData as any[])
-      .filter((p) => p.tag?.slug === currentTag?.slug)
+      .filter((p) => p.category?.slug === this.category?.slug && p.tag?.slug === currentTag?.slug)
       .sort((a, b) => a.created_time - b.created_time)
       .map((p) => convertPost(p))
   }

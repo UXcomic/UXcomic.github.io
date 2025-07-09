@@ -17,7 +17,7 @@ const notion = new Client({ auth: process.env['NOTION_API_KEY'] })
 const rootDatabaseId = process.env['NOTION_ROOT_DATABASE_ID']
 
 let blogsData = []
-let blogDatabaseIds = []
+let blogChildDatabases = []
 let postsData = []
 let blogRoutes = []
 let postRoutes = []
@@ -75,34 +75,36 @@ async function fetchTags() {
       slug: toSlug(item.name.split('-')[1]),
       order: parseInt(item.name.split('-')[0] || '-1'),
     }))
-    blogDatabaseIds.push(childDatabase.id)
+    blogChildDatabases.push(childDatabase)
   }
 }
 
 async function fetchPosts() {
-  for (let i = 0; i < blogDatabaseIds.length; i++) {
-    const databaseId = blogDatabaseIds[i]
+  for (let i = 0; i < blogChildDatabases.length; i++) {
+    const blogChildDatabase = blogChildDatabases[i]
+    const databaseId = blogChildDatabase.id
     const data = await notion.databases.query({ database_id: databaseId })
     const aboutPost = await notion.pages.retrieve({ page_id: process.env['NOTION_ABOUT_POST_ID'] })
     const publishedPostsData = data.results.filter((post) => post.properties.Publish.checkbox)
-    addPostCategoryAndTag(publishedPostsData)
+    addPostCategoryAndTag(publishedPostsData, blogChildDatabase)
     publishedPostsData.push(aboutPost)
     await fetchContents(publishedPostsData)
     postsData.push(...publishedPostsData)
   }
 }
 
-function addPostCategoryAndTag(postsData) {
+function addPostCategoryAndTag(postsData, blogChildDatabase) {
   for (let i = 0; i < postsData.length; i++) {
     const postData = postsData[i]
-    const postTagSlug = toSlug(postData.properties.Tag.select.name.split('-')[1])
-    const { category, tag } = processAddCategoryAndTag(postTagSlug)
+    const postCategoryId = blogChildDatabase.parent.page_id
+    const postTagId = postData.properties.Tag.select.id
+    const { category, tag } = processAddCategoryAndTag(postTagId, postCategoryId)
     postData.category = category
     postData.tag = tag
   }
 }
 
-function processAddCategoryAndTag(postTagSlug) {
+function processAddCategoryAndTag(postTagId, postCategoryId) {
   let categoryData = null
   let tagData = null
 
@@ -110,7 +112,7 @@ function processAddCategoryAndTag(postTagSlug) {
     const category = blogsData[i]
     for (let j = 0; j < category.tags.length; j++) {
       const tag = category.tags[j]
-      if (tag.slug === postTagSlug) {
+      if (category.id === postCategoryId && tag.id === postTagId) {
         categoryData = category
         tagData = tag
         break
