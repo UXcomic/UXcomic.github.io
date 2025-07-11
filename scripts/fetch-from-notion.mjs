@@ -3,7 +3,6 @@ import * as dotenv from 'dotenv'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as https from 'https'
-import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 dotenv.config()
@@ -206,7 +205,6 @@ async function handleImageBlocks(titleSlug, contentArray) {
       try {
         console.log(`Downloading image: ${imageFileName} -> ${relativePath}`)
         await downloadImage(imageUrl, savePath)
-        // compressImage(savePath)
         obj.image.file.url = relativePath
       } catch (err) {
         console.error(`Failed to download image: ${imageUrl}`, err.message)
@@ -245,28 +243,6 @@ async function downloadImage(imageUrl, savePath) {
         fs.unlink(savePath, () => reject(err))
       })
   })
-}
-
-async function compressImage(filePath) {
-  const ext = path.extname(filePath).toLowerCase()
-  const tempPath = filePath + '.tmp'
-
-  try {
-    if (ext === '.jpg' || ext === '.jpeg') {
-      await sharp(filePath).jpeg({ quality: 70 }).resize({ width: 1920 }).toFile(tempPath)
-    } else if (ext === '.png') {
-      await sharp(filePath).png({ quality: 70, compressionLevel: 8 }).resize({ width: 1920 }).toFile(tempPath)
-    } else if (ext === '.webp') {
-      await sharp(filePath).webp({ quality: 70 }).resize({ width: 1920 }).toFile(tempPath)
-    } else {
-      return
-    }
-    fs.renameSync(tempPath, filePath)
-    console.log(`Compressed image: ${filePath}`)
-  } catch (err) {
-    if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath)
-    console.error(`Failed to compress image: ${filePath}`, err.message)
-  }
 }
 
 function generateRoutes() {
