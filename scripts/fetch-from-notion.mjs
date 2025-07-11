@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as https from 'https'
+import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 dotenv.config()
@@ -148,7 +149,8 @@ async function processFetchContent(postData) {
   processCountNumberedListItem(contentData.results)
 
   const sanitizedTitle = getSantinizeTitle(postData)
-  await handleImageBlocks(sanitizedTitle, contentData.results)
+  const titleSlug = toSlug(sanitizedTitle)
+  await handleImageBlocks(titleSlug, contentData.results)
 
   return contentData.results
 }
@@ -168,18 +170,18 @@ function processCountNumberedListItem(content) {
   }
 }
 
-async function handleImageBlocks(sanitizedTitle, contentArray) {
+async function handleImageBlocks(titleSlug, contentArray) {
   const usedImageIdsPerArticle = {}
 
   for (const obj of contentArray) {
     if (obj.type === 'image' && obj.image?.file?.url) {
       const imageUrl = obj.image.file.url
 
-      const articleDir = path.join(imgsDir, sanitizedTitle)
+      const articleDir = path.join(imgsDir, titleSlug)
 
       if (!fs.existsSync(articleDir)) {
         fs.mkdirSync(articleDir, { recursive: true })
-        console.log(`Created folder for article: ${sanitizedTitle}`)
+        console.log(`Created folder for article: ${titleSlug}`)
       }
 
       const extMatch = new URL(imageUrl).pathname.match(/\.(jpg|jpeg|png|webp|gif)$/i)
@@ -188,12 +190,12 @@ async function handleImageBlocks(sanitizedTitle, contentArray) {
       const currentImageId = obj.id
       const imageFileName = `${currentImageId}${ext}`
       const savePath = path.join(articleDir, imageFileName)
-      const relativePath = `/imgs/${sanitizedTitle}/${imageFileName}`
+      const relativePath = `/imgs/${titleSlug}/${imageFileName}`
 
-      if (!usedImageIdsPerArticle[sanitizedTitle]) {
-        usedImageIdsPerArticle[sanitizedTitle] = new Set()
+      if (!usedImageIdsPerArticle[titleSlug]) {
+        usedImageIdsPerArticle[titleSlug] = new Set()
       }
-      usedImageIdsPerArticle[sanitizedTitle].add(currentImageId)
+      usedImageIdsPerArticle[titleSlug].add(currentImageId)
 
       if (fs.existsSync(savePath)) {
         console.log(`Image already exists: ${relativePath}, skipping download.`)
@@ -204,6 +206,7 @@ async function handleImageBlocks(sanitizedTitle, contentArray) {
       try {
         console.log(`Downloading image: ${imageFileName} -> ${relativePath}`)
         await downloadImage(imageUrl, savePath)
+        // compressImage(savePath)
         obj.image.file.url = relativePath
       } catch (err) {
         console.error(`Failed to download image: ${imageUrl}`, err.message)
@@ -242,6 +245,28 @@ async function downloadImage(imageUrl, savePath) {
         fs.unlink(savePath, () => reject(err))
       })
   })
+}
+
+async function compressImage(filePath) {
+  const ext = path.extname(filePath).toLowerCase()
+  const tempPath = filePath + '.tmp'
+
+  try {
+    if (ext === '.jpg' || ext === '.jpeg') {
+      await sharp(filePath).jpeg({ quality: 70 }).resize({ width: 1920 }).toFile(tempPath)
+    } else if (ext === '.png') {
+      await sharp(filePath).png({ quality: 70, compressionLevel: 8 }).resize({ width: 1920 }).toFile(tempPath)
+    } else if (ext === '.webp') {
+      await sharp(filePath).webp({ quality: 70 }).resize({ width: 1920 }).toFile(tempPath)
+    } else {
+      return
+    }
+    fs.renameSync(tempPath, filePath)
+    console.log(`Compressed image: ${filePath}`)
+  } catch (err) {
+    if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath)
+    console.error(`Failed to compress image: ${filePath}`, err.message)
+  }
 }
 
 function generateRoutes() {
