@@ -71,7 +71,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy Angular Project
-        run: ng deploy --base-href=/uxcomic-v2/
+        run: pnpm run deploy
 
       # - name: Deploy to GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v4 # Action phổ biến để triển khai lên gh-pages

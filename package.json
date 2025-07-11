@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "ng deploy --base-href=/uxcomic-v2/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:uxcomic-v2": "node dist/uxcomic-v2/server/server.mjs",
