@@ -66,7 +66,7 @@ jobs:
           git config --global user.email "hungvuongg71@gmail.com"
           git add public/imgs
           git diff --cached --quiet || git commit -m "chore: update images from Notion"
-          git push origin develop
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/UXcomic/uxcomic-v2.git develop
         env:
           GITHUB_TOKEN: ${{ secrets.UXCOMIC_TOKEN }}
 
