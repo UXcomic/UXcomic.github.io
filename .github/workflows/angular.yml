@@ -1,0 +1,70 @@
+name: Build Angular
+
+on:
+  push:
+    branches: ['develop']
+  pull_request:
+    branches: ['develop']
+
+jobs:
+  angular-pnpm:
+    name: Angular Build (pnpm)
+    runs-on: ubuntu-latest
+    env:
+      BASE_HREF: /uxcomic-by-angular/
+    strategy:
+      matrix:
+        node-version: [20]
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        run: npm install -g pnpm@8 # Cố định phiên bản pnpm là 8.x
+
+      # --- BƯỚC DEBUG MỚI: Kiểm tra phiên bản pnpm và PATH ---
+      - name: Verify pnpm setup
+        run: |
+          echo "Current pnpm version:"
+          pnpm --version
+          echo "Node.js version:"
+          node --version
+          echo "NPM version:"
+          npm --version
+          echo "PATH environment variable:"
+          echo $PATH
+          echo "Listing pnpm executable in known npm global install paths:"
+          # Kiểm tra các đường dẫn mặc định của npm global packages
+          find /usr/local/lib/node_modules/pnpm -name pnpm 2>/dev/null || true
+          find /opt/hostedtoolcache/node/*/bin/pnpm -name pnpm 2>/dev/null || true
+      # --- KẾT THÚC BƯỚC DEBUG MỚI ---
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      #- name: Run Tests
+      #  run: pnpm run test:ci
+
+      - name: Sync Notion Data
+        run: node scripts/fetch-from-notion.mjs
+
+      - name: Build Angular Project
+        run: ng deploy --base-href=/uxcomic-v2/
+
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v4 # Action phổ biến để triển khai lên gh-pages
+      #   with:
+      #     github_token: ${{ secrets.UXCOMIC_TOKEN }} # Token mặc định của GitHub Actions
+      #     publish_dir: ./dist/browser
