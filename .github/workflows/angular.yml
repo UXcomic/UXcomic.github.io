@@ -10,8 +10,6 @@ jobs:
   angular-pnpm:
     name: Angular Build (pnpm)
     runs-on: ubuntu-latest
-    env:
-      BASE_HREF: /uxcomic-by-angular/
     strategy:
       matrix:
         node-version: [20]
@@ -27,22 +25,6 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm@8 # Cố định phiên bản pnpm là 8.x
 
-      # --- BƯỚC DEBUG MỚI: Kiểm tra phiên bản pnpm và PATH ---
-      - name: Verify pnpm setup
-        run: |
-          echo "Current pnpm version:"
-          pnpm --version
-          echo "Node.js version:"
-          node --version
-          echo "NPM version:"
-          npm --version
-          echo "PATH environment variable:"
-          echo $PATH
-          echo "Listing pnpm executable in known npm global install paths:"
-          # Kiểm tra các đường dẫn mặc định của npm global packages
-          find /usr/local/lib/node_modules/pnpm -name pnpm 2>/dev/null || true
-          find /opt/hostedtoolcache/node/*/bin/pnpm -name pnpm 2>/dev/null || true
-      # --- KẾT THÚC BƯỚC DEBUG MỚI ---
       - name: Cache pnpm dependencies
         uses: actions/cache@v4
         with:
@@ -53,9 +35,6 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-
-      #- name: Run Tests
-      #  run: pnpm run test:ci
 
       - name: Sync Notion Data
         run: node scripts/fetch-from-notion.mjs
@@ -74,12 +53,3 @@ jobs:
         run: pnpm run deploy
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Build Angular Project
-      #   run: pnpm run build
-
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v4 # Action phổ biến để triển khai lên gh-pages
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }} # Token mặc định của GitHub Actions
-      #     publish_dir: ./dist/browser

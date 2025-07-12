@@ -11,13 +11,14 @@ import { TagSection } from '../../sections/tag-section/tag-section'
 import { Post } from '../../models/post'
 import { convertPost } from '../../utils/post-helper'
 import { PostsSection } from '../../sections/posts-section/posts-section'
+import { DrawerTopComponent } from '../../components/drawer-top-component/drawer-top-component'
 
 const DEFAULT_ROUTE = `/blog/${BlogRoutes[0].category}/${BlogRoutes[0].tag}`
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [CommonModule, CategorySection, TagSection, PostsSection],
+  imports: [CommonModule, CategorySection, TagSection, PostsSection, DrawerTopComponent],
   templateUrl: './blog.html',
   styleUrl: './blog.sass',
 })
@@ -25,6 +26,7 @@ export class Blog implements OnInit, OnDestroy {
   protected categoryParam: string | null = null
   protected tagParam: string | null = null
   protected category?: Category
+  protected categories?: Category[] = CategoriesData
   protected posts?: Post[]
 
   private router = inject(Router)
@@ -54,6 +56,13 @@ export class Blog implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.paramMapSubscription) this.paramMapSubscription.unsubscribe()
+  }
+
+  goToCategory(category: Category) {
+    if (!category) return
+
+    const firstTagSlug = category.tags?.[0]?.slug || 'null'
+    this.router.navigateByUrl(`/blog/${category.slug}/${firstTagSlug}`)
   }
 
   private getPosts() {

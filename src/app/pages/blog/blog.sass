@@ -1,5 +1,12 @@
 @use '../../styles/colors'
+@use '../../styles/typography'
 
 .blog
   &__header
     background-color: colors.$color-bg
+
+  &__list-item
+    border-bottom-color: colors.$color-divider
+    &-title
+      @extend %body-xl
+      @extend %font-bold

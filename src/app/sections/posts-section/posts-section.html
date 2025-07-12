@@ -1,4 +1,6 @@
-<section class="px-[27px] py-[16px] grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-[16px] gap-y-[24px]">
+<section
+  class="px-[27px] py-[16px] grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 md:flex md:flex-wrap md:justify-center gap-x-[16px] gap-y-[24px]"
+>
   @for(p of posts; track p.id) {
   <app-post-card-component [post]="p"></app-post-card-component>
   }

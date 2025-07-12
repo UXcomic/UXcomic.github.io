@@ -1,5 +1,5 @@
 <section class="category-section__container px-[24px]">
-  <div *ngIf="!!selected" class="h-[44px] flex justify-between items-center">
+  <div *ngIf="!!selected" class="h-min-[44px] flex md:flex-col-reverse justify-between items-center">
     <div
       class="grow flex items-center gap-[8px]"
       data-drawer-target="drawer-category-list"
@@ -23,43 +23,4 @@
     </div>
     <img [src]="`${config.baseUrl}/avatar.png`" width="40" height="40" (click)="goToAbout()" />
   </div>
-  <app-drawer-top-component drawerId="drawer-category-list" title="Danh mục">
-    <ul>
-      @for (c of categories; track c.id) {
-      <li
-        class="category-section__list-item h-[60px] flex items-center border-b-[1px]"
-        data-drawer-hide="drawer-category-list"
-        (click)="goToCategory(c)"
-      >
-        <div class="flex items-center gap-[8px] rtl:space-x-reverse w-full">
-          <div class="shrink-0">
-            <span class="text-[22px]">{{c.icon}}</span>
-          </div>
-          <div class="flex-1 min-w-0">
-            <a class="category-section__list-item-title truncate">{{c.name}}</a>
-          </div>
-          <div *ngIf="selected?.slug === c.slug" class="inline-flex items-center text-base font-semibold">
-            <svg
-              class="w-6 h-6 text-gray-800"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 11.917 9.724 16.5 19 7.5"
-              />
-            </svg>
-          </div>
-        </div>
-      </li>
-      }
-    </ul>
-  </app-drawer-top-component>
 </section>
