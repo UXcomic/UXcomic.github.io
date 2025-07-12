@@ -71,10 +71,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Angular Project
-        run: pnpm run build
+        run: pnpm run deploy
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4 # Action phổ biến để triển khai lên gh-pages
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # Token mặc định của GitHub Actions
-          publish_dir: ./dist/browser
+      # - name: Build Angular Project
+      #   run: pnpm run build
+
+      # - name: Deploy to GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v4 # Action phổ biến để triển khai lên gh-pages
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }} # Token mặc định của GitHub Actions
+      #     publish_dir: ./dist/browser
