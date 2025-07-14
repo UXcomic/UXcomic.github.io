@@ -1,0 +1,14 @@
+@use '../../styles/colors'
+@use '../../styles/typography'
+
+.notion-carousel
+  &__title
+    @extend %font-inter
+    font-variation-settings: "wght" 500
+  &__fraction
+    @extend %font-inter
+    font-variation-settings: "wght" 500
+    font-size: 12px
+    line-height: 16px
+    color: colors.$color-text-secondary
+    background-color: rgba(0, 0, 0, 0.04)

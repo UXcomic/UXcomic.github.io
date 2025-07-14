@@ -129,25 +129,25 @@ async function fetchContents(postsData) {
   for (let i = 0; i < postsData.length; i++) {
     const postData = postsData[i]
     let contentResult = await processFetchContent(postData)
-    await fetchChildren(contentResult)
+    await fetchChildren(contentResult, postData)
     postData.content = contentResult
   }
 }
 
-async function fetchChildren(contentArray) {
+async function fetchChildren(contentArray, parentPostData = undefined) {
   for (let i = 0; i < contentArray.length; i++) {
     if (!contentArray[i].has_children) continue
-    contentArray[i].children = await processFetchContent(contentArray[i])
+    contentArray[i].children = await processFetchContent(contentArray[i], parentPostData)
   }
 }
 
-async function processFetchContent(postData) {
+async function processFetchContent(postData, parentPostData = undefined) {
   let contentData = await notion.blocks.children.list({
     block_id: postData.id,
   })
   processCountNumberedListItem(contentData.results)
 
-  const sanitizedTitle = getSantinizeTitle(postData)
+  const sanitizedTitle = getSantinizeTitle(parentPostData || postData)
   const titleSlug = toSlug(sanitizedTitle)
   await handleImageBlocks(titleSlug, contentData.results)
 

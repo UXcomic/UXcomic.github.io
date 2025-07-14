@@ -15,6 +15,9 @@
     "slug": "observation"
   },
   {
+    "slug": "the-10-pre-action-compass"
+  },
+  {
     "slug": "your-design-suck-if"
   },
   {
@@ -108,9 +111,6 @@
     "slug": "decision-making-p1"
   },
   {
-    "slug": "take-design-feedback-p2"
-  },
-  {
     "slug": "questioning-p1"
   },
   {
@@ -153,6 +153,9 @@
     "slug": "ui-vs-ixd-vs-ux-vs-product-design"
   },
   {
+    "slug": "interaction-phisolophy"
+  },
+  {
     "slug": "a-brief-history-of-ux"
   },
   {
@@ -175,6 +178,12 @@
   },
   {
     "slug": "unknown"
+  },
+  {
+    "slug": "ui-pattern"
+  },
+  {
+    "slug": "ux-pattern"
   },
   {
     "slug": "design-ops"

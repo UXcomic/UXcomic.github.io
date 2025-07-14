@@ -11,6 +11,7 @@ import { NotionTextComponent } from '../notion-text-component/notion-text-compon
 })
 export class NotionImageComponent {
   @Input() data?: any
+  @Input() slider?: boolean
 
   protected config = environment
 }

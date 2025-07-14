@@ -3,7 +3,7 @@
     <h5 class="post-content__title">{{postContent.title}}</h5>
     <p class="post-content__created-date">{{postContent.createdDate | date:'longDate'}}</p>
   </div>
-  <article class="px-[16px] overflow-x-hidden">
+  <article class="overflow-x-hidden">
     <app-post-content-detail-section [content]="postContent.content"></app-post-content-detail-section>
   </article>
   <div
@@ -14,7 +14,7 @@
     }
   </div>
   <div
-    class="post-content__action-bar w-[240px] h-[48px] bg-white/80 border-[2px] border-white rounded-full mx-auto flex justify-between items-center sticky bottom-[10px] backdrop-blur-[16px]"
+    class="post-content__action-bar w-[240px] h-[48px] bg-white/80 border-[2px] border-white rounded-full mx-auto flex justify-between items-center sticky bottom-[10px] z-50 backdrop-blur-[16px]"
   >
     <span (click)="handleLikeClicked('like')" class="w-[80px] h-[48px] flex items-center justify-center">
       <svg

@@ -1,16 +1,18 @@
-<div
-  *ngIf="!!data"
-  class="notion-callout flex gap-x-[8px] my-[8px] p-[12px] bg-white/75 rounded-[8px] border-[2px] border-white"
->
-  <span class="notion-callout__icon text-[16px]/[26px]">{{data?.callout?.icon?.emoji}}</span>
-  <div>
-    <p class="notion-callout__text">
-      @for(r of data.callout.rich_text; track $index) {
-      <app-notion-text-component [data]="r"></app-notion-text-component>
-      }
-    </p>
-    <ng-container *ngIf="data.children">
-      <ng-content></ng-content>
-    </ng-container>
+<div class="px-[16px]">
+  <div
+    *ngIf="!!data"
+    class="notion-callout flex gap-x-[8px] my-[8px] p-[12px] bg-white/75 rounded-[8px] border-[2px] border-white"
+  >
+    <span class="notion-callout__icon text-[16px]/[26px]">{{data?.callout?.icon?.emoji}}</span>
+    <div>
+      <p class="notion-callout__text">
+        @for(r of data.callout.rich_text; track $index) {
+        <app-notion-text-component [data]="r"></app-notion-text-component>
+        }
+      </p>
+      <ng-container *ngIf="data.children">
+        <ng-content></ng-content>
+      </ng-container>
+    </div>
   </div>
 </div>

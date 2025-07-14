@@ -1,31 +1,54 @@
 <ng-container *ngIf="!!content">
-  @for(c of content; track c.id) { @switch (c.type) { @case ('paragraph') {
-  <app-notion-paragraph-component [data]="c"></app-notion-paragraph-component>
-  } @case ('image') {
-  <app-notion-image-component [data]="c"></app-notion-image-component>
-  } @case ('divider') {
-  <app-notion-divider-component></app-notion-divider-component>
-  } @case ('heading_1') {
-  <app-notion-heading-1-component [data]="c"></app-notion-heading-1-component>
-  } @case ('heading_2') {
-  <app-notion-heading-2-component [data]="c"></app-notion-heading-2-component>
-  } @case ('heading_3') {
-  <app-notion-heading-3-component [data]="c"></app-notion-heading-3-component>
-  } @case ('video') {
-  <app-notion-video-component [data]="c"></app-notion-video-component>
-  } @case ('callout') {
-  <app-notion-callout-component [data]="c">
-    <app-post-content-detail-section [content]="c.children"></app-post-content-detail-section>
-  </app-notion-callout-component>
-  } @case ('bulleted_list_item') {
-  <app-notion-bulleted-list-item-component [data]="c">
-    <app-post-content-detail-section [content]="c.children"></app-post-content-detail-section>
-  </app-notion-bulleted-list-item-component>
-  } @case ('numbered_list_item') {
-  <app-notion-numbered-list-item-component [data]="c">
-    <app-post-content-detail-section [content]="c.children"></app-post-content-detail-section>
-  </app-notion-numbered-list-item-component>
-  } @default {
-  <p class="text-gray-500">Unknown element - {{c.type}}</p>
-  } } }
+  <ng-container *ngIf="slider; else normalContent">
+    <ng-container *ngTemplateOutlet="sliderContent"></ng-container>
+  </ng-container>
+  <ng-template #sliderContent>
+    <swiper-container swiperElement init="false" [config]="swiperConfig">
+      @for(c of content; track c.id) {
+      <swiper-slide class="w-[85%]">
+        <ng-container *ngTemplateOutlet="notionContent; context: {$implicit: c}"></ng-container>
+      </swiper-slide>
+      }
+    </swiper-container>
+  </ng-template>
+  <ng-template #normalContent>
+    @for(c of content; track c.id) {
+    <ng-container *ngTemplateOutlet="notionContent; context: {$implicit: c}"></ng-container>
+    }
+  </ng-template>
+  <ng-template #notionContent let-c>
+    @switch (c.type) { @case ('paragraph') {
+    <app-notion-paragraph-component [data]="c"></app-notion-paragraph-component>
+    } @case ('image') {
+    <app-notion-image-component [data]="c" [slider]="true"></app-notion-image-component>
+    } @case ('divider') {
+    <app-notion-divider-component></app-notion-divider-component>
+    } @case ('heading_1') {
+    <app-notion-heading-1-component [data]="c"></app-notion-heading-1-component>
+    } @case ('heading_2') {
+    <app-notion-heading-2-component [data]="c"></app-notion-heading-2-component>
+    } @case ('heading_3') {
+    <app-notion-heading-3-component [data]="c"></app-notion-heading-3-component>
+    } @case ('video') {
+    <app-notion-video-component [data]="c"></app-notion-video-component>
+    } @case ('callout') {
+    <app-notion-callout-component [data]="c">
+      <app-post-content-detail-section [content]="c.children"></app-post-content-detail-section>
+    </app-notion-callout-component>
+    } @case ('bulleted_list_item') {
+    <app-notion-bulleted-list-item-component [data]="c">
+      <app-post-content-detail-section [content]="c.children"></app-post-content-detail-section>
+    </app-notion-bulleted-list-item-component>
+    } @case ('numbered_list_item') {
+    <app-notion-numbered-list-item-component [data]="c">
+      <app-post-content-detail-section [content]="c.children"></app-post-content-detail-section>
+    </app-notion-numbered-list-item-component>
+    } @case ('toggle') {
+    <app-notion-carousel-component [data]="c">
+      <app-post-content-detail-section [content]="c.children" [slider]="true"></app-post-content-detail-section>
+    </app-notion-carousel-component>
+    } @default {
+    <p class="text-gray-500">Unknown element - {{c.type}}</p>
+    } }
+  </ng-template>
 </ng-container>
