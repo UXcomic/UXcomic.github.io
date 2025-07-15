@@ -20,7 +20,7 @@
     @switch (c.type) { @case ('paragraph') {
     <app-notion-paragraph-component [data]="c"></app-notion-paragraph-component>
     } @case ('image') {
-    <app-notion-image-component [data]="c" [slider]="true"></app-notion-image-component>
+    <app-notion-image-component [data]="c" [notInSlider]="!slider"></app-notion-image-component>
     } @case ('divider') {
     <app-notion-divider-component></app-notion-divider-component>
     } @case ('heading_1') {

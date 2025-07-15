@@ -17,6 +17,7 @@ export class PostCardComponent {
   @Input() rotate?: boolean
   @Input() noRedirect?: boolean
 
+  protected isImageLoaded: boolean = false
   protected config = environment
 
   private router = inject(Router)
@@ -26,5 +27,10 @@ export class PostCardComponent {
 
     const slug = this.post.slug || 'unknown'
     this.router.navigateByUrl(`/post/${slug}`)
+  }
+
+  onImageLoad() {
+    console.log('1')
+    this.isImageLoaded = true
   }
 }
