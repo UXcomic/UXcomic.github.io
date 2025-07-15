@@ -6,11 +6,6 @@ on:
   pull_request:
     branches: ['develop']
   workflow_dispatch:
-    inputs:
-      message:
-        description: 'Build Angular Manually'
-        required: false
-        type: string
 
 jobs:
   angular-pnpm:
