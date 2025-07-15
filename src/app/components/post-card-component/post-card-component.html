@@ -2,21 +2,21 @@
   *ngIf="!!post"
   (click)="goToPostDetail()"
   class="post-card__container h-full p-[4px] bg-white rounded-[6px]"
+  [class.md:w-[192px]]="!small"
   [class.rotate-[4deg]]="rotate"
   [class.post-card__container--sm]="small"
 >
-  <div class="post-card__content h-full border-[0.5px] rounded-[2px]" [class.md:w-[192px]]="!small">
+  <div class="post-card__content w-full h-full border-[0.5px] rounded-[2px]">
     @defer {
     <img
       [src]="`${config.baseUrl}${post.cover}`"
       [alt]="post.title"
       [class.h-[137px]]="small"
-      [class.h-[152px]]="!small"
       [class.w-full]="small"
       loading="lazy"
     />
     } @placeholder (minimum 500ms) {
-    <div role="status" class="flex items-center justify-center w-full h-[152px] bg-gray-300 animate-pulse">
+    <div role="status" class="flex items-center justify-center w-full h-[160px] bg-gray-300 animate-pulse">
       <svg
         class="w-10 h-10 text-gray-200"
         aria-hidden="true"
