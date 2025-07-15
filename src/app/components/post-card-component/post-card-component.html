@@ -2,7 +2,7 @@
   *ngIf="!!post"
   (click)="goToPostDetail()"
   class="post-card__container h-full p-[4px] bg-white rounded-[6px]"
-  [class.md:w-[192px]]="!small"
+  [class.md:w-max-[192px]]="!small"
   [class.rotate-[4deg]]="rotate"
   [class.post-card__container--sm]="small"
 >
