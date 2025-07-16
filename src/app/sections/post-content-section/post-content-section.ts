@@ -133,7 +133,7 @@ export class PostContentSection implements OnInit, OnChanges, AfterViewInit {
   async sharePost() {
     await navigator.share({
       title: this.postContent?.title,
-      text: this.postContent?.title,
+      text: '',
       url: `${this.config.baseUrl}/post/${this.postContent?.slug}`,
     })
   }
