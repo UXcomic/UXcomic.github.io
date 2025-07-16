@@ -1,5 +1,6 @@
 <div [id]="`image-${this.data.id}`" [class.py-[8px]]="notInSlider" [class.px-[16px]]="notInSlider">
   <a
+    class="notion-image__viewer-link"
     [href]="`${config.baseUrl}`"
     [attr.data-pswp-src]="`${config.baseUrl}${data.image.file.url}`"
     data-pswp-width="1920"

@@ -4,6 +4,7 @@ import {
   ElementRef,
   inject,
   Input,
+  NgZone,
   OnChanges,
   OnInit,
   PLATFORM_ID,
@@ -17,14 +18,10 @@ import { PostContentDetailSection } from '../post-content-detail-section/post-co
 import { getRelevantPosts } from '../../utils/post-helper'
 import { PostCardComponent } from '../../components/post-card-component/post-card-component'
 import { FlowbiteService } from '../../services/flowbite.service'
-import {
-  initFlowbite,
-  CopyClipboard,
-  CopyClipboardInterface,
-  CopyClipboardOptions,
-  Tooltip,
-  TooltipInterface,
-} from 'flowbite'
+import { initFlowbite, CopyClipboard, CopyClipboardInterface, Tooltip, TooltipInterface } from 'flowbite'
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+import PhotoSwipe from 'photoswipe'
+import 'photoswipe/photoswipe.css'
 
 @Component({
   selector: 'app-post-content-section',
@@ -52,6 +49,7 @@ export class PostContentSection implements OnInit, OnChanges, AfterViewInit {
 
   private flowbiteService = inject(FlowbiteService)
   private platformId = inject(PLATFORM_ID)
+  private ngZone = inject(NgZone)
 
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite((flowbite) => {
@@ -69,6 +67,7 @@ export class PostContentSection implements OnInit, OnChanges, AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       this.initPostUrlClipboard()
       this.initPostUrlTooltip()
+      this.initPhotoswipe()
     }
   }
 
@@ -113,6 +112,21 @@ export class PostContentSection implements OnInit, OnChanges, AfterViewInit {
     )
 
     this.tooltip.init()
+  }
+
+  private initPhotoswipe() {
+    this.ngZone.runOutsideAngular(() => {
+      const lightbox = new PhotoSwipeLightbox({
+        gallery: `article`,
+        children: 'a.notion-image__viewer-link',
+        pswpModule: PhotoSwipe,
+        loop: false,
+        initialZoomLevel: 'fit',
+        secondaryZoomLevel: 0.5,
+        maxZoomLevel: 1,
+      })
+      lightbox.init()
+    })
   }
 
   async sharePost() {
