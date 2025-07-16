@@ -27,7 +27,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.sass"],
+            "styles": ["src/styles.sass", "node_modules/photoswipe/dist/photoswipe.css"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -92,7 +92,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.sass"]
+            "styles": ["src/styles.sass", "node_modules/photoswipe/dist/photoswipe.css"]
           }
         },
         "deploy": {
