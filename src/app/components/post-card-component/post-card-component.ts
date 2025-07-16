@@ -1,13 +1,13 @@
 import { Component, inject, Input } from '@angular/core'
 import { Post } from '../../models/post'
 import { environment } from '../../../environments/environment'
-import { CommonModule } from '@angular/common'
+import { CommonModule, NgOptimizedImage } from '@angular/common'
 import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-post-card-component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './post-card-component.html',
   styleUrl: './post-card-component.sass',
 })

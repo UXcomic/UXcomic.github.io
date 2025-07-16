@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, ElementRef, inject, Input, PLATFORM_ID, ViewChild } from '@angular/core'
 import { environment } from '../../../environments/environment'
 import { NotionTextComponent } from '../notion-text-component/notion-text-component'
-import { isPlatformBrowser } from '@angular/common'
+import { isPlatformBrowser, NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-notion-image-component',
   standalone: true,
-  imports: [NotionTextComponent],
+  imports: [NotionTextComponent, NgOptimizedImage],
   templateUrl: './notion-image-component.html',
   styleUrl: './notion-image-component.sass',
 })

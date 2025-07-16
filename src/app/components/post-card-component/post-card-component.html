@@ -9,11 +9,14 @@
   <div class="post-card__content w-full h-full border-[0.5px] rounded-[2px]">
     @defer {
     <img
-      [src]="`${config.baseUrl}${post.cover}`"
+      [ngSrc]="`${config.baseUrl}${post.cover}`"
+      width="300"
+      height="300"
       [alt]="post.title"
       class="w-full"
       [class.h-[137px]]="small"
       [class.min-h-[152px]]="!small"
+      priority
     />
     } @placeholder (minimum 400ms) {
     <div role="status" class="flex items-center justify-center w-full h-[152px] bg-gray-300 animate-pulse">

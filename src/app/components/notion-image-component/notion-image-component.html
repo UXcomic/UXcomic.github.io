@@ -1,7 +1,7 @@
 <div [id]="`image-${this.data.id}`" [class.py-[8px]]="notInSlider" [class.px-[16px]]="notInSlider">
   <a
     #notionImageViewerLinkElementRef
-    class="notion-image__viewer-link"
+    class="notion-image__viewer-link relative"
     [href]="`${config.baseUrl}`"
     [attr.data-pswp-src]="`${config.baseUrl}${data.image.file.url}`"
     target="_blank"
@@ -10,7 +10,9 @@
       #notionImageElementRef
       class="rounded-[8px]"
       [class.notion-image__in-slider--shadow]="!notInSlider"
-      [src]="`${config.baseUrl}${data.image.file.url}`"
+      [ngSrc]="`${config.baseUrl}${data.image.file.url}`"
+      width="1920"
+      height="1080"
       [alt]="data.image.file.url"
     />
   </a>
