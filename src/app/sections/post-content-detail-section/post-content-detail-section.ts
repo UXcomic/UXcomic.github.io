@@ -43,14 +43,6 @@ export class PostContentDetailSection {
   @Input() content?: any
   @Input() slider?: boolean
 
-  // slides-per-view="auto"
-  //     space-between="12"
-  //     centered-slides="true"
-  //     [pagination]="{
-  //       el: '.numberedaaaaa',
-  //       type: 'fraction'
-  //     }"
-
   protected swiperConfig: SwiperOptions = {
     slidesPerView: 'auto',
     spaceBetween: 12,

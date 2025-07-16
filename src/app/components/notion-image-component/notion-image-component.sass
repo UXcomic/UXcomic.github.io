@@ -1,6 +1,10 @@
 @use '../../styles/colors'
 @use '../../styles/typography'
 
-.notion-image__caption
-  @extend %notion-caption
-  color: colors.$color-text-secondary
+.notion-image
+  &__caption
+    @extend %notion-caption
+    color: colors.$color-text-secondary
+  &__in-slider--shadow
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1)
+    border: 0.5px solid rgba(218, 218, 218, 1)

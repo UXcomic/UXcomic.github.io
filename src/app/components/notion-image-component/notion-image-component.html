@@ -1,5 +1,10 @@
 <div [class.py-[8px]]="notInSlider" [class.px-[16px]]="notInSlider">
-  <img class="rounded-[8px]" [src]="`${config.baseUrl}${data.image.file.url}`" [alt]="data.image.file.url" />
+  <img
+    class="rounded-[8px]"
+    [class.notion-image__in-slider--shadow]="!notInSlider"
+    [src]="`${config.baseUrl}${data.image.file.url}`"
+    [alt]="data.image.file.url"
+  />
   @if (data.image.caption.length) {
   <div class="notion-image__caption mt-[8px]">
     @for(c of data.image.caption; track $index) {

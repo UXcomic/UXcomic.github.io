@@ -1,5 +1,5 @@
 <div *ngIf="!!data" class="flex gap-x-[8px] px-[16px] mb-[8px]">
-  <span>{{data.index + 1}}.</span>
+  <span class="text-[16px]/[26px]">{{data.index + 1}}.</span>
   <div class="grow">
     <span class="notion-numbered-list-item__text">
       @for(c of data.numbered_list_item.rich_text; track $index) {
