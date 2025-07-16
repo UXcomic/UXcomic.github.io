@@ -11,12 +11,13 @@
     <img
       [src]="`${config.baseUrl}${post.cover}`"
       [alt]="post.title"
+      class="w-full"
       [class.h-[137px]]="small"
-      [class.w-full]="small"
+      [class.h-min-[152px]]="!small"
       loading="lazy"
     />
-    } @placeholder (minimum 500ms) {
-    <div role="status" class="flex items-center justify-center w-full h-[160px] bg-gray-300 animate-pulse">
+    } @placeholder (minimum 800ms) {
+    <div role="status" class="flex items-center justify-center w-full h-[152px] bg-gray-300 animate-pulse">
       <svg
         class="w-10 h-10 text-gray-200"
         aria-hidden="true"

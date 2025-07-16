@@ -12,7 +12,7 @@ import { NotionNumberedListItemComponent } from '../../components/notion-numbere
 import { NotionVideoComponent } from '../../components/notion-video-component/notion-video-component'
 import { NotionCarouselComponent } from '../../components/notion-carousel-component/notion-carousel-component'
 import { register } from 'swiper/element/bundle'
-import { Swiper, SwiperOptions } from 'swiper/types'
+import { SwiperOptions } from 'swiper/types'
 import { SwiperDirective } from '../../directives/swiper.directive'
 
 register()
@@ -44,9 +44,6 @@ export class PostContentDetailSection {
   @Input() slider?: boolean
 
   protected swiperConfig: SwiperOptions = {
-    // slidesPerView: 'auto',
-    // spaceBetween: 12,
-    // centeredSlides: true,
     effect: 'cards',
     grabCursor: true,
     pagination: {

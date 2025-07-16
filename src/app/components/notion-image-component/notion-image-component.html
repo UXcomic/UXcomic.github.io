@@ -1,10 +1,18 @@
-<div [class.py-[8px]]="notInSlider" [class.px-[16px]]="notInSlider">
-  <img
-    class="rounded-[8px]"
-    [class.notion-image__in-slider--shadow]="!notInSlider"
-    [src]="`${config.baseUrl}${data.image.file.url}`"
-    [alt]="data.image.file.url"
-  />
+<div [id]="`image-${this.data.id}`" [class.py-[8px]]="notInSlider" [class.px-[16px]]="notInSlider">
+  <a
+    [href]="`${config.baseUrl}`"
+    [attr.data-pswp-src]="`${config.baseUrl}${data.image.file.url}`"
+    data-pswp-width="1920"
+    data-pswp-height="1920"
+    target="_blank"
+  >
+    <img
+      class="rounded-[8px]"
+      [class.notion-image__in-slider--shadow]="!notInSlider"
+      [src]="`${config.baseUrl}${data.image.file.url}`"
+      [alt]="data.image.file.url"
+    />
+  </a>
   @if (data.image.caption.length) {
   <div class="notion-image__caption mt-[8px]">
     @for(c of data.image.caption; track $index) {
