@@ -46,9 +46,5 @@ export class PostContentDetailSection {
   protected swiperConfig: SwiperOptions = {
     effect: 'cards',
     grabCursor: true,
-    pagination: {
-      el: '.notion-carousel__fraction',
-      type: 'fraction',
-    },
   }
 }

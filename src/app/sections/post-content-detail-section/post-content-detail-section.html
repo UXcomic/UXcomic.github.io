@@ -4,8 +4,8 @@
   </ng-container>
   <ng-template #sliderContent>
     <swiper-container swiperElement init="false" [config]="swiperConfig" class="w-[320px] mx-auto">
-      @for(c of content; track c.id) {
-      <swiper-slide>
+      @for(c of content; track c.id; let idx = $index) {
+      <swiper-slide lazy="true">
         <ng-container *ngTemplateOutlet="notionContent; context: {$implicit: c}"></ng-container>
       </swiper-slide>
       }
