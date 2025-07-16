@@ -121,8 +121,9 @@ export class PostContentSection implements OnInit, OnChanges, AfterViewInit {
         children: 'a.notion-image__viewer-link',
         pswpModule: PhotoSwipe,
         loop: false,
+        allowPanToNext: false,
         initialZoomLevel: 'fit',
-        secondaryZoomLevel: 0.5,
+        secondaryZoomLevel: 1.5,
         maxZoomLevel: 1,
       })
       lightbox.init()

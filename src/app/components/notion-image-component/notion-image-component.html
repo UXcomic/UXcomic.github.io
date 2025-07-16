@@ -1,13 +1,13 @@
 <div [id]="`image-${this.data.id}`" [class.py-[8px]]="notInSlider" [class.px-[16px]]="notInSlider">
   <a
+    #notionImageViewerLinkElementRef
     class="notion-image__viewer-link"
     [href]="`${config.baseUrl}`"
     [attr.data-pswp-src]="`${config.baseUrl}${data.image.file.url}`"
-    data-pswp-width="1920"
-    data-pswp-height="1920"
     target="_blank"
   >
     <img
+      #notionImageElementRef
       class="rounded-[8px]"
       [class.notion-image__in-slider--shadow]="!notInSlider"
       [src]="`${config.baseUrl}${data.image.file.url}`"
