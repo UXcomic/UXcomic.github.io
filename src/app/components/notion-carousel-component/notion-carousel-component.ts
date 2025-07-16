@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common'
 import { Component, Input } from '@angular/core'
-import { NotionTextComponent } from '../notion-text-component/notion-text-component'
 
 @Component({
   selector: 'app-notion-carousel-component',
-  imports: [CommonModule, NotionTextComponent],
+  imports: [CommonModule],
   templateUrl: './notion-carousel-component.html',
   styleUrl: './notion-carousel-component.sass',
 })

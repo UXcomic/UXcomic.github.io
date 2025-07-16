@@ -1,12 +1,12 @@
 <div class="my-[24px]">
-  <div class="px-[16px] flex justify-between">
+  <!-- <div class="px-[16px] flex justify-between">
     <p class="notion-carousel__title text-[14px]/[20px] mb-[12px]">
       @for(r of data.toggle.rich_text; track $index) {
       <app-notion-text-component [data]="r"></app-notion-text-component>
       }
     </p>
     <div class="notion-carousel__fraction h-[20px] rounded-full px-[12px] py-[2px]"></div>
-  </div>
+  </div> -->
   <ng-container *ngIf="data.children">
     <ng-content></ng-content>
   </ng-container>

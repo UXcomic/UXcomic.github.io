@@ -44,9 +44,11 @@ export class PostContentDetailSection {
   @Input() slider?: boolean
 
   protected swiperConfig: SwiperOptions = {
-    slidesPerView: 'auto',
-    spaceBetween: 12,
-    centeredSlides: true,
+    // slidesPerView: 'auto',
+    // spaceBetween: 12,
+    // centeredSlides: true,
+    effect: 'cards',
+    grabCursor: true,
     pagination: {
       el: '.notion-carousel__fraction',
       type: 'fraction',
