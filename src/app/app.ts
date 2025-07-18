@@ -9,7 +9,7 @@ import BlogRoutes from '../../public/data/blogRoutes.json'
   styleUrl: './app.sass',
 })
 export class App {
-  protected title = 'uxcomic-v2'
+  protected title = 'uxcomic'
 
   private router = inject(Router)
   private route = inject(ActivatedRoute)

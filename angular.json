@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "uxcomic-v2": {
+    "uxcomic": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -33,7 +33,7 @@
             "ssr": {
               "entry": "src/server.ts"
             },
-            "outputPath": "dist/uxcomic-v2"
+            "outputPath": "dist/uxcomic"
           },
           "configurations": {
             "production": {
@@ -69,10 +69,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "uxcomic-v2:build:production"
+              "buildTarget": "uxcomic:build:production"
             },
             "development": {
-              "buildTarget": "uxcomic-v2:build:development"
+              "buildTarget": "uxcomic:build:development"
             }
           },
           "defaultConfiguration": "development"

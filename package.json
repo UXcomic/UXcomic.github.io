@@ -1,14 +1,14 @@
 {
-  "name": "uxcomic-v2",
+  "name": "uxcomic",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "deploy": "ng deploy --base-href=/uxcomic-v2/",
+    "deploy": "ng deploy --base-href=/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:uxcomic-v2": "node dist/uxcomic-v2/server/server.mjs",
+    "serve:ssr:uxcomic": "node dist/uxcomic/server/server.mjs",
     "prettier": "prettier --write \"./src/**/*.{ts,html,scss,json}\"",
     "prettier:check": "prettier --check \"./src/**/*.{ts,html,scss,json}\"",
     "format": "npm run prettier"
