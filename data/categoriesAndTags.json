@@ -1,0 +1,149 @@
+[
+  {
+    "id": "11a5d164-78d8-80c5-95ab-ebc19da12022",
+    "name": "Technical",
+    "slug": "technical",
+    "icon": "🕹️",
+    "order": 5,
+    "tags": [
+      {
+        "id": "715a3f1f-8d2e-426b-a2d8-86f0e34dfc02",
+        "name": "UI relevant",
+        "slug": "ui-relevant",
+        "order": 1
+      },
+      {
+        "id": "d416873d-bbef-4675-8e5f-6dadaca6b689",
+        "name": "Functionality",
+        "slug": "functionality",
+        "order": 2
+      },
+      {
+        "id": "9171cfc1-4b53-4d18-b58f-72e33c73ea78",
+        "name": "Data",
+        "slug": "data",
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "1195d164-78d8-8065-a1df-f4f8e3c089fd",
+    "name": "Cheat sheet",
+    "slug": "cheat-sheet",
+    "icon": "🧩",
+    "order": 1,
+    "tags": [
+      {
+        "id": "715a3f1f-8d2e-426b-a2d8-86f0e34dfc02",
+        "name": "Design",
+        "slug": "design",
+        "order": 1
+      },
+      {
+        "id": "e01c5a08-4b91-45db-8aca-0720767c6574",
+        "name": "Think",
+        "slug": "think",
+        "order": 2
+      },
+      {
+        "id": "34ab4e5c-eb99-46c6-af9c-27ca71f10955",
+        "name": "Other",
+        "slug": "other",
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": "1045d164-78d8-8055-80fc-eb5e062c0cda",
+    "name": "Collaboration",
+    "slug": "collaboration",
+    "icon": "🤝",
+    "order": 4,
+    "tags": [
+      {
+        "id": "715a3f1f-8d2e-426b-a2d8-86f0e34dfc02",
+        "name": "Communication",
+        "slug": "communication",
+        "order": 2
+      },
+      {
+        "id": "93eb03d2-df0b-4702-b9b7-62b519119ed1",
+        "name": "Workflow",
+        "slug": "workflow",
+        "order": 3
+      },
+      {
+        "id": "33f5d15b-12d5-421b-b756-116b5b0cbce8",
+        "name": "Understanding",
+        "slug": "understanding",
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": "5cacdbff-b9e2-4973-b565-ec1ae4327ec9",
+    "name": "Fundamental",
+    "slug": "fundamental",
+    "icon": "🌞",
+    "order": 2,
+    "tags": [
+      {
+        "id": "843ac5bc-2826-43e2-a5ea-ff89ae43d888",
+        "name": "Product",
+        "slug": "product",
+        "order": 1
+      },
+      {
+        "id": "156ef770-14db-4170-b1d7-95a2fbdf62ba",
+        "name": "User",
+        "slug": "user",
+        "order": 2
+      },
+      {
+        "id": "4d57276c-5c0e-47d6-93b9-378a6f6d4367",
+        "name": "Design",
+        "slug": "design",
+        "order": 3
+      },
+      {
+        "id": "9290a1c0-fd10-40c6-a821-56f188976357",
+        "name": "Random",
+        "slug": "random",
+        "order": 4
+      }
+    ]
+  },
+  {
+    "id": "bdbc06ee-d7c2-4b3c-813d-674e7a4975c6",
+    "name": "Design",
+    "slug": "design",
+    "icon": "🌗",
+    "order": 3,
+    "tags": [
+      {
+        "id": "1d9985ef-31a1-4ad8-a081-3ccb155ec30d",
+        "name": "Understand",
+        "slug": "understand",
+        "order": 1
+      },
+      {
+        "id": "4ec0342e-83f3-47a0-986c-f4331a8c4390",
+        "name": "Think",
+        "slug": "think",
+        "order": 2
+      },
+      {
+        "id": "d307b34b-7c4b-4801-93c4-724215d4f425",
+        "name": "Build",
+        "slug": "build",
+        "order": 3
+      },
+      {
+        "id": "~cV[",
+        "name": "Measure",
+        "slug": "measure",
+        "order": 4
+      }
+    ]
+  }
+]
