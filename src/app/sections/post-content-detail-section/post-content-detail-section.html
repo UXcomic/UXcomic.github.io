@@ -4,7 +4,7 @@
   </ng-container>
   <ng-template #sliderContent>
     <div class="flex justify-center items-center">
-      <swiper-container swiperElement init="false" [config]="swiperConfig" class="w-[240px] h-[240px]">
+      <swiper-container swiperElement init="false" [config]="swiperConfig" class="w-[320px] h-[320px]">
         @for(c of content; track c.id; let idx = $index) {
         <swiper-slide class="flex justify-center items-start" lazy="true">
           <ng-container *ngTemplateOutlet="notionContent; context: {$implicit: c}"></ng-container>
