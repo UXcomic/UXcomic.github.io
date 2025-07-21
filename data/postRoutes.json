@@ -6,6 +6,9 @@
     "slug": "unknown"
   },
   {
+    "slug": "test-short-cut"
+  },
+  {
     "slug": "cac-meta-terms-e-hoc"
   },
   {
@@ -150,9 +153,6 @@
     "slug": "why-people-said-good-design-is-invisible"
   },
   {
-    "slug": "understand-empathize-user"
-  },
-  {
     "slug": "ui-vs-ixd-vs-ux-vs-product-design"
   },
   {
@@ -226,6 +226,9 @@
   },
   {
     "slug": "ux-audit"
+  },
+  {
+    "slug": "understand-empathize-user"
   },
   {
     "slug": "interaction-pattern"
