@@ -25,7 +25,7 @@ export class PostCardComponent implements OnInit, OnChanges {
   protected isImageLoaded: boolean = false
   protected config = environment
   protected coverImg!: CloudinaryImage
-  protected cldPlaceholderPlugins = [placeholder({ mode: 'blur' })]
+  protected coverImgPlugins = [placeholder({ mode: 'blur' })]
 
   private router = inject(Router)
   private cld?: Cloudinary
