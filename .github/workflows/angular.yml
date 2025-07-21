@@ -58,6 +58,9 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy Angular Project
-        run: pnpm run deploy
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          pnpm run deploy
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
