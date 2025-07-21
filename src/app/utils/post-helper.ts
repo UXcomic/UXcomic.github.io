@@ -32,7 +32,7 @@ const getCoverId = (post: any) => {
 
 const convertPost = (post: any): Post => ({
   id: post.id,
-  cover: post.content.find((c: any) => c.type === 'image')?.image?.file?.url || '/hello.jpg',
+  cover: post.content.find((c: any) => c.type === 'image'),
   level: getPostLevelInformation(post?.properties?.Type?.select?.name),
   title: post?.properties?.Name?.title?.[0]?.text?.content || post.properties.title.title[0].plain_text || '',
   slug: slugify(post?.properties?.Name?.title?.[0]?.text?.content),

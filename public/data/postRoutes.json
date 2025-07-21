@@ -6,6 +6,12 @@
     "slug": "unknown"
   },
   {
+    "slug": "test-short-cut"
+  },
+  {
+    "slug": "cac-meta-terms-e-hoc"
+  },
+  {
     "slug": "my-map"
   },
   {
@@ -13,6 +19,9 @@
   },
   {
     "slug": "observation"
+  },
+  {
+    "slug": "deal-with-unknown"
   },
   {
     "slug": "the-10-pre-action-compass"
@@ -117,9 +126,6 @@
     "slug": "unknown"
   },
   {
-    "slug": "deal-with-unknown"
-  },
-  {
     "slug": "value-vs-benefit"
   },
   {
@@ -147,13 +153,7 @@
     "slug": "why-people-said-good-design-is-invisible"
   },
   {
-    "slug": "understand-empathize-user"
-  },
-  {
     "slug": "ui-vs-ixd-vs-ux-vs-product-design"
-  },
-  {
-    "slug": "interaction-phisolophy"
   },
   {
     "slug": "a-brief-history-of-ux"
@@ -226,6 +226,9 @@
   },
   {
     "slug": "ux-audit"
+  },
+  {
+    "slug": "understand-empathize-user"
   },
   {
     "slug": "interaction-pattern"

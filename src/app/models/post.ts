@@ -4,7 +4,7 @@ import { Level } from './level'
 import { Tag } from './tag'
 
 export interface Post extends Base {
-  cover: string
+  cover: any
   title: string
   level?: Level
   slug: string

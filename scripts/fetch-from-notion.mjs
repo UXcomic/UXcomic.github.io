@@ -4,8 +4,15 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as https from 'https'
 import { fileURLToPath } from 'url'
+import { v2 as cloudinary } from 'cloudinary'
 
 dotenv.config()
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -149,7 +156,8 @@ async function processFetchContent(postData, parentPostData = undefined) {
 
   const sanitizedTitle = getSantinizeTitle(parentPostData || postData)
   const titleSlug = toSlug(sanitizedTitle)
-  await handleImageBlocks(titleSlug, contentData.results)
+  // await handleImageBlocks(titleSlug, contentData.results)
+  await handleUploadImagesToCloudinary(contentData.results)
 
   return contentData.results
 }
@@ -243,6 +251,36 @@ async function downloadImage(imageUrl, savePath) {
         fs.unlink(savePath, () => reject(err))
       })
   })
+}
+
+async function handleUploadImagesToCloudinary(contentArray) {
+  let uploadedCount = 0
+  let failedCount = 0
+  let usedImagePublicIds = []
+
+  for (const obj of contentArray) {
+    if (obj.type === 'image' && obj.image?.file?.url) {
+      const imageUrl = obj.image.file.url
+      try {
+        const result = await cloudinary.uploader.upload(imageUrl, {
+          public_id: obj.id,
+          folder: 'uxcomic-imgs',
+          overwrite: false,
+        })
+        obj.image.file.url = result.secure_url
+        obj.public_id = result.public_id
+        usedImagePublicIds.push(result.public_id)
+        uploadedCount++
+        console.log(`[Cloudinary] Success: ${result.secure_url}`)
+      } catch (err) {
+        failedCount++
+        console.error(`[Cloudinary] Failed to upload: ${imageUrl}`, err.message)
+      }
+    }
+  }
+
+  // Remove unused images
+  // const cloudinaryImages = await cloudinary.api.resources_by_asset_folder('uxcomic-imgs')
 }
 
 function generateRoutes() {
