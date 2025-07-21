@@ -6,6 +6,8 @@ import { Router } from '@angular/router'
 import { CloudinaryModule } from '@cloudinary/ng'
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen'
 import { fill } from '@cloudinary/url-gen/actions/resize'
+import { quality } from '@cloudinary/url-gen/actions/delivery'
+import { auto } from '@cloudinary/url-gen/qualifiers/quality'
 
 @Component({
   selector: 'app-post-card-component',
@@ -36,7 +38,7 @@ export class PostCardComponent implements OnInit {
 
     const publicId = this.post?.cover?.public_id
     if (this.post && publicId) {
-      this.coverUrl = this.cld.image(publicId).resize(fill().width(200).height(200)).toURL()
+      this.coverUrl = this.cld.image(publicId).resize(fill().width(300).height(300)).delivery(quality(auto())).toURL()
     }
   }
 
