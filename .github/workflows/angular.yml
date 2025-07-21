@@ -39,6 +39,13 @@ jobs:
 
       - name: Sync Notion Data
         run: node scripts/fetch-from-notion.mjs
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_ROOT_DATABASE_ID: ${{ secrets.NOTION_ROOT_DATABASE_ID }}
+          NOTION_ABOUT_POST_ID: ${{ secrets.NOTION_ABOUT_POST_ID }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
 
       - name: Commit and Push Images
         run: |
