@@ -1,9 +1,9 @@
-import { Component, inject, Input, OnInit } from '@angular/core'
+import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
 import { Post } from '../../models/post'
 import { environment } from '../../../environments/environment'
 import { CommonModule } from '@angular/common'
 import { Router } from '@angular/router'
-import { CloudinaryModule } from '@cloudinary/ng'
+import { CloudinaryModule, placeholder } from '@cloudinary/ng'
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen'
 import { fill } from '@cloudinary/url-gen/actions/resize'
 import { quality } from '@cloudinary/url-gen/actions/delivery'
@@ -16,7 +16,7 @@ import { auto } from '@cloudinary/url-gen/qualifiers/quality'
   templateUrl: './post-card-component.html',
   styleUrl: './post-card-component.sass',
 })
-export class PostCardComponent implements OnInit {
+export class PostCardComponent implements OnInit, OnChanges {
   @Input() post?: Post
   @Input() small?: boolean
   @Input() rotate?: boolean
@@ -24,7 +24,8 @@ export class PostCardComponent implements OnInit {
 
   protected isImageLoaded: boolean = false
   protected config = environment
-  protected coverUrl?: string
+  protected coverImg!: CloudinaryImage
+  protected cldPlaceholderPlugins = [placeholder({ mode: 'blur' })]
 
   private router = inject(Router)
   private cld?: Cloudinary
@@ -36,10 +37,20 @@ export class PostCardComponent implements OnInit {
       },
     })
 
-    const publicId = this.post?.cover?.public_id
-    if (this.post && publicId) {
-      this.coverUrl = this.cld.image(publicId).resize(fill().width(300).height(300)).delivery(quality(auto())).toURL()
-    }
+    this.setCoverUrl()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.post = changes['post'].currentValue
+    this.setCoverUrl()
+  }
+
+  setCoverUrl() {
+    if (this.post && this.cld)
+      this.coverImg = this.cld
+        .image(this.post.cover?.public_id)
+        .resize(fill().width(300).height(300))
+        .delivery(quality(auto()))
   }
 
   goToPostDetail() {

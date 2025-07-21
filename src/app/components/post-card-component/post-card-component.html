@@ -6,17 +6,10 @@
   [class.rotate-[4deg]]="rotate"
   [class.post-card__container--sm]="small"
 >
-  <div class="post-card__content w-full h-full border-[0.5px] rounded-[2px]">
-    <img
-      [src]="`${coverUrl}`"
-      width="300"
-      height="300"
-      [alt]="post.title"
-      class="w-full"
-      [class.h-[137px]]="small"
-      [class.min-h-[152px]]="!small"
-      priority
-    />
+  <div class="post-card__content flex flex-col w-full h-full border-[0.5px] rounded-[2px]">
+    <div class="w-full grow">
+      <advanced-image [cldImg]="coverImg" [plugins]="cldPlaceholderPlugins"></advanced-image>
+    </div>
 
     <div
       class="pt-[16px] pb-[8px] px-[8px] relative flex items-center justify-center"
