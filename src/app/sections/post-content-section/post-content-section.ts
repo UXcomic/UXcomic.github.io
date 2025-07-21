@@ -21,7 +21,6 @@ import { FlowbiteService } from '../../services/flowbite.service'
 import { initFlowbite, CopyClipboard, CopyClipboardInterface, Tooltip, TooltipInterface } from 'flowbite'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import PhotoSwipe from 'photoswipe'
-import 'photoswipe/photoswipe.css'
 
 @Component({
   selector: 'app-post-content-section',

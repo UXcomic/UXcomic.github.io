@@ -1,7 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
-import BlogRoutes from '../../../../public/data/blogRoutes.json'
 import CategoriesData from '../../../../public/data/categoriesAndTags.json'
 import PostsData from '../../../../public/data/posts.json'
 import { Category } from '../../models/category'
@@ -12,8 +11,8 @@ import { Post } from '../../models/post'
 import { convertPost } from '../../utils/post-helper'
 import { PostsSection } from '../../sections/posts-section/posts-section'
 import { DrawerTopComponent } from '../../components/drawer-top-component/drawer-top-component'
-
-const DEFAULT_ROUTE = `/blog/${BlogRoutes[0].category}/${BlogRoutes[0].tag}`
+import { getDefaultRoute, getNotFoundRoute } from '../../utils/route-helper'
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-blog',
@@ -28,12 +27,11 @@ export class Blog implements OnInit, OnDestroy {
   protected category?: Category
   protected categories?: Category[] = CategoriesData
   protected posts?: Post[]
+  protected config = environment
 
   private router = inject(Router)
   private route = inject(ActivatedRoute)
   private paramMapSubscription: Subscription | undefined
-
-  constructor() {}
 
   ngOnInit(): void {
     this.paramMapSubscription = this.route.paramMap.subscribe((params) => {
@@ -41,13 +39,18 @@ export class Blog implements OnInit, OnDestroy {
       this.tagParam = params.get('tag')
 
       if (!this.categoryParam || !this.tagParam) {
-        this.router.navigateByUrl(DEFAULT_ROUTE)
+        this.router.navigateByUrl(getDefaultRoute(this.config))
         return
       }
 
       this.category = CategoriesData.find(
         (item) => item.slug === this.categoryParam && item.tags.findIndex((tag) => tag.slug === this.tagParam) > -1,
       )
+
+      if (!this.category) {
+        this.router.navigateByUrl(getNotFoundRoute())
+        return
+      }
 
       this.getPosts()
       this.filterTags()

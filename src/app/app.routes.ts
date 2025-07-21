@@ -12,5 +12,6 @@ export const routes: Routes = [
   { path: 'about', component: About },
   { path: 'blog/:category/:tag', component: Blog },
   { path: 'post/:slug', component: Post },
+  { path: 'not-found', component: NotFound },
   { path: '**', pathMatch: 'full', component: NotFound },
 ]

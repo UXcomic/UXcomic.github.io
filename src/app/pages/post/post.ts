@@ -1,5 +1,4 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core'
-import BlogRoutes from '../../../../public/data/blogRoutes.json'
 import PostData from '../../../../public/data/posts.json'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
@@ -11,8 +10,7 @@ import { convertPostContent } from '../../utils/post-helper'
 import { PostContentSection } from '../../sections/post-content-section/post-content-section'
 import { Meta, Title } from '@angular/platform-browser'
 import { environment } from '../../../environments/environment'
-
-const DEFAULT_ROUTE = `/blog/${BlogRoutes[0].category}/${BlogRoutes[0].tag}`
+import { getDefaultRoute, getNotFoundRoute } from '../../utils/route-helper'
 
 @Component({
   selector: 'app-post',
@@ -33,20 +31,24 @@ export class Post implements OnInit, OnDestroy {
   private meta = inject(Meta)
   private title = inject(Title)
 
-  constructor() {}
-
   ngOnInit(): void {
     this.paramMapSubscription = this.route.paramMap.subscribe((params) => {
       this.slugParam = params.get('slug')
 
       if (!this.slugParam) {
-        this.router.navigateByUrl(DEFAULT_ROUTE)
+        this.router.navigateByUrl(getDefaultRoute(this.config))
         return
       }
 
       const pData = (PostData as any[]).find(
         (p) => slugify(p?.properties?.Name?.title?.[0]?.text?.content) === this.slugParam,
       )
+
+      if (!pData) {
+        this.router.navigateByUrl(getNotFoundRoute())
+        return
+      }
+
       this.post = convertPostContent(pData)
 
       this.initTitle()
@@ -63,12 +65,15 @@ export class Post implements OnInit, OnDestroy {
   }
 
   private initMetaTags() {
+    this.updateOGTitle()
+    this.updateOGImage()
+  }
+
+  private updateOGTitle() {
     this.meta.updateTag({
       name: 'og:title',
       content: this.post?.title || this.meta.getTag('name="og:title"')?.content || '',
     })
-
-    this.updateOGImage()
   }
 
   private updateOGImage() {
