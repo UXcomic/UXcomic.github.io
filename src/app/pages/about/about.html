@@ -28,6 +28,6 @@
       </button>
     </div>
   </div>
-  <img [src]="`${config.baseUrl}${post.cover}`" [alt]="post.title" class="mb-[16px] px-[16px] rounded-[8px]" />
+  <img [src]="`${config.cdnUrl}${post.cover}`" [alt]="post.title" class="mb-[16px] px-[16px] rounded-[8px]" />
   <app-post-content-section [postContent]="post" [hideTitle]="true"></app-post-content-section>
 </section>
