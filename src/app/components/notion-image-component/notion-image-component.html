@@ -3,14 +3,14 @@
     #notionImageViewerLinkElementRef
     class="notion-image__viewer-link relative"
     [href]="`${config.baseUrl}`"
-    [attr.data-pswp-src]="`${config.cdnUrl}${data.image.file.url}`"
+    [attr.data-pswp-src]="`${data.image.file.url}`"
     target="_blank"
   >
     <img
       #notionImageElementRef
       class="rounded-[8px]"
       [class.notion-image__in-slider--shadow]="!notInSlider"
-      [ngSrc]="`${config.cdnUrl}${data.image.file.url}`"
+      [src]="`${data.image.file.url}`"
       width="1920"
       height="1080"
       [alt]="data.image.file.url"
