@@ -68,9 +68,13 @@ export class Post implements OnInit, OnDestroy {
       content: this.post?.title || this.meta.getTag('name="og:title"')?.content || '',
     })
 
+    this.updateOGImage()
+  }
+
+  private updateOGImage() {
     this.meta.updateTag({
       name: 'og:image',
-      content: `${this.config.baseUrl}${this.post?.cover}` || this.meta.getTag('name="og:image"')?.content || '',
+      content: `${this.post?.cover?.image?.file?.url}` || this.meta.getTag('name="og:image"')?.content || '',
     })
   }
 
