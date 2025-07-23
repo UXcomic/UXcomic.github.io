@@ -40,6 +40,7 @@ jobs:
       - name: Sync Notion Data
         run: node scripts/fetch-from-notion.mjs
         env:
+          BASE_URL: ${{ secrets.BASE_URL }}
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_ROOT_DATABASE_ID: ${{ secrets.NOTION_ROOT_DATABASE_ID }}
           NOTION_ABOUT_POST_ID: ${{ secrets.NOTION_ABOUT_POST_ID }}
