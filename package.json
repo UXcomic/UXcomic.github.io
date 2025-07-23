@@ -11,7 +11,8 @@
     "serve:ssr:uxcomic": "node dist/uxcomic/server/server.mjs",
     "prettier": "prettier --write \"./src/**/*.{ts,html,scss,json}\"",
     "prettier:check": "prettier --check \"./src/**/*.{ts,html,scss,json}\"",
-    "format": "npm run prettier"
+    "format": "npm run prettier",
+    "sync": "node scripts/fetch-from-notion.mjs"
   },
   "private": true,
   "dependencies": {
