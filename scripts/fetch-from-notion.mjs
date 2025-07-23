@@ -41,7 +41,7 @@ async function fetchAll() {
   await fetchTags()
   await fetchPosts()
   generateRoutes()
-  createJsonFiles()
+  createFiles()
 }
 
 function createDirectory() {
@@ -312,11 +312,12 @@ function toSlug(title) {
     .replace(/^-+|-+$/g, '') // Trim hyphens
 }
 
-function createJsonFiles() {
+function createFiles() {
   processCreateCategoriesAndTagsFile()
   processPostsFile()
   processBlogRoutesFile()
   processPostRoutesFile()
+  processCreateSitemapFile()
 }
 
 function processCreateCategoriesAndTagsFile() {
@@ -345,4 +346,70 @@ function processPostRoutesFile() {
   const outputPath = path.join(outputDir, 'postRoutes.json')
   fs.writeFileSync(outputPath, JSON.stringify(postRoutes, null, 2))
   console.log(`✅ Saved ${postRoutes.length} routes to ${outputPath}`)
+}
+
+function processCreateSitemapFile() {
+  const baseUrl = process.env['BASE_URL']
+  const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd
+  let urls = []
+
+  postRoutes.forEach((route) => {
+    urls.push({
+      loc: `${baseUrl}/post/${route.slug}`,
+      lastmod: today,
+    })
+  })
+
+  blogRoutes.forEach((route) => {
+    urls.push({
+      loc: `${baseUrl}/blog/${route.category}/${route.tag}`,
+      lastmod: today,
+    })
+  })
+
+  const outputFile = path.join(outputDir, '../sitemap.xml')
+  let existingLocs = new Set()
+
+  // Đọc sitemap.xml nếu đã tồn tại và lấy các loc cũ
+  if (fs.existsSync(outputFile)) {
+    const oldContent = fs.readFileSync(outputFile, 'utf-8')
+    const locMatches = [...oldContent.matchAll(/<loc>(.*?)<\/loc>/g)]
+    locMatches.forEach((match) => existingLocs.add(match[1]))
+  }
+
+  // Chỉ thêm url mới chưa có
+  const newUrls = urls.filter((url) => !existingLocs.has(url.loc))
+
+  // Nếu không có url mới thì không cần ghi lại file
+  if (newUrls.length === 0) {
+    console.log('✅ No new URLs to add to sitemap.xml')
+    return
+  }
+
+  // Gộp url cũ và url mới
+  let allUrls = []
+  if (fs.existsSync(outputFile)) {
+    // Parse lại các url cũ
+    const oldContent = fs.readFileSync(outputFile, 'utf-8')
+    const urlMatches = [...oldContent.matchAll(/<url>([\s\S]*?)<\/url>/g)]
+    urlMatches.forEach((match) => allUrls.push(match[1].trim()))
+  }
+  // Thêm các url mới
+  allUrls.push(
+    ...newUrls.map(
+      (url) =>
+        `<url>
+          <loc>${url.loc}</loc>
+          <lastmod>${url.lastmod}</lastmod>
+        </url>`,
+    ),
+  )
+
+  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${allUrls.join('\n')}
+    </urlset>`
+
+  fs.writeFileSync(outputFile, sitemapContent, 'utf-8')
+  console.log(`✅ Added ${newUrls.length} new URLs to sitemap.xml at ${outputFile}`)
 }
