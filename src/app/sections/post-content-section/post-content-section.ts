@@ -36,6 +36,7 @@ export class PostContentSection implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('copyPostUrlDefaultTooltipMessageElementRef') copyPostUrlDefaultTooltipMessageElementRef!: ElementRef
   @ViewChild('copyPostUrlSuccessTooltipMessageElementRef') copyPostUrlSuccessTooltipMessageElementRef!: ElementRef
 
+  @Input() copyLink?: string
   @Input() postContent?: PostContent
   @Input() hideTitle?: boolean
 

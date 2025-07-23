@@ -69,7 +69,7 @@
         #postUrlInputElementRef
         type="hidden"
         id="post-url-input"
-        [value]="`${config.baseUrl}/post/${postContent.slug}`"
+        [value]="copyLink ? `${copyLink}` : `${config.baseUrl}/post/${postContent.slug}`"
       />
       <svg
         id="default-icon"
