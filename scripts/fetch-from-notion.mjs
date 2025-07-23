@@ -62,6 +62,7 @@ async function fetchCategories() {
     slug: toSlug(cate.properties.Name?.title?.[0]?.plain_text) || null,
     icon: cate.icon.emoji,
     order: parseInt(cate.properties.Number?.number || '-1'),
+    created_time: cate.created_time,
     tags: [],
   }))
 }
@@ -76,6 +77,7 @@ async function fetchTags() {
     const databaseInfo = await notion.databases.retrieve({
       database_id: childDatabase.id,
     })
+
     categoryData.tags = databaseInfo.properties.Tag.select.options.map((item) => ({
       id: item.id,
       name: item.name.split('-')[1],
@@ -279,8 +281,7 @@ async function handleUploadImagesToCloudinary(contentArray) {
     }
   }
 
-  // Remove unused images
-  // const cloudinaryImages = await cloudinary.api.resources_by_asset_folder('uxcomic-imgs')
+  // TODO Remove unused images
 }
 
 function generateRoutes() {
@@ -291,14 +292,14 @@ function generateRoutes() {
 function processGeneratePostRoutes() {
   postsData.forEach((post) => {
     const slug = toSlug(post.properties?.Name?.title[0]?.text?.content || 'Unknown')
-    postRoutes.push({ slug })
+    postRoutes.push({ slug, lastEditedTime: post.last_edited_time })
   })
 }
 
 function processGenerateBlogRoutes() {
   blogsData.forEach((cate) => {
     cate.tags.forEach((tagItem) => {
-      blogRoutes.push({ category: cate.slug, tag: tagItem.slug })
+      blogRoutes.push({ category: cate.slug, tag: tagItem.slug, createdTime: cate.created_time })
     })
   })
 }
@@ -350,66 +351,28 @@ function processPostRoutesFile() {
 
 function processCreateSitemapFile() {
   const baseUrl = process.env['BASE_URL']
-  const today = new Date().toISOString().split('T')[0] // yyyy-mm-dd
   let urls = []
 
   postRoutes.forEach((route) => {
     urls.push({
       loc: `${baseUrl}/post/${route.slug}`,
-      lastmod: today,
+      lastmod: new Date(route.lastEditedTime).toISOString().split('T')[0],
     })
   })
 
   blogRoutes.forEach((route) => {
     urls.push({
       loc: `${baseUrl}/blog/${route.category}/${route.tag}`,
-      lastmod: today,
+      lastmod: new Date(route.createdTime).toISOString().split('T')[0],
     })
   })
 
   const outputFile = path.join(outputDir, '../sitemap.xml')
-  let existingLocs = new Set()
-
-  // Đọc sitemap.xml nếu đã tồn tại và lấy các loc cũ
-  if (fs.existsSync(outputFile)) {
-    const oldContent = fs.readFileSync(outputFile, 'utf-8')
-    const locMatches = [...oldContent.matchAll(/<loc>(.*?)<\/loc>/g)]
-    locMatches.forEach((match) => existingLocs.add(match[1]))
-  }
-
-  // Chỉ thêm url mới chưa có
-  const newUrls = urls.filter((url) => !existingLocs.has(url.loc))
-
-  // Nếu không có url mới thì không cần ghi lại file
-  if (newUrls.length === 0) {
-    console.log('✅ No new URLs to add to sitemap.xml')
-    return
-  }
-
-  // Gộp url cũ và url mới
-  let allUrls = []
-  if (fs.existsSync(outputFile)) {
-    // Parse lại các url cũ
-    const oldContent = fs.readFileSync(outputFile, 'utf-8')
-    const urlMatches = [...oldContent.matchAll(/<url>([\s\S]*?)<\/url>/g)]
-    urlMatches.forEach((match) => allUrls.push(match[1].trim()))
-  }
-  // Thêm các url mới
-  allUrls.push(
-    ...newUrls.map(
-      (url) =>
-        `<url>
-          <loc>${url.loc}</loc>
-          <lastmod>${url.lastmod}</lastmod>
-        </url>`,
-    ),
+  const urlContent = urls.map(
+    (url) => `\n\t<url>\n\t\t<loc>${url.loc}</loc>\n\t\t<lastmod>${url.lastmod}</lastmod>\n\t</url>`,
   )
-
-  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${allUrls.join('\n')}
-    </urlset>`
+  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlContent.join('')}\n</urlset>`
 
   fs.writeFileSync(outputFile, sitemapContent, 'utf-8')
-  console.log(`✅ Added ${newUrls.length} new URLs to sitemap.xml at ${outputFile}`)
+  console.log(`✅ Added ${urls.length} new URLs to sitemap.xml at ${outputFile}`)
 }
