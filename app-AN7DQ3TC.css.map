@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/app.sass", "src/app/styles/_colors.sass", "src/app/app.sass"],
-  "sourcesContent": ["@use './styles/colors'\n\nmain\n  background-color: colors.$color-bg\n", "$color-text-primary: rgba(55, 53, 47, 1)\n$color-text-secondary: rgba(55, 53, 47, 0.75)\n$color-text-tertiary: rgba(55, 53, 47, 0.5)\n$color-text-disabled: rgba(55, 53, 47, 0.3)\n$color-bg: rgba(247, 244, 238, 1)\n$color-divider: rgba(218, 218, 218, 1)", "main {\n  background-color: rgb(247, 244, 238);\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlOi8vL2hvbWUvcnVubmVyL3dvcmsvVVhjb21pYy5naXRodWIuaW8vVVhjb21pYy5naXRodWIuaW8vc3JjL2FwcC9hcHAuc2FzcyIsImZpbGU6Ly8vaG9tZS9ydW5uZXIvd29yay9VWGNvbWljLmdpdGh1Yi5pby9VWGNvbWljLmdpdGh1Yi5pby9zcmMvYXBwL3N0eWxlcy9fY29sb3JzLnNhc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDRSxrQkNDUyIsInNvdXJjZXNDb250ZW50IjpbIkB1c2UgJy4vc3R5bGVzL2NvbG9ycydcblxubWFpblxuICBiYWNrZ3JvdW5kLWNvbG9yOiBjb2xvcnMuJGNvbG9yLWJnXG4iLCIkY29sb3ItdGV4dC1wcmltYXJ5OiByZ2JhKDU1LCA1MywgNDcsIDEpXG4kY29sb3ItdGV4dC1zZWNvbmRhcnk6IHJnYmEoNTUsIDUzLCA0NywgMC43NSlcbiRjb2xvci10ZXh0LXRlcnRpYXJ5OiByZ2JhKDU1LCA1MywgNDcsIDAuNSlcbiRjb2xvci10ZXh0LWRpc2FibGVkOiByZ2JhKDU1LCA1MywgNDcsIDAuMylcbiRjb2xvci1iZzogcmdiYSgyNDcsIDI0NCwgMjM4LCAxKVxuJGNvbG9yLWRpdmlkZXI6IHJnYmEoMjE4LCAyMTgsIDIxOCwgMSkiXX0= */"],
-  "mappings": "AAEA,KACE,iBAAA,OEDF",
-  "names": []
-}

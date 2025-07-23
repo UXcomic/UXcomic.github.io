@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/app.sass", "src/app/styles/_colors.sass", "src/app/app.sass"],
+  "sourcesContent": ["@use './styles/colors'\r\n\r\nmain\r\n  background-color: colors.$color-bg\r\n", "$color-text-primary: rgba(55, 53, 47, 1)\r\n$color-text-secondary: rgba(55, 53, 47, 0.75)\r\n$color-text-tertiary: rgba(55, 53, 47, 0.5)\r\n$color-text-disabled: rgba(55, 53, 47, 0.3)\r\n$color-bg: rgba(247, 244, 238, 1)\r\n$color-divider: rgba(218, 218, 218, 1)", "main {\n  background-color: rgb(247, 244, 238);\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlOi8vL0M6L1VzZXJzL3BlcmN5L0RvY3VtZW50cy9Qcm9qZWN0cy91eGNvbWljLXYyL3NyYy9hcHAvYXBwLnNhc3MiLCJmaWxlOi8vL0M6L1VzZXJzL3BlcmN5L0RvY3VtZW50cy9Qcm9qZWN0cy91eGNvbWljLXYyL3NyYy9hcHAvc3R5bGVzL19jb2xvcnMuc2FzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUNFLGtCQ0NTIiwic291cmNlc0NvbnRlbnQiOlsiQHVzZSAnLi9zdHlsZXMvY29sb3JzJ1xyXG5cclxubWFpblxyXG4gIGJhY2tncm91bmQtY29sb3I6IGNvbG9ycy4kY29sb3ItYmdcclxuIiwiJGNvbG9yLXRleHQtcHJpbWFyeTogcmdiYSg1NSwgNTMsIDQ3LCAxKVxyXG4kY29sb3ItdGV4dC1zZWNvbmRhcnk6IHJnYmEoNTUsIDUzLCA0NywgMC43NSlcclxuJGNvbG9yLXRleHQtdGVydGlhcnk6IHJnYmEoNTUsIDUzLCA0NywgMC41KVxyXG4kY29sb3ItdGV4dC1kaXNhYmxlZDogcmdiYSg1NSwgNTMsIDQ3LCAwLjMpXHJcbiRjb2xvci1iZzogcmdiYSgyNDcsIDI0NCwgMjM4LCAxKVxyXG4kY29sb3ItZGl2aWRlcjogcmdiYSgyMTgsIDIxOCwgMjE4LCAxKSJdfQ== */"],
+  "mappings": "AAEA,KACE,iBAAA,OEDF",
+  "names": []
+}

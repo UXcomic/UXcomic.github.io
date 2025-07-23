@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/notion-divider-component/notion-divider-component.sass", "src/app/components/notion-divider-component/notion-divider-component.sass"],
+  "sourcesContent": ["@use '../../styles/colors'\r\n\r\n.notion-divider\r\n  width: 100%\r\n  height: 1px\r\n  background-color: colors.$color-divider\r\n", ".notion-divider {\n  width: 100%;\n  height: 1px;\n  background-color: rgb(218, 218, 218);\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlOi8vL0M6L1VzZXJzL3BlcmN5L0RvY3VtZW50cy9Qcm9qZWN0cy91eGNvbWljLXYyL3NyYy9hcHAvY29tcG9uZW50cy9ub3Rpb24tZGl2aWRlci1jb21wb25lbnQvbm90aW9uLWRpdmlkZXItY29tcG9uZW50LnNhc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDRTtFQUNBO0VBQ0EiLCJzb3VyY2VzQ29udGVudCI6WyJAdXNlICcuLi8uLi9zdHlsZXMvY29sb3JzJ1xyXG5cclxuLm5vdGlvbi1kaXZpZGVyXHJcbiAgd2lkdGg6IDEwMCVcclxuICBoZWlnaHQ6IDFweFxyXG4gIGJhY2tncm91bmQtY29sb3I6IGNvbG9ycy4kY29sb3ItZGl2aWRlclxyXG4iXX0= */"],
+  "mappings": "AAEA,CAAA,eACE,MAAA,KACA,OAAA,IACA,iBAAA,OCDF",
+  "names": []
+}
