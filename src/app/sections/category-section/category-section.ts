@@ -4,13 +4,13 @@ import { DrawerTopComponent } from '../../components/drawer-top-component/drawer
 import { Category } from '../../models/category'
 import CategoryData from '../../../../public/data/categoriesAndTags.json'
 import { CommonModule } from '@angular/common'
-import { Router } from '@angular/router'
+import { Router, RouterModule } from '@angular/router'
 import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-category-section',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './category-section.html',
   styleUrl: './category-section.sass',
 })
@@ -19,10 +19,4 @@ export class CategorySection {
 
   protected categories: Category[] = CategoryData.sort((a, b) => a.order - b.order)
   protected config = environment
-
-  private router = inject(Router)
-
-  goToAbout() {
-    this.router.navigateByUrl('/about')
-  }
 }

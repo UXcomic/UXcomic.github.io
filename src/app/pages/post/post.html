@@ -1,8 +1,7 @@
 <section *ngIf="!!post" class="pt-[24px] max-w-[600px] mx-auto relative">
-  <button
-    (click)="goBack()"
-    type="button"
-    class="w-[48px] h-[48px] bg-white/75 border-[2px] border-white rounded-full flex items-center justify-center fixed z-50 md:sticky md:ml-auto! right-[16px] top-[16px] backdrop-blur-[16px]"
+  <a
+    [routerLink]="`/blog/${post.category?.slug}/${post.tag?.slug}`"
+    class="w-[48px] h-[48px] bg-white/75! border-[2px] border-white rounded-full flex items-center justify-center fixed z-50 md:sticky md:ml-auto! right-[16px] top-[16px] backdrop-blur-[16px]"
   >
     <svg
       class="w-6 h-6"
@@ -21,7 +20,7 @@
         d="M6 18 17.94 6M18 18 6.06 6"
       />
     </svg>
-  </button>
+  </a>
   <app-post-card-component
     [post]="post"
     [small]="true"

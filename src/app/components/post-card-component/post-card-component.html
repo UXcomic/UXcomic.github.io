@@ -1,10 +1,10 @@
-<div
+<a
   *ngIf="!!post"
-  (click)="goToPostDetail()"
-  class="post-card__container h-full p-[4px] bg-white rounded-[6px]"
+  class="post-card__container block h-full p-[4px] bg-white! rounded-[6px]"
   [class.md:w-max-[192px]]="!small"
   [class.rotate-[4deg]]="rotate"
   [class.post-card__container--sm]="small"
+  [routerLink]="`/post/${post.slug}`"
 >
   <div class="post-card__content flex flex-col w-full h-full border-[0.5px] rounded-[2px]">
     <div class="w-full min-h-[150px] grow">
@@ -30,4 +30,4 @@
       <h4 class="post-card__title text-[12px]/[10px] md:text-[14px]/[18px] text-center line-clamp-2">{{post.title}}</h4>
     </div>
   </div>
-</div>
+</a>

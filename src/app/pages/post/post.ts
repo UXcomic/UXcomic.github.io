@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core'
 import PostData from '../../../../public/data/posts.json'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { slugify } from '../../utils/string-helper'
 import { PostCardComponent } from '../../components/post-card-component/post-card-component'
@@ -15,7 +15,7 @@ import { getDefaultRoute, getNotFoundRoute } from '../../utils/route-helper'
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [PostCardComponent, CommonModule, PostContentSection],
+  imports: [PostCardComponent, CommonModule, PostContentSection, RouterModule],
   templateUrl: './post.html',
   styleUrl: './post.sass',
 })
@@ -81,9 +81,5 @@ export class Post implements OnInit, OnDestroy {
       name: 'og:image',
       content: `${this.post?.cover?.image?.file?.url}` || this.meta.getTag('name="og:image"')?.content || '',
     })
-  }
-
-  goBack() {
-    this.router.navigateByUrl(`/blog/${this.post?.category?.slug}/${this.post?.tag?.slug}`)
   }
 }

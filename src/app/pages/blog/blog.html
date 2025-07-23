@@ -6,12 +6,11 @@
 <app-drawer-top-component drawerId="drawer-category-list" title="Danh mục">
   <ul>
     @for (c of categories; track c.id) {
-    <li
-      class="blog__list-item h-[60px] flex items-center border-b-[1px]"
-      data-drawer-hide="drawer-category-list"
-      (click)="goToCategory(c)"
-    >
-      <div class="flex items-center gap-[8px] rtl:space-x-reverse w-full">
+    <li class="blog__list-item h-[60px] flex items-center border-b-[1px]" data-drawer-hide="drawer-category-list">
+      <a
+        [routerLink]="`/blog/${c.slug}/${c?.tags?.[0]?.slug}`"
+        class="flex items-center gap-[8px] rtl:space-x-reverse w-full"
+      >
         <div class="shrink-0">
           <span class="text-[22px]">{{c.icon}}</span>
         </div>
@@ -37,7 +36,7 @@
             />
           </svg>
         </div>
-      </div>
+      </a>
     </li>
     }
   </ul>

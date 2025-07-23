@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { Subscription } from 'rxjs'
 import CategoriesData from '../../../../public/data/categoriesAndTags.json'
 import PostsData from '../../../../public/data/posts.json'
@@ -17,7 +17,7 @@ import { environment } from '../../../environments/environment'
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [CommonModule, CategorySection, TagSection, PostsSection, DrawerTopComponent],
+  imports: [CommonModule, CategorySection, TagSection, PostsSection, DrawerTopComponent, RouterModule],
   templateUrl: './blog.html',
   styleUrl: './blog.sass',
 })
@@ -59,13 +59,6 @@ export class Blog implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.paramMapSubscription) this.paramMapSubscription.unsubscribe()
-  }
-
-  goToCategory(category: Category) {
-    if (!category) return
-
-    const firstTagSlug = category.tags?.[0]?.slug || 'null'
-    this.router.navigateByUrl(`/blog/${category.slug}/${firstTagSlug}`)
   }
 
   private getPosts() {

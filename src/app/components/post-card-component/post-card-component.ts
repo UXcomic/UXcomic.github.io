@@ -2,7 +2,7 @@ import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@ang
 import { Post } from '../../models/post'
 import { environment } from '../../../environments/environment'
 import { CommonModule } from '@angular/common'
-import { Router } from '@angular/router'
+import { RouterModule } from '@angular/router'
 import { CloudinaryModule, placeholder } from '@cloudinary/ng'
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen'
 import { fill } from '@cloudinary/url-gen/actions/resize'
@@ -10,7 +10,7 @@ import { fill } from '@cloudinary/url-gen/actions/resize'
 @Component({
   selector: 'app-post-card-component',
   standalone: true,
-  imports: [CommonModule, CloudinaryModule],
+  imports: [CommonModule, CloudinaryModule, RouterModule],
   templateUrl: './post-card-component.html',
   styleUrl: './post-card-component.sass',
 })
@@ -25,7 +25,6 @@ export class PostCardComponent implements OnInit, OnChanges {
   protected coverImg!: CloudinaryImage
   protected coverImgPlugins = [placeholder({ mode: 'blur' })]
 
-  private router = inject(Router)
   private cld?: Cloudinary
 
   ngOnInit(): void {
@@ -50,12 +49,5 @@ export class PostCardComponent implements OnInit, OnChanges {
         .resize(fill().width(300).height(300))
         .format('auto')
         .quality('auto')
-  }
-
-  goToPostDetail() {
-    if (this.noRedirect || !this.post) return
-
-    const slug = this.post.slug || 'unknown'
-    this.router.navigateByUrl(`/post/${slug}`)
   }
 }

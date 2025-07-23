@@ -1,13 +1,13 @@
 import { Component, inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core'
 import { Tag } from '../../models/tag'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, RouterModule } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-tag-section',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './tag-section.html',
   styleUrl: './tag-section.sass',
 })
@@ -19,7 +19,6 @@ export class TagSection implements OnInit, OnChanges, OnDestroy {
   protected selected?: Tag
 
   private route = inject(ActivatedRoute)
-  private router = inject(Router)
   private paramMapSubscription: Subscription | undefined
 
   constructor() {}
@@ -44,11 +43,5 @@ export class TagSection implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.paramMapSubscription) this.paramMapSubscription.unsubscribe()
-  }
-
-  goToTag(tag: Tag) {
-    if (!tag) return
-
-    this.router.navigateByUrl(`/blog/${this.categoryParam}/${tag.slug}`)
   }
 }
