@@ -354,16 +354,17 @@ function processCreateSitemapFile() {
   let urls = []
 
   postRoutes.forEach((route) => {
-    urls.push({
-      loc: `${baseUrl}/post/${route.slug}`,
-      lastmod: new Date(route.lastEditedTime).toISOString().split('T')[0],
-    })
+    if (route.slug != 'unknown')
+      urls.push({
+        loc: `${baseUrl}/post/${route.slug}`,
+        lastmod: route.lastEditedTime,
+      })
   })
 
   blogRoutes.forEach((route) => {
     urls.push({
       loc: `${baseUrl}/blog/${route.category}/${route.tag}`,
-      lastmod: new Date(route.createdTime).toISOString().split('T')[0],
+      lastmod: route.createdTime,
     })
   })
 
@@ -371,7 +372,8 @@ function processCreateSitemapFile() {
   const urlContent = urls.map(
     (url) => `\n\t<url>\n\t\t<loc>${url.loc}</loc>\n\t\t<lastmod>${url.lastmod}</lastmod>\n\t</url>`,
   )
-  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlContent.join('')}\n</urlset>`
+  urlContent.push(`\n\t<url>\n\t\t<loc>${baseUrl}</loc></url>\n\t<url>\n\t\t<loc>${baseUrl}/about</loc></url>`)
+  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlContent.join('')}\n</urlset>`
 
   fs.writeFileSync(outputFile, sitemapContent, 'utf-8')
   console.log(`✅ Added ${urls.length} new URLs to sitemap.xml at ${outputFile}`)
