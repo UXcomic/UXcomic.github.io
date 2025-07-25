@@ -368,13 +368,16 @@ function processCreateSitemapFile() {
     })
   })
 
-  const outputFile = path.join(outputDir, '../sitemap.xml')
+  const outputFile = path.join(outputDir, '../sitemap_index.xml')
   const urlContent = urls.map(
-    (url) => `\n\t<url>\n\t\t<loc>${url.loc}/</loc>\n\t\t<lastmod>${url.lastmod}</lastmod>\n\t</url>`,
+    (url) =>
+      `\n\t<url>\n\t\t<loc>${url.loc}/index.html</loc>\n\t\t<lastmod>${url.lastmod}</lastmod>\n\t\t<priority>0.64</priority>\n\t</url>`,
   )
-  urlContent.push(`\n\t<url>\n\t\t<loc>${baseUrl}/</loc></url>\n\t<url>\n\t\t<loc>${baseUrl}/about/</loc></url>`)
+  urlContent.push(
+    `\n\t<url>\n\t\t<loc>${baseUrl}/</loc>\n\t\t<priority>1.00</priority>\n\t</url>\n\t<url>\n\t\t<loc>${baseUrl}/about/index.html</loc>\n\t\t<priority>0.80</priority>\n\t</url>`,
+  )
   const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlContent.join('')}\n</urlset>`
 
   fs.writeFileSync(outputFile, sitemapContent, 'utf-8')
-  console.log(`✅ Added ${urls.length} new URLs to sitemap.xml at ${outputFile}`)
+  console.log(`✅ Added ${urls.length} new URLs to sitemap_index.xml at ${outputFile}`)
 }
