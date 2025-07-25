@@ -1,87 +1,70 @@
 [
   {
     "category": "technical",
-    "tag": "ui-relevant",
-    "createdTime": "2024-10-09T02:56:00.000Z"
+    "tag": "ui-relevant"
   },
   {
     "category": "technical",
-    "tag": "functionality",
-    "createdTime": "2024-10-09T02:56:00.000Z"
+    "tag": "functionality"
   },
   {
     "category": "technical",
-    "tag": "data",
-    "createdTime": "2024-10-09T02:56:00.000Z"
+    "tag": "data"
   },
   {
     "category": "cheat-sheet",
-    "tag": "design",
-    "createdTime": "2024-10-08T09:58:00.000Z"
+    "tag": "design"
   },
   {
     "category": "cheat-sheet",
-    "tag": "think",
-    "createdTime": "2024-10-08T09:58:00.000Z"
+    "tag": "think"
   },
   {
     "category": "cheat-sheet",
-    "tag": "other",
-    "createdTime": "2024-10-08T09:58:00.000Z"
+    "tag": "other"
   },
   {
     "category": "collaboration",
-    "tag": "communication",
-    "createdTime": "2024-09-17T02:13:00.000Z"
+    "tag": "communication"
   },
   {
     "category": "collaboration",
-    "tag": "workflow",
-    "createdTime": "2024-09-17T02:13:00.000Z"
+    "tag": "workflow"
   },
   {
     "category": "collaboration",
-    "tag": "understanding",
-    "createdTime": "2024-09-17T02:13:00.000Z"
+    "tag": "understanding"
   },
   {
     "category": "fundamental",
-    "tag": "product",
-    "createdTime": "2024-09-17T02:10:00.000Z"
+    "tag": "product"
   },
   {
     "category": "fundamental",
-    "tag": "user",
-    "createdTime": "2024-09-17T02:10:00.000Z"
+    "tag": "user"
   },
   {
     "category": "fundamental",
-    "tag": "design",
-    "createdTime": "2024-09-17T02:10:00.000Z"
+    "tag": "design"
   },
   {
     "category": "fundamental",
-    "tag": "random",
-    "createdTime": "2024-09-17T02:10:00.000Z"
+    "tag": "random"
   },
   {
     "category": "design",
-    "tag": "understand",
-    "createdTime": "2024-09-17T02:10:00.000Z"
+    "tag": "understand"
   },
   {
     "category": "design",
-    "tag": "think",
-    "createdTime": "2024-09-17T02:10:00.000Z"
+    "tag": "think"
   },
   {
     "category": "design",
-    "tag": "build",
-    "createdTime": "2024-09-17T02:10:00.000Z"
+    "tag": "build"
   },
   {
     "category": "design",
-    "tag": "measure",
-    "createdTime": "2024-09-17T02:10:00.000Z"
+    "tag": "measure"
   }
 ]
