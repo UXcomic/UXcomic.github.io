@@ -3,6 +3,7 @@ import { Tag } from '../../models/tag'
 import { ActivatedRoute, RouterModule } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { CommonModule } from '@angular/common'
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-tag-section',
@@ -17,6 +18,7 @@ export class TagSection implements OnInit, OnChanges, OnDestroy {
   protected categoryParam?: string
   protected tagParam?: string
   protected selected?: Tag
+  protected config = environment
 
   private route = inject(ActivatedRoute)
   private paramMapSubscription: Subscription | undefined
@@ -25,8 +27,8 @@ export class TagSection implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.paramMapSubscription = this.route.paramMap.subscribe((params) => {
-      this.categoryParam = params.get('category') || 'null'
-      this.tagParam = params.get('tag') || 'null'
+      this.categoryParam = params.get('category') || this.config.defaultCategory || 'null'
+      this.tagParam = params.get('tag') || this.config.defaultTag || 'null'
 
       this.selected = this.tags?.find((t) => t.slug === this.tagParam)
 

@@ -39,8 +39,8 @@ export class Blog implements OnInit, OnDestroy {
       this.tagParam = params.get('tag')
 
       if (!this.categoryParam || !this.tagParam) {
-        this.router.navigateByUrl(getDefaultRoute(this.config))
-        return
+        this.categoryParam = this.config.defaultCategory
+        this.tagParam = this.config.defaultTag
       }
 
       this.category = CategoriesData.find(
