@@ -13,6 +13,7 @@ import { PostsSection } from '../../sections/posts-section/posts-section'
 import { DrawerTopComponent } from '../../components/drawer-top-component/drawer-top-component'
 import { getNotFoundRoute } from '../../utils/route-helper'
 import { environment } from '../../../environments/environment'
+import { Meta, Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-blog',
@@ -31,6 +32,8 @@ export class Blog implements OnInit, OnDestroy {
 
   private router = inject(Router)
   private route = inject(ActivatedRoute)
+  private meta = inject(Meta)
+  private title = inject(Title)
   private paramMapSubscription: Subscription | undefined
 
   ngOnInit(): void {
@@ -54,6 +57,9 @@ export class Blog implements OnInit, OnDestroy {
 
       this.getPosts()
       this.filterTags()
+
+      this.initTitle()
+      this.initMetaTags()
     })
   }
 
@@ -74,5 +80,39 @@ export class Blog implements OnInit, OnDestroy {
     if (!this.category || !this.category.tags) return
 
     this.category.tags = this.category.tags.filter((t) => (PostsData as any[]).some((p) => p.tag?.slug === t?.slug))
+  }
+
+  private initTitle() {
+    this.title.setTitle(this.generateTitle() + ' | ' + this.config.prefixOGTitle)
+  }
+
+  private initMetaTags() {
+    this.updateOGTitle()
+    this.updateOGImage()
+  }
+
+  private updateOGTitle() {
+    this.meta.updateTag({
+      name: 'og:title',
+      content: this.generateTitle() + ' | ' + this.config.prefixOGTitle,
+    })
+  }
+
+  private generateTitle() {
+    let name = this.title.getTitle() || this.meta.getTag('name="og:title"')?.content.trim() || ''
+
+    if (this.category && this.category.tags && this.category.tags.find((t) => t.slug === this.tagParam)) {
+      const selectedTag = this.category.tags.find((t) => t.slug === this.tagParam)
+      name = selectedTag?.name + ' - ' + this.category.name
+    }
+
+    return name
+  }
+
+  private updateOGImage() {
+    this.meta.updateTag({
+      name: 'og:image',
+      content: this.meta.getTag('name="og:image"')?.content || '',
+    })
   }
 }
