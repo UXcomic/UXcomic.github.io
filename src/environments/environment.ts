@@ -5,4 +5,5 @@ export const environment = {
   cloudinaryCloudName: 'dpzknshvi',
   defaultCategory: 'cheat-sheet',
   defaultTag: 'design',
+  prefixOGTitle: 'UX share chơi 😄',
 }

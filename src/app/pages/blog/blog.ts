@@ -11,7 +11,7 @@ import { Post } from '../../models/post'
 import { convertPost } from '../../utils/post-helper'
 import { PostsSection } from '../../sections/posts-section/posts-section'
 import { DrawerTopComponent } from '../../components/drawer-top-component/drawer-top-component'
-import { getDefaultRoute, getNotFoundRoute } from '../../utils/route-helper'
+import { getNotFoundRoute } from '../../utils/route-helper'
 import { environment } from '../../../environments/environment'
 
 @Component({

@@ -61,7 +61,7 @@ export class Post implements OnInit, OnDestroy {
   }
 
   private initTitle() {
-    this.title.setTitle(this.post?.title || this.title.getTitle() || '')
+    this.title.setTitle((this.post?.title || this.title.getTitle() || '') + ' | ' + this.config.prefixOGTitle)
   }
 
   private initMetaTags() {
@@ -72,7 +72,10 @@ export class Post implements OnInit, OnDestroy {
   private updateOGTitle() {
     this.meta.updateTag({
       name: 'og:title',
-      content: this.post?.title || this.meta.getTag('name="og:title"')?.content || '',
+      content:
+        (this.post?.title.trim() || this.meta.getTag('name="og:title"')?.content.trim() || '') +
+        ' | ' +
+        this.config.prefixOGTitle,
     })
   }
 

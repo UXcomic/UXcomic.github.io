@@ -29,7 +29,7 @@
             ],
             "styles": ["src/styles.sass", "node_modules/photoswipe/dist/photoswipe.css"],
             "server": "src/main.server.ts",
-            "outputMode": "server",
+            "outputMode": "static",
             "ssr": {
               "entry": "src/server.ts"
             },
