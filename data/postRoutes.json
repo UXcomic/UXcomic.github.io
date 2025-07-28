@@ -9,7 +9,7 @@
   },
   {
     "slug": "user-behavior",
-    "lastEditedTime": "2025-07-27T07:26:00.000Z"
+    "lastEditedTime": "2025-07-28T05:54:00.000Z"
   },
   {
     "slug": "cac-meta-terms-e-hoc",
@@ -61,11 +61,11 @@
   },
   {
     "slug": "product-design-checklist",
-    "lastEditedTime": "2025-07-27T01:47:00.000Z"
+    "lastEditedTime": "2025-07-28T05:56:00.000Z"
   },
   {
     "slug": "ux-checklist",
-    "lastEditedTime": "2025-07-27T06:36:00.000Z"
+    "lastEditedTime": "2025-07-28T06:33:00.000Z"
   },
   {
     "slug": "information-message-content",
@@ -73,7 +73,7 @@
   },
   {
     "slug": "ixd-checklist",
-    "lastEditedTime": "2025-07-27T00:58:00.000Z"
+    "lastEditedTime": "2025-07-28T06:32:00.000Z"
   },
   {
     "slug": "usability-heuristics",
@@ -221,7 +221,7 @@
   },
   {
     "slug": "mental-model",
-    "lastEditedTime": "2025-07-26T05:52:00.000Z"
+    "lastEditedTime": "2025-07-28T06:43:00.000Z"
   },
   {
     "slug": "design-value",
@@ -230,6 +230,10 @@
   {
     "slug": "unknown",
     "lastEditedTime": "2025-03-25T05:59:00.000Z"
+  },
+  {
+    "slug": "interaction-cost",
+    "lastEditedTime": "2025-07-27T13:42:00.000Z"
   },
   {
     "slug": "ui-pattern",
@@ -301,7 +305,7 @@
   },
   {
     "slug": "interaction-pattern",
-    "lastEditedTime": "2025-07-26T10:56:00.000Z"
+    "lastEditedTime": "2025-07-28T06:32:00.000Z"
   },
   {
     "slug": "ux-as-a-cupid",
