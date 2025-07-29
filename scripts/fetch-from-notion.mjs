@@ -349,35 +349,82 @@ function processPostRoutesFile() {
   console.log(`✅ Saved ${postRoutes.length} routes to ${outputPath}`)
 }
 
+// Giả sử postRoutes và blogRoutes đã được định nghĩa và có dữ liệu tương tự như bạn mô tả
+// Ví dụ cấu trúc dữ liệu:
+// const postRoutes = [
+//   { slug: 'bai-viet-1', lastEditedTime: '2024-07-28T10:00:00+07:00' },
+//   { slug: 'bai-viet-2', lastEditedTime: '2024-07-27T15:30:00+07:00' },
+// ];
+// const blogRoutes = [
+//   { category: 'cong-nghe', tag: 'lap-trinh', createdTime: '2024-07-26T08:00:00+07:00' },
+// ];
+// const outputDir = __dirname; // Hoặc đường dẫn thư mục output thực tế của bạn
+
 function processCreateSitemapFile() {
-  const baseUrl = process.env['BASE_URL']
+  const baseUrl = process.env['BASE_URL'] || 'https://your-website.com' // Đảm bảo BASE_URL được định nghĩa hoặc có giá trị mặc định
   let urls = []
 
+  // Hàm helper để định dạng ngày tháng sang W3C Datetime
+  const formatLastMod = (dateString) => {
+    try {
+      // Đảm bảo dateString là định dạng ISO 8601 hoặc có thể được parse bởi Date
+      const date = new Date(dateString)
+      // Lấy phần YYYY-MM-DD
+      const year = date.getFullYear()
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const day = String(date.getDate()).padStart(2, '0')
+      return `${year}-${month}-${day}`
+    } catch (error) {
+      console.warn(`Could not parse date string: ${dateString}. Using current date as fallback.`)
+      const now = new Date()
+      const year = now.getFullYear()
+      const month = String(now.getMonth() + 1).padStart(2, '0')
+      const day = String(now.getDate()).padStart(2, '0')
+      return `${year}-${month}-${day}`
+    }
+  }
+
   postRoutes.forEach((route) => {
-    if (route.slug != 'unknown')
+    if (route.slug !== 'unknown') {
       urls.push({
         loc: `${baseUrl}/post/${route.slug}`,
-        lastmod: route.lastEditedTime,
+        lastmod: formatLastMod(route.lastEditedTime),
+        changefreq: 'monthly',
+        priority: '0.64',
       })
+    }
   })
 
   blogRoutes.forEach((route) => {
     urls.push({
       loc: `${baseUrl}/blog/${route.category}/${route.tag}`,
-      lastmod: route.createdTime,
+      lastmod: formatLastMod(route.createdTime),
+      changefreq: 'monthly',
+      priority: '0.64', // Có thể điều chỉnh priority tùy theo mức độ quan trọng
     })
   })
 
-  const outputFile = path.join(outputDir, '../sitemap.xml')
-  const urlContent = urls.map(
-    (url) =>
-      `\n\t<url>\n\t\t<loc>${url.loc}</loc>\n\t\t<lastmod>${url.lastmod}</lastmod>\n\t\t<changefreq>monthly</changefreq>\n\t\t<priority>0.64</priority>\n\t</url>`,
-  )
-  urlContent.push(
-    `\n\t<url>\n\t\t<loc>${baseUrl}/</loc>\n\t\t<changefreq>monthly</changefreq>\n\t\t<priority>1.00</priority>\n\t</url>\n\t<url>\n\t\t<loc>${baseUrl}/about</loc>\n\t\t<changefreq>monthly</changefreq>\n\t\t<priority>0.80</priority>\n\t</url>`,
-  )
-  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urlContent.join('')}\n</urlset>`
+  // Thêm các URL tĩnh (trang chủ, về chúng tôi,...)
+  urls.push({
+    loc: `${baseUrl}/`,
+    changefreq: 'monthly',
+    priority: '1.00',
+  })
+  urls.push({
+    loc: `${baseUrl}/about`,
+    changefreq: 'monthly',
+    priority: '0.80',
+  })
 
+  // Tạo nội dung XML cho từng URL
+  const urlEntries = urls.map(
+    (url) =>
+      `<url>\n  <loc>${url.loc}</loc>\n  ${url.lastmod ? `<lastmod>${url.lastmod}</lastmod>\n  ` : ''}<changefreq>${url.changefreq}</changefreq>\n  <priority>${url.priority}</priority>\n</url>`,
+  )
+
+  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries.join('\n')}\n</urlset>`
+
+  const outputFile = path.join(outputDir, 'sitemap.xml') // Đảm bảo đường dẫn đúng
   fs.writeFileSync(outputFile, sitemapContent, 'utf-8')
-  console.log(`✅ Added ${urls.length} new URLs to sitemap.xml at ${outputFile}`)
+  console.log(`✅ Added ${urls.length} URLs to sitemap.xml at ${outputFile}`)
 }
