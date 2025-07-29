@@ -319,6 +319,7 @@ function createFiles() {
   processBlogRoutesFile()
   processPostRoutesFile()
   processCreateSitemapFile()
+  processCreateSitemapTxtFile()
 }
 
 function processCreateCategoriesAndTagsFile() {
@@ -424,7 +425,30 @@ function processCreateSitemapFile() {
 
   const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries.join('\n')}\n</urlset>`
 
-  const outputFile = path.join(outputDir, 'sitemap.xml') // Đảm bảo đường dẫn đúng
+  const outputFile = path.join(outputDir, '../sitemap.xml') // Đảm bảo đường dẫn đúng
   fs.writeFileSync(outputFile, sitemapContent, 'utf-8')
   console.log(`✅ Added ${urls.length} URLs to sitemap.xml at ${outputFile}`)
+}
+
+function processCreateSitemapTxtFile() {
+  const baseUrl = process.env['BASE_URL'] || 'https://your-website.com'
+  let urls = []
+
+  postRoutes.forEach((route) => {
+    if (route.slug !== 'unknown') {
+      urls.push(`${baseUrl}/post/${route.slug}`)
+    }
+  })
+
+  blogRoutes.forEach((route) => {
+    urls.push(`${baseUrl}/blog/${route.category}/${route.tag}`)
+  })
+
+  // Thêm các URL tĩnh (trang chủ, về chúng tôi,...)
+  urls.push(`${baseUrl}/`)
+  urls.push(`${baseUrl}/about`)
+
+  const outputFile = path.join(outputDir, '../sitemap.txt')
+  fs.writeFileSync(outputFile, urls.join('\n'), 'utf-8')
+  console.log(`✅ Saved ${urls.length} URLs to sitemap.txt at ${outputFile}`)
 }
