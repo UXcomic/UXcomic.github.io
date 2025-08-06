@@ -325,8 +325,14 @@
   <priority>0.64</priority>
 </url>
 <url>
+  <loc>https://uxcomic.github.io/post/cognitive-load</loc>
+  <lastmod>2025-08-06</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://uxcomic.github.io/post/interaction-cost</loc>
-  <lastmod>2025-07-31</lastmod>
+  <lastmod>2025-08-06</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>

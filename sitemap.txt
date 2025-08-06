@@ -52,6 +52,7 @@ https://uxcomic.github.io/post/user-multiverse
 https://uxcomic.github.io/post/digital-vs-physical-product
 https://uxcomic.github.io/post/mental-model
 https://uxcomic.github.io/post/design-value
+https://uxcomic.github.io/post/cognitive-load
 https://uxcomic.github.io/post/interaction-cost
 https://uxcomic.github.io/post/ui-pattern
 https://uxcomic.github.io/post/ux-pattern
