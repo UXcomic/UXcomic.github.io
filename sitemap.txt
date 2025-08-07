@@ -1,4 +1,5 @@
 https://uxcomic.github.io/post/figma-ui-term-vs-css-term
+https://uxcomic.github.io/post/cognitive-load-checklist
 https://uxcomic.github.io/post/user-behavior
 https://uxcomic.github.io/post/cac-meta-terms-e-hoc
 https://uxcomic.github.io/post/my-map
