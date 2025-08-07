@@ -1,6 +1,9 @@
 @use '../../styles/colors'
 @use '../../styles/typography'
 
+body
+  background-color: black
+
 .post-content
   &__title
     @extend %notion-h1
@@ -8,3 +11,7 @@
   &__created-date
     @extend %notion-caption
     color: colors.$color-text-tertiary
+
+@media (width >= 48rem)
+  .md\:scrollbar-default
+    scrollbar-width: thin
