@@ -1,1 +1,1 @@
-Sitemap: https://uxcomic.github.io/sitemap.txt
+Sitemap: https://uxcomic.github.io/sitemap.xml

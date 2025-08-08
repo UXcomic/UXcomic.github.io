@@ -319,7 +319,6 @@ function createFiles() {
   processBlogRoutesFile()
   processPostRoutesFile()
   processCreateSitemapFile()
-  processCreateSitemapTxtFile()
 }
 
 function processCreateCategoriesAndTagsFile() {
@@ -362,15 +361,12 @@ function processPostRoutesFile() {
 // const outputDir = __dirname; // Hoặc đường dẫn thư mục output thực tế của bạn
 
 function processCreateSitemapFile() {
-  const baseUrl = process.env['BASE_URL'] || 'https://your-website.com' // Đảm bảo BASE_URL được định nghĩa hoặc có giá trị mặc định
+  const baseUrl = process.env['BASE_URL'] || 'https://uxcomic.github.io'
   let urls = []
 
-  // Hàm helper để định dạng ngày tháng sang W3C Datetime
   const formatLastMod = (dateString) => {
     try {
-      // Đảm bảo dateString là định dạng ISO 8601 hoặc có thể được parse bởi Date
       const date = new Date(dateString)
-      // Lấy phần YYYY-MM-DD
       const year = date.getFullYear()
       const month = String(date.getMonth() + 1).padStart(2, '0')
       const day = String(date.getDate()).padStart(2, '0')
@@ -401,11 +397,10 @@ function processCreateSitemapFile() {
       loc: `${baseUrl}/blog/${route.category}/${route.tag}`,
       lastmod: formatLastMod(route.createdTime),
       changefreq: 'monthly',
-      priority: '0.64', // Có thể điều chỉnh priority tùy theo mức độ quan trọng
+      priority: '0.64',
     })
   })
 
-  // Thêm các URL tĩnh (trang chủ, về chúng tôi,...)
   urls.push({
     loc: `${baseUrl}/`,
     changefreq: 'monthly',
@@ -417,7 +412,6 @@ function processCreateSitemapFile() {
     priority: '0.80',
   })
 
-  // Tạo nội dung XML cho từng URL
   const urlEntries = urls.map(
     (url) =>
       `<url>\n  <loc>${url.loc}</loc>\n  ${url.lastmod ? `<lastmod>${url.lastmod}</lastmod>\n  ` : ''}<changefreq>${url.changefreq}</changefreq>\n  <priority>${url.priority}</priority>\n</url>`,
@@ -425,30 +419,7 @@ function processCreateSitemapFile() {
 
   const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries.join('\n')}\n</urlset>`
 
-  const outputFile = path.join(outputDir, '../sitemap.xml') // Đảm bảo đường dẫn đúng
+  const outputFile = path.join(outputDir, '../sitemap.xml')
   fs.writeFileSync(outputFile, sitemapContent, 'utf-8')
   console.log(`✅ Added ${urls.length} URLs to sitemap.xml at ${outputFile}`)
-}
-
-function processCreateSitemapTxtFile() {
-  const baseUrl = process.env['BASE_URL'] || 'https://your-website.com'
-  let urls = []
-
-  postRoutes.forEach((route) => {
-    if (route.slug !== 'unknown') {
-      urls.push(`${baseUrl}/post/${route.slug}`)
-    }
-  })
-
-  blogRoutes.forEach((route) => {
-    urls.push(`${baseUrl}/blog/${route.category}/${route.tag}`)
-  })
-
-  // Thêm các URL tĩnh (trang chủ, về chúng tôi,...)
-  urls.push(`${baseUrl}/`)
-  urls.push(`${baseUrl}/about`)
-
-  const outputFile = path.join(outputDir, '../sitemap.txt')
-  fs.writeFileSync(outputFile, urls.join('\n'), 'utf-8')
-  console.log(`✅ Saved ${urls.length} URLs to sitemap.txt at ${outputFile}`)
 }
