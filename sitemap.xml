@@ -121,6 +121,12 @@
   <priority>0.64</priority>
 </url>
 <url>
+  <loc>https://uxcomic.github.io/post/take-design-feedback-p1</loc>
+  <lastmod>2025-08-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://uxcomic.github.io/post/questioning-p4</loc>
   <lastmod>2025-05-21</lastmod>
   <changefreq>monthly</changefreq>
@@ -235,6 +241,12 @@
   <priority>0.64</priority>
 </url>
 <url>
+  <loc>https://uxcomic.github.io/post/take-design-feedback-p2</loc>
+  <lastmod>2025-08-10</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://uxcomic.github.io/post/questioning-p1</loc>
   <lastmod>2025-05-21</lastmod>
   <changefreq>monthly</changefreq>
@@ -303,6 +315,12 @@
 <url>
   <loc>https://uxcomic.github.io/post/ui-vs-ixd-vs-ux-vs-product-design</loc>
   <lastmod>2025-07-13</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/post/interaction-phisolophy</loc>
+  <lastmod>2025-08-11</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -410,7 +428,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/brief-hieu-e</loc>
-  <lastmod>2025-05-13</lastmod>
+  <lastmod>2025-08-10</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -458,7 +476,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/interaction-pattern</loc>
-  <lastmod>2025-07-28</lastmod>
+  <lastmod>2025-08-11</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
