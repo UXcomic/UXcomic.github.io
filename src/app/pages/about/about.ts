@@ -24,7 +24,7 @@ export class About implements OnInit {
   private document = inject(DOCUMENT)
 
   goBack() {
-    if (window.history.length) this.location.back()
+    if (window.history.length > 1) this.location.back()
     else this.location.go('/')
   }
 
