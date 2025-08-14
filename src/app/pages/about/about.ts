@@ -1,5 +1,5 @@
 import { CommonModule, Location } from '@angular/common'
-import { Component, inject, OnInit } from '@angular/core'
+import { Component, DOCUMENT, inject, OnInit } from '@angular/core'
 import PostData from '../../../../public/data/posts.json'
 import { PostContent } from '../../models/post-content'
 import { environment } from '../../../environments/environment'
@@ -21,9 +21,11 @@ export class About implements OnInit {
   private meta = inject(Meta)
   private title = inject(Title)
   private location = inject(Location)
+  private document = inject(DOCUMENT)
 
   goBack() {
-    this.location.back()
+    if (window.history.length) this.location.back()
+    else this.location.go('/')
   }
 
   ngOnInit(): void {
