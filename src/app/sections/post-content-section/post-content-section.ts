@@ -134,7 +134,7 @@ export class PostContentSection implements OnInit, OnChanges, AfterViewInit {
     await navigator.share({
       title: this.postContent?.title,
       text: '',
-      url: `${this.config.baseUrl}/post/${this.postContent?.slug}`,
+      url: this.copyLink ? this.copyLink : `${this.config.baseUrl}/post/${this.postContent?.slug}`,
     })
   }
 
