@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment'
 import { convertPostContent } from '../../utils/post-helper'
 import { PostContentSection } from '../../sections/post-content-section/post-content-section'
 import { Meta, Title } from '@angular/platform-browser'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-about',
@@ -21,11 +22,12 @@ export class About implements OnInit {
   private meta = inject(Meta)
   private title = inject(Title)
   private location = inject(Location)
-  private document = inject(DOCUMENT)
+  private router = inject(Router)
 
   goBack() {
-    if (window.history.length > 1) this.location.back()
-    else this.location.go('/')
+    const state = this.location.getState() as any
+    if (state && state.navigationId > 1) this.location.back()
+    else this.router.navigateByUrl('/')
   }
 
   ngOnInit(): void {
