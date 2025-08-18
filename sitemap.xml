@@ -25,6 +25,12 @@
   <priority>0.64</priority>
 </url>
 <url>
+  <loc>https://uxcomic.github.io/post/for-testing</loc>
+  <lastmod>2025-08-18</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://uxcomic.github.io/post/cac-meta-terms-e-hoc</loc>
   <lastmod>2025-08-14</lastmod>
   <changefreq>monthly</changefreq>
@@ -266,7 +272,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/lap-luan-vs-tranh-luan</loc>
-  <lastmod>2025-08-10</lastmod>
+  <lastmod>2025-08-17</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -440,13 +446,19 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/brief-hieu-e</loc>
-  <lastmod>2025-08-10</lastmod>
+  <lastmod>2025-08-17</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/diagram-canvas</loc>
-  <lastmod>2025-08-09</lastmod>
+  <lastmod>2025-08-17</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/post/use-case</loc>
+  <lastmod>2025-08-17</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
