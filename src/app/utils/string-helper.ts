@@ -11,4 +11,9 @@ const slugify = (text: string) => {
   return slug
 }
 
-export { slugify }
+const isUUID = (value: string) => {
+  const uuidRegex = /^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[0-9a-f]{32})$/i
+  return uuidRegex.test(value)
+}
+
+export { slugify, isUUID }

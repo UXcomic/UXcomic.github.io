@@ -9,4 +9,13 @@ const getDefaultRoute = (config: any) => {
 
 const getNotFoundRoute = () => '/not-found'
 
-export { getDefaultRoute, getNotFoundRoute }
+const isAbsoluteURL = (url: string) => {
+  try {
+    new URL(url)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+export { getDefaultRoute, getNotFoundRoute, isAbsoluteURL }

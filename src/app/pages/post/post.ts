@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core'
 import PostData from '../../../../public/data/posts.json'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { Subscription } from 'rxjs'
-import { slugify } from '../../utils/string-helper'
+import { slugify, isUUID } from '../../utils/string-helper'
 import { PostCardComponent } from '../../components/post-card-component/post-card-component'
 import { CommonModule } from '@angular/common'
 import { PostContent } from '../../models/post-content'
@@ -40,9 +40,12 @@ export class Post implements OnInit, OnDestroy {
         return
       }
 
-      const pData = (PostData as any[]).find(
-        (p) => slugify(p?.properties?.Name?.title?.[0]?.text?.content) === this.slugParam,
-      )
+      let pData
+      if (isUUID(this.slugParam)) pData = (PostData as any[]).find((p) => p.id.replaceAll('-', '') === this.slugParam)
+      else
+        pData = (PostData as any[]).find(
+          (p) => slugify(p?.properties?.Name?.title?.[0]?.text?.content) === this.slugParam,
+        )
 
       if (!pData) {
         this.router.navigateByUrl(getNotFoundRoute())
