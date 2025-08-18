@@ -46,6 +46,5 @@ export class PostContentDetailSection {
   protected swiperConfig: SwiperOptions = {
     effect: 'cards',
     grabCursor: true,
-    autoHeight: true,
   }
 }
