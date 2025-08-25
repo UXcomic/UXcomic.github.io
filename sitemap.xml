@@ -13,6 +13,12 @@
   <priority>0.64</priority>
 </url>
 <url>
+  <loc>https://uxcomic.github.io/post/measuring-checklist</loc>
+  <lastmod>2025-08-25</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://uxcomic.github.io/post/terms-hoi-tho-cua-po-pm-ux-designer-dev</loc>
   <lastmod>2025-08-22</lastmod>
   <changefreq>monthly</changefreq>
@@ -411,6 +417,12 @@
 <url>
   <loc>https://uxcomic.github.io/post/ux-pattern</loc>
   <lastmod>2025-07-22</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/post/data-metrics-in-ux</loc>
+  <lastmod>2025-08-25</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
