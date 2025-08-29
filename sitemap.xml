@@ -20,7 +20,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/measuring-checklist</loc>
-  <lastmod>2025-08-28</lastmod>
+  <lastmod>2025-08-29</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -75,12 +75,6 @@
 <url>
   <loc>https://uxcomic.github.io/post/observation</loc>
   <lastmod>2025-08-28</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://uxcomic.github.io/post/deal-with-unknown</loc>
-  <lastmod>2025-07-15</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -200,7 +194,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/presenting-p2</loc>
-  <lastmod>2025-01-12</lastmod>
+  <lastmod>2025-08-29</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -440,7 +434,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/data-metrics-in-ux</loc>
-  <lastmod>2025-08-27</lastmod>
+  <lastmod>2025-08-29</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
