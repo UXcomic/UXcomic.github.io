@@ -151,6 +151,12 @@
   <priority>0.64</priority>
 </url>
 <url>
+  <loc>https://uxcomic.github.io/post/bias-in-work</loc>
+  <lastmod>2025-09-03</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://uxcomic.github.io/post/response</loc>
   <lastmod>2025-08-27</lastmod>
   <changefreq>monthly</changefreq>
@@ -404,7 +410,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/mental-model</loc>
-  <lastmod>2025-08-09</lastmod>
+  <lastmod>2025-09-03</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
