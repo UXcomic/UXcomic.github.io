@@ -55,8 +55,8 @@
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://uxcomic.github.io/post/meeting</loc>
-  <lastmod>2025-10-04</lastmod>
+  <loc>https://uxcomic.github.io/post/meeting-p1</loc>
+  <lastmod>2025-10-14</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -117,6 +117,12 @@
 <url>
   <loc>https://uxcomic.github.io/post/bias-in-work</loc>
   <lastmod>2025-09-04</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/post/meeting-p2</loc>
+  <lastmod>2025-10-15</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
