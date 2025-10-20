@@ -56,7 +56,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/meeting-p1</loc>
-  <lastmod>2025-10-14</lastmod>
+  <lastmod>2025-10-15</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -283,6 +283,12 @@
   <priority>0.64</priority>
 </url>
 <url>
+  <loc>https://uxcomic.github.io/post/ux-challenge-cards</loc>
+  <lastmod>2025-10-20</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://uxcomic.github.io/post/measuring-checklist</loc>
   <lastmod>2025-10-11</lastmod>
   <changefreq>monthly</changefreq>
@@ -309,12 +315,6 @@
 <url>
   <loc>https://uxcomic.github.io/post/figma-ui-term-vs-css-term</loc>
   <lastmod>2025-08-07</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://uxcomic.github.io/post/test</loc>
-  <lastmod>2025-09-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -566,13 +566,13 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/ux-audit</loc>
-  <lastmod>2025-04-03</lastmod>
+  <lastmod>2025-10-17</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/just-an-experiment</loc>
-  <lastmod>2025-08-27</lastmod>
+  <lastmod>2025-10-17</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>

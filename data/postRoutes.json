@@ -37,7 +37,7 @@
   },
   {
     "slug": "meeting-p1",
-    "lastEditedTime": "2025-10-14T01:33:00.000Z"
+    "lastEditedTime": "2025-10-15T02:02:00.000Z"
   },
   {
     "slug": "presenting-p1",
@@ -81,7 +81,7 @@
   },
   {
     "slug": "meeting-p2",
-    "lastEditedTime": "2025-10-15T01:52:00.000Z"
+    "lastEditedTime": "2025-10-15T02:01:00.000Z"
   },
   {
     "slug": "negotiation",
@@ -192,6 +192,10 @@
     "lastEditedTime": "2025-08-22T01:31:00.000Z"
   },
   {
+    "slug": "ux-challenge-cards",
+    "lastEditedTime": "2025-10-20T01:46:00.000Z"
+  },
+  {
     "slug": "measuring-checklist",
     "lastEditedTime": "2025-10-11T03:18:00.000Z"
   },
@@ -214,10 +218,6 @@
   {
     "slug": "figma-ui-term-vs-css-term",
     "lastEditedTime": "2025-08-07T11:58:00.000Z"
-  },
-  {
-    "slug": "test",
-    "lastEditedTime": "2025-09-08T01:14:00.000Z"
   },
   {
     "slug": "unknown",
@@ -393,11 +393,11 @@
   },
   {
     "slug": "ux-audit",
-    "lastEditedTime": "2025-04-03T04:12:00.000Z"
+    "lastEditedTime": "2025-10-17T02:42:00.000Z"
   },
   {
     "slug": "just-an-experiment",
-    "lastEditedTime": "2025-08-27T10:58:00.000Z"
+    "lastEditedTime": "2025-10-17T02:42:00.000Z"
   },
   {
     "slug": "unknown",
