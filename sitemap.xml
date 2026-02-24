@@ -290,7 +290,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/measuring-checklist</loc>
-  <lastmod>2025-10-11</lastmod>
+  <lastmod>2025-10-23</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -309,6 +309,12 @@
 <url>
   <loc>https://uxcomic.github.io/post/meeting-checklist</loc>
   <lastmod>2025-10-09</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/post/ux-ui-toolkit</loc>
+  <lastmod>2026-01-17</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -356,7 +362,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/product-development-process-overall</loc>
-  <lastmod>2025-09-23</lastmod>
+  <lastmod>2025-11-01</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -500,7 +506,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/data-metrics-in-ux</loc>
-  <lastmod>2025-10-11</lastmod>
+  <lastmod>2026-02-24</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
@@ -572,7 +578,7 @@
 </url>
 <url>
   <loc>https://uxcomic.github.io/post/just-an-experiment</loc>
-  <lastmod>2025-10-17</lastmod>
+  <lastmod>2026-02-02</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
