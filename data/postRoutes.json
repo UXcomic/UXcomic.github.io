@@ -1,123 +1,103 @@
 [
   {
-    "slug": "raci-role-responsibility",
-    "lastEditedTime": "2024-12-21T23:32:00.000Z"
-  },
-  {
-    "slug": "persuade",
-    "lastEditedTime": "2025-07-10T05:50:00.000Z"
-  },
-  {
-    "slug": "non-design-work",
-    "lastEditedTime": "2025-05-19T01:58:00.000Z"
-  },
-  {
-    "slug": "listening",
-    "lastEditedTime": "2025-05-21T01:59:00.000Z"
-  },
-  {
-    "slug": "principle-of-communication",
-    "lastEditedTime": "2025-08-27T02:14:00.000Z"
-  },
-  {
-    "slug": "questioning-p3",
-    "lastEditedTime": "2025-05-23T16:24:00.000Z"
-  },
-  {
-    "slug": "questioning-p2",
-    "lastEditedTime": "2025-08-19T00:48:00.000Z"
-  },
-  {
-    "slug": "take-design-feedback-p2",
-    "lastEditedTime": "2025-08-10T10:31:00.000Z"
-  },
-  {
-    "slug": "tinh-cach-p1",
-    "lastEditedTime": "2025-08-28T02:34:00.000Z"
-  },
-  {
-    "slug": "meeting-p1",
-    "lastEditedTime": "2025-10-15T02:02:00.000Z"
-  },
-  {
-    "slug": "presenting-p1",
-    "lastEditedTime": "2024-12-31T05:13:00.000Z"
-  },
-  {
-    "slug": "presenting-p2",
-    "lastEditedTime": "2025-08-29T05:21:00.000Z"
-  },
-  {
-    "slug": "workflow",
-    "lastEditedTime": "2025-06-26T02:35:00.000Z"
-  },
-  {
-    "slug": "decision-making-p2",
-    "lastEditedTime": "2025-08-08T07:53:00.000Z"
-  },
-  {
-    "slug": "questioning-p4",
-    "lastEditedTime": "2025-05-21T11:42:00.000Z"
-  },
-  {
-    "slug": "tinh-cach-p2",
-    "lastEditedTime": "2025-08-28T02:37:00.000Z"
-  },
-  {
-    "slug": "take-design-feedback-p1",
-    "lastEditedTime": "2025-10-13T10:57:00.000Z"
-  },
-  {
-    "slug": "ux-as-consultant-expectation",
-    "lastEditedTime": "2025-09-04T02:00:00.000Z"
-  },
-  {
-    "slug": "response",
-    "lastEditedTime": "2025-08-27T01:46:00.000Z"
-  },
-  {
-    "slug": "bias-in-work",
-    "lastEditedTime": "2025-09-04T10:56:00.000Z"
-  },
-  {
-    "slug": "meeting-p2",
-    "lastEditedTime": "2025-10-15T02:01:00.000Z"
-  },
-  {
-    "slug": "negotiation",
-    "lastEditedTime": "2024-12-11T01:32:00.000Z"
-  },
-  {
-    "slug": "conflict",
-    "lastEditedTime": "2025-06-27T05:54:00.000Z"
-  },
-  {
-    "slug": "questioning-p1",
-    "lastEditedTime": "2025-05-21T06:01:00.000Z"
-  },
-  {
-    "slug": "mindset-vs-tam-the",
-    "lastEditedTime": "2025-06-15T05:13:00.000Z"
-  },
-  {
-    "slug": "decision-making-p1",
-    "lastEditedTime": "2025-08-08T07:44:00.000Z"
-  },
-  {
-    "slug": "facilitate",
-    "lastEditedTime": "2025-01-03T01:50:00.000Z"
+    "slug": "figma-ui-term-vs-css-term",
+    "lastEditedTime": "2025-08-07T11:58:00.000Z"
   },
   {
     "slug": "unknown",
     "lastEditedTime": "2025-08-15T10:43:00.000Z"
   },
   {
-    "slug": "ux-checklist",
-    "lastEditedTime": "2025-07-31T01:39:00.000Z"
+    "slug": "ux-ui-toolkit",
+    "lastEditedTime": "2026-01-17T09:59:00.000Z"
+  },
+  {
+    "slug": "meeting-checklist",
+    "lastEditedTime": "2025-10-09T05:15:00.000Z"
+  },
+  {
+    "slug": "ui-checklist",
+    "lastEditedTime": "2025-08-31T14:27:00.000Z"
+  },
+  {
+    "slug": "idea-wait-rethink",
+    "lastEditedTime": "2025-08-28T14:25:00.000Z"
+  },
+  {
+    "slug": "measuring-checklist",
+    "lastEditedTime": "2025-10-23T07:54:00.000Z"
+  },
+  {
+    "slug": "ux-challenge-cards",
+    "lastEditedTime": "2025-10-20T02:10:00.000Z"
+  },
+  {
+    "slug": "terms-hoi-tho-cua-po-pm-ux-designer-dev",
+    "lastEditedTime": "2025-08-22T01:31:00.000Z"
+  },
+  {
+    "slug": "ux-ui-mindmap",
+    "lastEditedTime": "2025-08-15T16:30:00.000Z"
+  },
+  {
+    "slug": "cognitive-load-checklist",
+    "lastEditedTime": "2025-08-23T01:57:00.000Z"
+  },
+  {
+    "slug": "user-behavior",
+    "lastEditedTime": "2025-08-19T06:25:00.000Z"
+  },
+  {
+    "slug": "cac-meta-terms-e-hoc",
+    "lastEditedTime": "2025-08-14T02:37:00.000Z"
+  },
+  {
+    "slug": "my-map",
+    "lastEditedTime": "2025-08-08T07:53:00.000Z"
+  },
+  {
+    "slug": "to-think",
+    "lastEditedTime": "2025-09-01T15:52:00.000Z"
+  },
+  {
+    "slug": "khi-co-qua-nhieu-thu-can",
+    "lastEditedTime": "2025-06-28T05:27:00.000Z"
+  },
+  {
+    "slug": "observation",
+    "lastEditedTime": "2025-08-28T13:37:00.000Z"
+  },
+  {
+    "slug": "your-design-suck-if",
+    "lastEditedTime": "2025-08-19T08:27:00.000Z"
+  },
+  {
+    "slug": "questionnaire-toolkit",
+    "lastEditedTime": "2025-08-29T15:41:00.000Z"
+  },
+  {
+    "slug": "judging",
+    "lastEditedTime": "2025-08-29T16:16:00.000Z"
+  },
+  {
+    "slug": "brainstorm-toolkit",
+    "lastEditedTime": "2025-07-27T01:06:00.000Z"
+  },
+  {
+    "slug": "6-thinking-hats",
+    "lastEditedTime": "2025-08-29T15:46:00.000Z"
+  },
+  {
+    "slug": "smarter-question-for-decision-making",
+    "lastEditedTime": "2025-05-20T01:33:00.000Z"
   },
   {
     "slug": "product-design-checklist",
     "lastEditedTime": "2025-07-28T05:56:00.000Z"
+  },
+  {
+    "slug": "ux-checklist",
+    "lastEditedTime": "2025-07-31T01:39:00.000Z"
   },
   {
     "slug": "information-message-content",
@@ -132,168 +112,160 @@
     "lastEditedTime": "2025-07-27T01:00:00.000Z"
   },
   {
-    "slug": "smarter-question-for-decision-making",
-    "lastEditedTime": "2025-05-20T01:33:00.000Z"
+    "slug": "unknown",
+    "lastEditedTime": "2025-08-15T10:43:00.000Z"
   },
   {
-    "slug": "6-thinking-hats",
-    "lastEditedTime": "2025-08-29T15:46:00.000Z"
+    "slug": "meeting-p2",
+    "lastEditedTime": "2025-10-15T02:01:00.000Z"
   },
   {
-    "slug": "brainstorm-toolkit",
-    "lastEditedTime": "2025-07-27T01:06:00.000Z"
+    "slug": "bias-in-work",
+    "lastEditedTime": "2025-09-04T10:56:00.000Z"
   },
   {
-    "slug": "judging",
-    "lastEditedTime": "2025-08-29T16:16:00.000Z"
+    "slug": "response",
+    "lastEditedTime": "2025-08-27T01:46:00.000Z"
   },
   {
-    "slug": "questionnaire-toolkit",
-    "lastEditedTime": "2025-08-29T15:41:00.000Z"
+    "slug": "ux-as-consultant-expectation",
+    "lastEditedTime": "2025-09-04T02:00:00.000Z"
   },
   {
-    "slug": "your-design-suck-if",
-    "lastEditedTime": "2025-08-19T08:27:00.000Z"
+    "slug": "take-design-feedback-p1",
+    "lastEditedTime": "2025-10-13T10:57:00.000Z"
   },
   {
-    "slug": "observation",
-    "lastEditedTime": "2025-08-28T13:37:00.000Z"
+    "slug": "tinh-cach-p2",
+    "lastEditedTime": "2025-08-28T02:37:00.000Z"
   },
   {
-    "slug": "khi-co-qua-nhieu-thu-can",
-    "lastEditedTime": "2025-06-28T05:27:00.000Z"
+    "slug": "questioning-p4",
+    "lastEditedTime": "2025-05-21T11:42:00.000Z"
   },
   {
-    "slug": "to-think",
-    "lastEditedTime": "2025-09-01T15:52:00.000Z"
-  },
-  {
-    "slug": "my-map",
+    "slug": "decision-making-p2",
     "lastEditedTime": "2025-08-08T07:53:00.000Z"
   },
   {
-    "slug": "cac-meta-terms-e-hoc",
-    "lastEditedTime": "2025-08-14T02:37:00.000Z"
+    "slug": "mindset-vs-tam-the",
+    "lastEditedTime": "2025-06-15T05:13:00.000Z"
   },
   {
-    "slug": "user-behavior",
-    "lastEditedTime": "2025-08-19T06:25:00.000Z"
+    "slug": "workflow",
+    "lastEditedTime": "2025-06-26T02:35:00.000Z"
   },
   {
-    "slug": "cognitive-load-checklist",
-    "lastEditedTime": "2025-08-23T01:57:00.000Z"
+    "slug": "presenting-p2",
+    "lastEditedTime": "2025-08-29T05:21:00.000Z"
   },
   {
-    "slug": "ux-ui-mindmap",
-    "lastEditedTime": "2025-08-15T16:30:00.000Z"
+    "slug": "presenting-p1",
+    "lastEditedTime": "2024-12-31T05:13:00.000Z"
   },
   {
-    "slug": "terms-hoi-tho-cua-po-pm-ux-designer-dev",
-    "lastEditedTime": "2025-08-22T01:31:00.000Z"
+    "slug": "meeting-p1",
+    "lastEditedTime": "2025-10-15T02:02:00.000Z"
   },
   {
-    "slug": "ux-challenge-cards",
-    "lastEditedTime": "2025-10-20T02:10:00.000Z"
+    "slug": "tinh-cach-p1",
+    "lastEditedTime": "2025-08-28T02:34:00.000Z"
   },
   {
-    "slug": "measuring-checklist",
-    "lastEditedTime": "2025-10-23T07:54:00.000Z"
+    "slug": "questioning-p2",
+    "lastEditedTime": "2025-08-19T00:48:00.000Z"
   },
   {
-    "slug": "idea-wait-rethink",
-    "lastEditedTime": "2025-08-28T14:25:00.000Z"
+    "slug": "questioning-p3",
+    "lastEditedTime": "2025-05-23T16:24:00.000Z"
   },
   {
-    "slug": "ui-checklist",
-    "lastEditedTime": "2025-08-31T14:27:00.000Z"
+    "slug": "principle-of-communication",
+    "lastEditedTime": "2025-08-27T02:14:00.000Z"
   },
   {
-    "slug": "meeting-checklist",
-    "lastEditedTime": "2025-10-09T05:15:00.000Z"
+    "slug": "listening",
+    "lastEditedTime": "2025-05-21T01:59:00.000Z"
   },
   {
-    "slug": "ux-ui-toolkit",
-    "lastEditedTime": "2026-01-17T09:59:00.000Z"
+    "slug": "conflict",
+    "lastEditedTime": "2025-06-27T05:54:00.000Z"
+  },
+  {
+    "slug": "facilitate",
+    "lastEditedTime": "2025-01-03T01:50:00.000Z"
+  },
+  {
+    "slug": "non-design-work",
+    "lastEditedTime": "2025-05-19T01:58:00.000Z"
+  },
+  {
+    "slug": "negotiation",
+    "lastEditedTime": "2024-12-11T01:32:00.000Z"
+  },
+  {
+    "slug": "persuade",
+    "lastEditedTime": "2025-07-10T05:50:00.000Z"
+  },
+  {
+    "slug": "raci-role-responsibility",
+    "lastEditedTime": "2024-12-21T23:32:00.000Z"
+  },
+  {
+    "slug": "decision-making-p1",
+    "lastEditedTime": "2025-08-08T07:44:00.000Z"
+  },
+  {
+    "slug": "take-design-feedback-p2",
+    "lastEditedTime": "2026-06-19T02:44:00.000Z"
+  },
+  {
+    "slug": "questioning-p1",
+    "lastEditedTime": "2025-05-21T06:01:00.000Z"
   },
   {
     "slug": "unknown",
     "lastEditedTime": "2025-08-15T10:43:00.000Z"
-  },
-  {
-    "slug": "figma-ui-term-vs-css-term",
-    "lastEditedTime": "2025-08-07T11:58:00.000Z"
-  },
-  {
-    "slug": "unknown",
-    "lastEditedTime": "2025-08-15T10:43:00.000Z"
-  },
-  {
-    "slug": "product-development-process-detail",
-    "lastEditedTime": "2025-02-25T02:08:00.000Z"
-  },
-  {
-    "slug": "interaction",
-    "lastEditedTime": "2025-08-21T05:59:00.000Z"
-  },
-  {
-    "slug": "cai-ghe-product",
-    "lastEditedTime": "2024-12-31T02:06:00.000Z"
-  },
-  {
-    "slug": "sense-making",
-    "lastEditedTime": "2025-01-01T14:34:00.000Z"
-  },
-  {
-    "slug": "work-journal",
-    "lastEditedTime": "2025-10-22T03:28:00.000Z"
-  },
-  {
-    "slug": "relation-systematic-thinking",
-    "lastEditedTime": "2025-08-09T06:50:00.000Z"
-  },
-  {
-    "slug": "product-development-process-overall",
-    "lastEditedTime": "2025-11-01T08:02:00.000Z"
-  },
-  {
-    "slug": "value-vs-benefit",
-    "lastEditedTime": "2025-03-20T04:53:00.000Z"
-  },
-  {
-    "slug": "suy-luan-vs-lap-luan",
-    "lastEditedTime": "2025-08-09T10:58:00.000Z"
-  },
-  {
-    "slug": "lap-luan-vs-tranh-luan",
-    "lastEditedTime": "2025-08-17T01:28:00.000Z"
-  },
-  {
-    "slug": "user-multiverse",
-    "lastEditedTime": "2025-01-03T12:51:00.000Z"
-  },
-  {
-    "slug": "product-la-gi",
-    "lastEditedTime": "2025-09-11T06:06:00.000Z"
   },
   {
     "slug": "choi-co-day-gi-minh",
     "lastEditedTime": "2025-09-01T03:24:00.000Z"
   },
   {
+    "slug": "lap-luan-vs-tranh-luan",
+    "lastEditedTime": "2025-08-17T01:28:00.000Z"
+  },
+  {
+    "slug": "suy-luan-vs-lap-luan",
+    "lastEditedTime": "2025-08-09T10:58:00.000Z"
+  },
+  {
+    "slug": "value-vs-benefit",
+    "lastEditedTime": "2025-03-20T04:53:00.000Z"
+  },
+  {
+    "slug": "product-development-process-overall",
+    "lastEditedTime": "2026-05-18T05:13:00.000Z"
+  },
+  {
     "slug": "ro-dan",
     "lastEditedTime": "2025-08-08T10:54:00.000Z"
   },
   {
-    "slug": "mental-model",
-    "lastEditedTime": "2025-09-03T11:04:00.000Z"
+    "slug": "relation-systematic-thinking",
+    "lastEditedTime": "2025-08-09T06:50:00.000Z"
   },
   {
-    "slug": "digital-vs-physical-product",
-    "lastEditedTime": "2025-08-23T02:26:00.000Z"
+    "slug": "work-journal",
+    "lastEditedTime": "2025-10-22T03:28:00.000Z"
   },
   {
-    "slug": "design-value",
-    "lastEditedTime": "2025-10-21T04:48:00.000Z"
+    "slug": "sense-making",
+    "lastEditedTime": "2025-01-01T14:34:00.000Z"
+  },
+  {
+    "slug": "product-la-gi",
+    "lastEditedTime": "2025-09-11T06:06:00.000Z"
   },
   {
     "slug": "why-people-said-good-design-is-invisible",
@@ -304,44 +276,60 @@
     "lastEditedTime": "2025-07-13T04:13:00.000Z"
   },
   {
+    "slug": "interaction",
+    "lastEditedTime": "2025-08-21T05:59:00.000Z"
+  },
+  {
+    "slug": "cai-ghe-product",
+    "lastEditedTime": "2024-12-31T02:06:00.000Z"
+  },
+  {
+    "slug": "product-development-process-detail",
+    "lastEditedTime": "2025-02-25T02:08:00.000Z"
+  },
+  {
+    "slug": "user-multiverse",
+    "lastEditedTime": "2025-01-03T12:51:00.000Z"
+  },
+  {
+    "slug": "digital-vs-physical-product",
+    "lastEditedTime": "2025-08-23T02:26:00.000Z"
+  },
+  {
+    "slug": "mental-model",
+    "lastEditedTime": "2025-09-03T11:04:00.000Z"
+  },
+  {
+    "slug": "design-value",
+    "lastEditedTime": "2025-10-21T04:48:00.000Z"
+  },
+  {
     "slug": "unknown",
     "lastEditedTime": "2025-08-15T10:43:00.000Z"
   },
   {
-    "slug": "ux-as-a-cupid",
-    "lastEditedTime": "2025-03-27T08:40:00.000Z"
+    "slug": "khac-biet-van-hoa-giua-ios-android",
+    "lastEditedTime": "2025-08-29T02:04:00.000Z"
   },
   {
-    "slug": "user-journey-map-user-scenario-task-flow-user-flow",
-    "lastEditedTime": "2025-08-24T01:26:00.000Z"
+    "slug": "cognitive-load",
+    "lastEditedTime": "2025-08-26T06:46:00.000Z"
   },
   {
-    "slug": "ia-ooux-conceptual-model",
-    "lastEditedTime": "2025-09-09T09:48:00.000Z"
+    "slug": "interaction-cost",
+    "lastEditedTime": "2025-08-06T02:10:00.000Z"
   },
   {
-    "slug": "use-case",
-    "lastEditedTime": "2025-08-17T02:46:00.000Z"
+    "slug": "ui-pattern",
+    "lastEditedTime": "2025-08-15T06:10:00.000Z"
   },
   {
-    "slug": "diagram-canvas",
-    "lastEditedTime": "2025-08-17T02:39:00.000Z"
+    "slug": "ux-pattern",
+    "lastEditedTime": "2025-07-22T03:55:00.000Z"
   },
   {
-    "slug": "brief-hieu-e",
-    "lastEditedTime": "2025-08-17T02:51:00.000Z"
-  },
-  {
-    "slug": "essential-design-principles",
-    "lastEditedTime": "2024-12-31T00:47:00.000Z"
-  },
-  {
-    "slug": "ideate-p1",
-    "lastEditedTime": "2025-07-17T07:48:00.000Z"
-  },
-  {
-    "slug": "ideate-p2",
-    "lastEditedTime": "2025-01-21T02:34:00.000Z"
+    "slug": "data-metrics-in-ux",
+    "lastEditedTime": "2026-02-24T08:19:00.000Z"
   },
   {
     "slug": "design-ops",
@@ -352,28 +340,56 @@
     "lastEditedTime": "2025-01-05T17:41:00.000Z"
   },
   {
-    "slug": "data-metrics-in-ux",
-    "lastEditedTime": "2026-02-24T08:19:00.000Z"
+    "slug": "graphic-fundamental",
+    "lastEditedTime": "2025-08-31T05:16:00.000Z"
   },
   {
-    "slug": "ux-pattern",
-    "lastEditedTime": "2025-07-22T03:55:00.000Z"
+    "slug": "ideate-p2",
+    "lastEditedTime": "2025-01-21T02:34:00.000Z"
   },
   {
-    "slug": "ui-pattern",
-    "lastEditedTime": "2025-08-15T06:10:00.000Z"
+    "slug": "ideate-p1",
+    "lastEditedTime": "2025-07-17T07:48:00.000Z"
   },
   {
-    "slug": "interaction-cost",
-    "lastEditedTime": "2025-08-06T02:10:00.000Z"
+    "slug": "figjam-before-figma",
+    "lastEditedTime": "2025-05-22T05:29:00.000Z"
   },
   {
-    "slug": "cognitive-load",
-    "lastEditedTime": "2025-08-26T06:46:00.000Z"
+    "slug": "psychology",
+    "lastEditedTime": "2024-12-03T11:29:00.000Z"
   },
   {
-    "slug": "khac-biet-van-hoa-giua-ios-android",
-    "lastEditedTime": "2025-08-29T02:04:00.000Z"
+    "slug": "brief-hieu-e",
+    "lastEditedTime": "2025-08-17T02:51:00.000Z"
+  },
+  {
+    "slug": "diagram-canvas",
+    "lastEditedTime": "2025-08-17T02:39:00.000Z"
+  },
+  {
+    "slug": "use-case",
+    "lastEditedTime": "2025-08-17T02:46:00.000Z"
+  },
+  {
+    "slug": "just-an-experiment",
+    "lastEditedTime": "2026-02-02T04:30:00.000Z"
+  },
+  {
+    "slug": "essential-design-principles",
+    "lastEditedTime": "2024-12-31T00:47:00.000Z"
+  },
+  {
+    "slug": "ia-ooux-conceptual-model",
+    "lastEditedTime": "2026-05-27T08:49:00.000Z"
+  },
+  {
+    "slug": "user-journey-map-user-scenario-task-flow-user-flow",
+    "lastEditedTime": "2025-08-24T01:26:00.000Z"
+  },
+  {
+    "slug": "ux-audit",
+    "lastEditedTime": "2025-10-17T02:42:00.000Z"
   },
   {
     "slug": "understand-empathize-user",
@@ -384,24 +400,8 @@
     "lastEditedTime": "2025-08-11T01:53:00.000Z"
   },
   {
-    "slug": "figjam-before-figma",
-    "lastEditedTime": "2025-05-22T05:29:00.000Z"
-  },
-  {
-    "slug": "graphic-fundamental",
-    "lastEditedTime": "2025-08-31T05:16:00.000Z"
-  },
-  {
-    "slug": "psychology",
-    "lastEditedTime": "2024-12-03T11:29:00.000Z"
-  },
-  {
-    "slug": "ux-audit",
-    "lastEditedTime": "2025-10-17T02:42:00.000Z"
-  },
-  {
-    "slug": "just-an-experiment",
-    "lastEditedTime": "2026-02-02T04:30:00.000Z"
+    "slug": "ux-as-a-cupid",
+    "lastEditedTime": "2025-03-27T08:40:00.000Z"
   },
   {
     "slug": "unknown",
