@@ -1,70 +1,124 @@
-# Spec: Upload Embed HTML Files to Cloudinary
+# Spec: Notion Embed HTML Viewer Component
 
-## Objective
+## Mục tiêu
 
-Bổ sung xử lý embed blocks trong Notion content — download file HTML từ `embed.url`, upload lên Cloudinary, và ghi đè URL bằng Cloudinary URL trước khi lưu vào `posts.json`.
+Xây dựng component Angular để hiển thị Notion `embed` block chứa file HTML (đã upload lên Cloudinary dạng raw). Component dùng iframe để hiển thị nội dung HTML với kích thước responsive.
 
-**Target user:** Script `fetch-from-notion.mjs` chạy ở server-side khi fetch dữ liệu từ Notion API.
+**Người dùng:** Độc giả xem nội dung HTML được nhúng trong bài viết Notion.
 
-**Success criteria:**
-- Embed blocks trong Notion content được xử lý tự động (download → upload → replace URL)
-- `embed.url` trong `posts.json` trỏ đến Cloudinary thay vì S3 URL gốc từ Notion
-- `embed.caption` được giữ nguyên
-- Không ảnh hưởng đến image blocks hoặc các block type khác
+**Tiêu chí thành công:**
+- Embed block render dưới dạng iframe trỏ tới Cloudinary raw URL
+- Width: 100% container cha (hiện tại max 600px trên desktop, full width trên mobile)
+- Height: `100dvh` (full viewport height)
+- Tích hợp vào PostContentDetailSection block dispatcher
+- Hoạt động với SSR (không truy cập `window` trực tiếp nếu không có platform check)
 
 ## Tech Stack
 
-- **Runtime:** Node.js 20+ (ESM)
-- **Cloud SDK:** `cloudinary` v2
-- **Upload method:** `cloudinary.uploader.upload(url, { public_id, overwrite: false })`
-- **Không chỉ định folder** (upload vào default Cloudinary folder)
+| Layer | Công nghệ |
+|-------|-----------|
+| Framework | Angular 20 (standalone components) |
+| Styling | Tailwind CSS + SASS (`.sass`) |
+| SSR | Angular SSR với hydration |
+| Test | Karma + Jasmine |
 
 ## Commands
 
-```bash
-# Run fetch script
-node scripts/fetch-from-notion.mjs
+```
+Build:  ng build
+Test:   ng test
+Lint:   prettier --check "./src/**/*.{ts,html,sass,json}"
+Format: prettier --write "./src/**/*.{ts,html,sass,json}"
 ```
 
 ## Project Structure
 
 ```
-scripts/
-└── fetch-from-notion.mjs    # File cần sửa — thêm hàm xử lý embed
-public/data/
-└── posts.json                # Output — embed.url sẽ là Cloudinary URL
+src/app/
+  components/
+    notion-embed-component/
+      notion-embed-component.ts       → Class component
+      notion-embed-component.html     → Template (iframe)
+      notion-embed-component.sass     → Style (height 100dvh)
+      notion-embed-component.spec.ts  → Unit test
+  sections/
+    post-content-detail-section/
+      post-content-detail-section.html → Thêm @case('embed')
 ```
 
 ## Code Style
 
-- Dùng `async/await`, error logging pattern giống `handleUploadImagesToCloudinary`
-- Log prefix: `[Cloudinary]` cho upload actions
-- Biến đặt tên tiếng Anh, rõ ràng
+Tuân theo convention hiện tại:
+
+```typescript
+@Component({
+  selector: 'app-notion-embed-component',
+  standalone: true,
+  templateUrl: './notion-embed-component.html',
+  styleUrl: './notion-embed-component.sass',
+})
+export class NotionEmbedComponent implements OnInit {
+  @Input() data?: any
+
+  embedUrl: SafeResourceUrl | null = null
+  private sanitizer = inject(DomSanitizer)
+
+  ngOnInit(): void {
+    const url = this.data?.embed?.url
+    if (url) this.embedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url)
+  }
+}
+```
+
+Template:
+
+```html
+@if (embedUrl) {
+  <div class="notion-embed">
+    <iframe [src]="embedUrl" title="Embedded content" loading="lazy" />
+  </div>
+}
+```
+
+Quy tắc:
+- `standalone: true`
+- `inject()` DI, không dùng constructor injection
+- File đặt tên kebab-case
+- `styleUrl` (số ít)
 
 ## Testing Strategy
 
-- **Manual:** Chạy script và kiểm tra `posts.json` — embed block có `embed.url` trỏ đến Cloudinary
-- **Eye check:** Đếm số lượng "Embed success" logs sau khi chạy
-- Không có unit test hiện tại; chỉ verify bằng cách run script
+| Cấp độ | Công cụ | Vị trí |
+|--------|---------|--------|
+| Unit | Karma + Jasmine | `notion-embed-component.spec.ts` |
+
+Test coverage:
+- Render iframe khi có URL
+- Không render gì khi URL rỗng/null
 
 ## Boundaries
 
-- **Always:**
-  - Xử lý tất cả `embed` blocks trong content (bao gồm children)
-  - Giữ nguyên `embed.caption`
-  - Dùng `overwrite: false` để không ghi đè file đã upload
-  - Log success/failed count sau khi xử lý
+- **Luôn làm:**
+  - Dùng `DomSanitizer.bypassSecurityTrustResourceUrl()` cho Cloudinary raw URLs
+  - Check `isPlatformBrowser` trước khi truy cập `window`/`document`
+  - Dùng `height: 100dvh` (dynamic viewport height) qua CSS
+  - Thêm `@case('embed')` vào PostContentDetailSection
+  - Thêm `loading="lazy"` trên iframe
+  - Style với Tailwind + SASS component-specific
 
-- **Ask first:**
-  - Thay đổi Cloudinary folder config
-  - Xóa/thay đổi caption
-  - Xử lý file HTML cũ (cleanup unused)
+- **Hỏi trước:**
+  - Thêm dependencies mới
+  - Thay đổi data model (`post-content.ts`)
+  - Thay đổi cấu trúc block dispatch
 
-- **Never:**
-  - Xóa hoặc modify các block type khác ngoài embed
-  - Upload file không phải HTML từ embed block
-  - Bỏ qua error handling
+- **Không bao giờ:**
+  - Hardcode height px
+  - Truy cập `window` không có `isPlatformBrowser` guard
+  - Bind `[src]` trực tiếp — luôn dùng `SafeResourceUrl` qua `DomSanitizer`
+  - Bỏ qua tests
 
-## Open Questions
+## Open Questions (đã giải quyết)
 
-- [ ] Có cần xử lý cleanup URL cũ (xóa file HTML cũ trên Cloudinary khi URL thay đổi)?
+- [x] Embed URLs đến từ Cloudinary (raw resource type)
+- [x] Width: 100% container (giữ trong container max 600px của post page)
+- [x] Height: `100dvh` (không trừ header vì post page không có fixed header)

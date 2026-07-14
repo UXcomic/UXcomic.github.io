@@ -10,6 +10,7 @@ import { NotionHeading1Component } from '../../components/notion-heading-1-compo
 import { NotionBulletedListItemComponent } from '../../components/notion-bulleted-list-item-component/notion-bulleted-list-item-component'
 import { NotionNumberedListItemComponent } from '../../components/notion-numbered-list-item-component/notion-numbered-list-item-component'
 import { NotionVideoComponent } from '../../components/notion-video-component/notion-video-component'
+import { NotionEmbedComponent } from '../../components/notion-embed-component/notion-embed-component'
 import { NotionCarouselComponent } from '../../components/notion-carousel-component/notion-carousel-component'
 import { register } from 'swiper/element/bundle'
 import { SwiperOptions } from 'swiper/types'
@@ -33,6 +34,7 @@ register()
     NotionBulletedListItemComponent,
     NotionNumberedListItemComponent,
     NotionVideoComponent,
+    NotionEmbedComponent,
     NotionCarouselComponent,
   ],
   templateUrl: './post-content-detail-section.html',

@@ -39,6 +39,7 @@ export class PostContentSection implements OnInit, OnChanges, AfterViewInit {
   @Input() copyLink?: string
   @Input() postContent?: PostContent
   @Input() hideTitle?: boolean
+  @Input() hideActions?: boolean
 
   protected config = environment
   protected relevantPosts?: any[] = []

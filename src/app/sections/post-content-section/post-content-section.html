@@ -13,6 +13,7 @@
     <app-post-card-component [post]="p" class="w-[160px] h-[216px] shrink-0"></app-post-card-component>
     }
   </div>
+  @if (!hideActions) {
   <div
     class="post-content__action-bar w-[240px] h-[48px] bg-white/80 border-[2px] border-white rounded-full mx-auto flex justify-between items-center sticky bottom-[10px] z-50 backdrop-blur-[16px]"
   >
@@ -144,4 +145,5 @@
       </svg>
     </span>
   </div>
+  }
 </section>

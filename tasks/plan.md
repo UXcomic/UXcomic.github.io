@@ -1,42 +1,48 @@
-# Plan: Upload Embed HTML to Cloudinary
+# Plan: Fix Embed HTML Download — Cloudinary fetch + srcdoc
 
-## Overview
+## Root Cause
 
-Thêm function `handleUploadEmbedsToCloudinary` vào `scripts/fetch-from-notion.mjs` để xử lý embed blocks tương tự `handleUploadImagesToCloudinary`.
+Cloudinary raw upload → `Content-Disposition: attachment` → browser download
 
-## Components
+## Giải pháp
 
-1. **New function:** `handleUploadEmbedsToCloudinary(contentArray)` — download HTML từ `embed.url`, upload Cloudinary, replace URL
-2. **Integration point:** Gọi function mới trong `processFetchContent` ngay sau `handleUploadImagesToCloudinary`
+Thay vì iframe `[src]` (trỏ URL → browser đọc headers → download), dùng:
+1. `HttpClient` fetch nội dung HTML từ Cloudinary raw URL (dạng text)
+2. iframe `[srcdoc]` = nội dung HTML string
 
-## Dependency Graph
+Browser đọc `srcdoc` trực tiếp, bỏ qua Content-Disposition.
+
+## Kiến trúc
 
 ```
-handleUploadEmbedsToCloudinary  (no internal deps, standalone)
-        │
-        ▼
-processFetchContent  (gọi hàm mới)
-        │
-        ▼
-fetchContents → fetchAll
+fetch-from-notion.mjs
+  ├── Download HTML từ Notion S3
+  ├── Upload → Cloudinary (raw, giữ nguyên)
+  └── obj.embed.url = Cloudinary URL
+
+notion-embed-component
+  ├── SSR: render placeholder
+  ├── Browser: HttpClient.get(Cloudinary URL) → text
+  ├── Loading state: spinner
+  ├── Success: iframe [srcdoc]="embedHtml"
+  └── Error: fallback / error message
 ```
 
-## Implementation Order
+## Dependencies
 
-1. Thêm `handleUploadEmbedsToCloudinary` function (mirror `handleUploadImagesToCloudinary`)
-2. Thêm call trong `processFetchContent`
-3. Chạy thử script để verify
+```
+app.config.ts → thêm provideHttpClient(withFetch())
+  └── notion-embed-component → inject HttpClient
+      └── fetch Cloudinary → srcdoc
+```
 
-## Risks
+## Tasks
 
-| Risk | Mitigation |
-|------|-----------|
-| `cloudinary.uploader.upload` fail với file HTML | Dùng `resource_type: 'raw'` nếu cần; fallback giữ nguyên URL gốc |
-| File HTML quá lớn | Cloudinary free plan giới hạn; log warning nếu fail |
-| Embed block có children | `fetchChildren` đã xử lý đệ quy; chỉ cần gọi ở từng level |
+### Phase 1: Setup HttpClient
+Task 1: Add provideHttpClient to app.config.ts
 
-## Verification
+### Phase 2: Fix component
+Task 2: Rewrite NotionEmbedComponent — fetch + srcdoc + loading/error states
 
-- Chạy `node scripts/fetch-from-notion.mjs`
-- Kiểm tra log: `[Cloudinary] Embed success: https://res.cloudinary.com/...`
-- Kiểm tra `public/data/posts.json`: embed block có `embed.url` trỏ đến Cloudinary
+### Checkpoint
+Task 3: Build & verify

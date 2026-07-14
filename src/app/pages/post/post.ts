@@ -21,6 +21,7 @@ import { getDefaultRoute, getNotFoundRoute } from '../../utils/route-helper'
 })
 export class Post implements OnInit, OnDestroy {
   protected post?: PostContent
+  protected hasEmbed = false
   protected config = environment
 
   private slugParam: string | null = null
@@ -53,6 +54,7 @@ export class Post implements OnInit, OnDestroy {
       }
 
       this.post = convertPostContent(pData)
+      this.hasEmbed = this.post?.content?.some((c: any) => c.type === 'embed') || false
 
       this.initTitle()
       this.initMetaTags()

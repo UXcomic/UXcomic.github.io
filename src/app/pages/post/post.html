@@ -21,11 +21,13 @@
       />
     </svg>
   </a>
-  <app-post-card-component
-    [post]="post"
-    [small]="true"
-    [rotate]="true"
-    class="flex justify-center"
-  ></app-post-card-component>
-  <app-post-content-section [postContent]="post"></app-post-content-section>
+  @if (!hasEmbed) {
+    <app-post-card-component
+      [post]="post"
+      [small]="true"
+      [rotate]="true"
+      class="flex justify-center"
+    ></app-post-card-component>
+  }
+  <app-post-content-section [postContent]="post" [hideActions]="hasEmbed"></app-post-content-section>
 </section>
