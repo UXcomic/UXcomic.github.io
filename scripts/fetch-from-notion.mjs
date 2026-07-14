@@ -297,9 +297,16 @@ async function handleUploadEmbedsToCloudinary(contentArray) {
   for (const obj of contentArray) {
     if (obj.type === 'embed' && obj.embed?.url) {
       const embedUrl = obj.embed.url
+      const localPath = path.join(htmlDir, `${obj.id}.html`)
+
       try {
-        const result = await cloudinary.uploader.upload(embedUrl, {
+        const content = await fetchUrlContent(embedUrl)
+        fs.writeFileSync(localPath, content, 'utf-8')
+
+        const result = await cloudinary.uploader.upload(localPath, {
           public_id: obj.id,
+          resource_type: 'raw',
+          folder: 'uxcomic-html',
           overwrite: false,
         })
         obj.embed.url = result.secure_url
@@ -315,6 +322,19 @@ async function handleUploadEmbedsToCloudinary(contentArray) {
   if (uploadedCount > 0 || failedCount > 0) {
     console.log(`[Cloudinary] Embeds: ${uploadedCount} uploaded, ${failedCount} failed`)
   }
+}
+
+function fetchUrlContent(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (response) => {
+      if (response.statusCode !== 200) {
+        return reject(new Error(`Failed to fetch '${url}' (${response.statusCode})`))
+      }
+      let data = ''
+      response.on('data', (chunk) => (data += chunk))
+      response.on('end', () => resolve(data))
+    }).on('error', reject)
+  })
 }
 
 function renderRichText(richText) {
@@ -383,7 +403,11 @@ function renderBlockToHtml(block) {
       return `<figure><video controls src="${vidUrl}"></video></figure>`
     }
 
-    case 'embed':
+    case 'embed': {
+      const url = data?.url || ''
+      return `<div class="embed"><iframe src="${url}" title="Embedded content"></iframe></div>`
+    }
+
     case 'bookmark': {
       const url = data?.url || ''
       return `<div class="embed"><a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a></div>`
@@ -466,7 +490,7 @@ function generatePostHtml(post) {
     blockquote { border-left: 4px solid #ddd; margin-left: 0; padding-left: 1rem; color: #666; }
     hr { border: none; border-top: 1px solid #eee; }
     .callout { background: #f0f7ff; padding: 1rem; border-radius: 4px; margin: 1rem 0; }
-    .embed { padding: 0.5rem; background: #f9f9f9; border-radius: 4px; }
+    .embed iframe { width: 100%; height: 400px; border: 1px solid #ddd; border-radius: 4px; }
   </style>
 </head>
 <body>
