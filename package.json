@@ -15,6 +15,7 @@
     "sync": "node scripts/fetch-from-notion.mjs"
   },
   "private": true,
+  "packageManager": "pnpm@11.3.0",
   "dependencies": {
     "@angular/common": "^20.0.0",
     "@angular/compiler": "^20.0.0",
