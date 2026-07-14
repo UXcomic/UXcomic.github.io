@@ -160,6 +160,7 @@ async function processFetchContent(postData, parentPostData = undefined) {
   const titleSlug = toSlug(sanitizedTitle)
   // await handleImageBlocks(titleSlug, contentData.results)
   await handleUploadImagesToCloudinary(contentData.results)
+  await handleUploadEmbedsToCloudinary(contentData.results)
 
   return contentData.results
 }
@@ -282,6 +283,33 @@ async function handleUploadImagesToCloudinary(contentArray) {
   }
 
   // TODO Remove unused images
+}
+
+async function handleUploadEmbedsToCloudinary(contentArray) {
+  let uploadedCount = 0
+  let failedCount = 0
+
+  for (const obj of contentArray) {
+    if (obj.type === 'embed' && obj.embed?.url) {
+      const embedUrl = obj.embed.url
+      try {
+        const result = await cloudinary.uploader.upload(embedUrl, {
+          public_id: obj.id,
+          overwrite: false,
+        })
+        obj.embed.url = result.secure_url
+        uploadedCount++
+        console.log(`[Cloudinary] Embed success: ${result.secure_url}`)
+      } catch (err) {
+        failedCount++
+        console.error(`[Cloudinary] Failed to upload embed: ${embedUrl}`, err.message)
+      }
+    }
+  }
+
+  if (uploadedCount > 0 || failedCount > 0) {
+    console.log(`[Cloudinary] Embeds: ${uploadedCount} uploaded, ${failedCount} failed`)
+  }
 }
 
 function generateRoutes() {
