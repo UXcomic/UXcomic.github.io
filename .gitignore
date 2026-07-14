@@ -45,4 +45,7 @@ Thumbs.db
 .env
 
 # Data
-/public/dataagents
+/public/data
+
+# Generated HTML
+/uxcomic-html

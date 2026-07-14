@@ -19,6 +19,7 @@ const __dirname = path.dirname(__filename)
 
 const outputDir = path.join(__dirname, '../public/data')
 const imgsDir = path.join(__dirname, '../public/imgs')
+const htmlDir = path.join(__dirname, '../uxcomic-html')
 
 const notion = new Client({ auth: process.env['NOTION_API_KEY'] })
 const rootDatabaseId = process.env['NOTION_ROOT_DATABASE_ID']
@@ -48,6 +49,10 @@ function createDirectory() {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true })
     console.log(`📁 Created directory: ${outputDir}`)
+  }
+  if (!fs.existsSync(htmlDir)) {
+    fs.mkdirSync(htmlDir, { recursive: true })
+    console.log(`📁 Created directory: ${htmlDir}`)
   }
 }
 
@@ -312,6 +317,181 @@ async function handleUploadEmbedsToCloudinary(contentArray) {
   }
 }
 
+function renderRichText(richText) {
+  if (!richText) return ''
+  return richText.map((t) => {
+    let text = t.plain_text || ''
+    if (t.annotations?.bold) text = `<strong>${text}</strong>`
+    if (t.annotations?.italic) text = `<em>${text}</em>`
+    if (t.annotations?.underline) text = `<u>${text}</u>`
+    if (t.annotations?.strikethrough) text = `<s>${text}</s>`
+    if (t.annotations?.code) text = `<code>${text}</code>`
+    if (t.href) text = `<a href="${t.href}">${text}</a>`
+    return text
+  }).join('')
+}
+
+function renderBlockToHtml(block) {
+  const type = block.type
+  const data = block[type]
+
+  switch (type) {
+    case 'paragraph':
+      return `<p>${renderRichText(data?.rich_text)}</p>`
+
+    case 'heading_1':
+      return `<h1>${renderRichText(data?.rich_text)}</h1>`
+
+    case 'heading_2':
+      return `<h2>${renderRichText(data?.rich_text)}</h2>`
+
+    case 'heading_3':
+      return `<h3>${renderRichText(data?.rich_text)}</h3>`
+
+    case 'bulleted_list_item':
+      return `<li>${renderRichText(data?.rich_text)}</li>`
+
+    case 'numbered_list_item':
+      return `<li>${renderRichText(data?.rich_text)}</li>`
+
+    case 'to_do':
+      return `<li><input type="checkbox" ${data?.checked ? 'checked' : ''} disabled /> ${renderRichText(data?.rich_text)}</li>`
+
+    case 'toggle':
+      return `<details><summary>${renderRichText(data?.rich_text)}</summary></details>`
+
+    case 'quote':
+      return `<blockquote>${renderRichText(data?.rich_text)}</blockquote>`
+
+    case 'code':
+      return `<pre><code class="language-${data?.language || ''}">${renderRichText(data?.rich_text)}</code></pre>`
+
+    case 'callout':
+      return `<div class="callout">${data?.icon?.emoji || ''} ${renderRichText(data?.rich_text)}</div>`
+
+    case 'divider':
+      return `<hr />`
+
+    case 'image': {
+      const imgUrl = data?.file?.url || data?.external?.url || ''
+      const caption = data?.caption?.[0]?.plain_text || ''
+      return `<figure><img src="${imgUrl}" alt="${caption}" />${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`
+    }
+
+    case 'video': {
+      const vidUrl = data?.file?.url || data?.external?.url || ''
+      return `<figure><video controls src="${vidUrl}"></video></figure>`
+    }
+
+    case 'embed':
+    case 'bookmark': {
+      const url = data?.url || ''
+      return `<div class="embed"><a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a></div>`
+    }
+
+    case 'file': {
+      const fileUrl = data?.file?.url || data?.external?.url || ''
+      const fileName = data?.name || 'File'
+      return `<div><a href="${fileUrl}" target="_blank" rel="noopener noreferrer">📎 ${fileName}</a></div>`
+    }
+
+    default:
+      console.warn(`[HTML] Unsupported block type: ${type}`)
+      return ''
+  }
+}
+
+function renderBlocksToHtml(blocks) {
+  let html = ''
+  let inList = false
+  let listType = null
+
+  for (const block of blocks) {
+    const type = block.type
+    const isListItem = type === 'bulleted_list_item' || type === 'numbered_list_item'
+
+    if (isListItem) {
+      const currentListType = type === 'bulleted_list_item' ? 'ul' : 'ol'
+      if (!inList || listType !== currentListType) {
+        if (inList) html += `</${listType}>\n`
+        html += `<${currentListType}>\n`
+        inList = true
+        listType = currentListType
+      }
+      html += `  ${renderBlockToHtml(block)}\n`
+    } else {
+      if (inList) {
+        html += `</${listType}>\n`
+        inList = false
+        listType = null
+      }
+
+      if (block.has_children && block.children) {
+        html += renderBlockToHtml(block)
+        html += renderBlocksToHtml(block.children)
+      } else {
+        html += renderBlockToHtml(block) + '\n'
+      }
+    }
+  }
+
+  if (inList) html += `</${listType}>\n`
+
+  return html
+}
+
+function generatePostHtml(post) {
+  const title = post.properties?.Name?.title[0]?.text?.content || 'Untitled'
+  const slug = toSlug(title)
+  const contentHtml = renderBlocksToHtml(post.content || [])
+  const baseUrl = process.env['BASE_URL'] || 'https://uxcomic.github.io'
+
+  return `<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${title} | UXcomic</title>
+  <meta name="description" content="${title}" />
+  <meta property="og:title" content="${title}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="${baseUrl}/post/${slug}" />
+  <meta property="og:description" content="${title}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 1rem; line-height: 1.6; }
+    img, video { max-width: 100%; height: auto; }
+    pre { overflow-x: auto; background: #f5f5f5; padding: 1rem; border-radius: 4px; }
+    code { font-family: monospace; }
+    blockquote { border-left: 4px solid #ddd; margin-left: 0; padding-left: 1rem; color: #666; }
+    hr { border: none; border-top: 1px solid #eee; }
+    .callout { background: #f0f7ff; padding: 1rem; border-radius: 4px; margin: 1rem 0; }
+    .embed { padding: 0.5rem; background: #f9f9f9; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <article>
+    <h1>${title}</h1>
+    ${contentHtml}
+  </article>
+</body>
+</html>`
+}
+
+function processCreatePostHtmlFiles() {
+  if (!postsData.length) return
+
+  for (const post of postsData) {
+    const title = post.properties?.Name?.title[0]?.text?.content || 'Untitled'
+    const slug = toSlug(title)
+    if (slug === 'unknown') continue
+    const filePath = path.join(htmlDir, `${slug}.html`)
+    const html = generatePostHtml(post)
+    fs.writeFileSync(filePath, html, 'utf-8')
+    console.log(`✅ Saved HTML: ${filePath}`)
+  }
+}
+
 function generateRoutes() {
   processGeneratePostRoutes()
   processGenerateBlogRoutes()
@@ -347,6 +527,7 @@ function createFiles() {
   processBlogRoutesFile()
   processPostRoutesFile()
   processCreateSitemapFile()
+  processCreatePostHtmlFiles()
 }
 
 function processCreateCategoriesAndTagsFile() {
