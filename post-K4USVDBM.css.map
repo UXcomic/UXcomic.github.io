@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/post/post.sass", "src/app/pages/post/post.sass"],
+  "sourcesContent": [".post--embed\n  max-width: none !important\n  margin: 0 !important\n  padding-top: 0 !important\n", ".post--embed {\n  max-width: none !important;\n  margin: 0 !important;\n  padding-top: 0 !important;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlOi8vL2hvbWUvcnVubmVyL3dvcmsvVVhjb21pYy5naXRodWIuaW8vVVhjb21pYy5naXRodWIuaW8vc3JjL2FwcC9wYWdlcy9wb3N0L3Bvc3Quc2FzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5wb3N0LS1lbWJlZFxuICBtYXgtd2lkdGg6IG5vbmUgIWltcG9ydGFudFxuICBtYXJnaW46IDAgIWltcG9ydGFudFxuICBwYWRkaW5nLXRvcDogMCAhaW1wb3J0YW50XG4iXX0= */"],
+  "mappings": "AAAA,CAAA,YACE,UAAA,eADF,OAEE,YACA,YAAA,WCCF",
+  "names": []
+}
