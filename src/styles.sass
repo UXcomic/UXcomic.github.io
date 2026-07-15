@@ -8,7 +8,9 @@
 @source "../node_modules/flowbite"
 
 html
-  overscroll-behavior: contain
+  background-color: #f7f4ee; /* đồng bộ với main, tránh lộ màu trắng khi bounce */
+  overscroll-behavior-y: none; /* nếu không muốn bounce chút nào */
+  height: 100%;
 
 body
   color: colors.$color-text-primary
