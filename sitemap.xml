@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+  <loc>https://uxcomic.github.io/post/san-pham-tai-chinh</loc>
+  <lastmod>2026-07-15</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/post/life-stage-base-finance</loc>
+  <lastmod>2026-07-15</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/post/popular-traps</loc>
+  <lastmod>2026-07-15</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/post/tai-chinh-101</loc>
+  <lastmod>2026-07-15</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/post/caculator</loc>
+  <lastmod>2026-07-15</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
   <loc>https://uxcomic.github.io/post/figma-ui-term-vs-css-term</loc>
   <lastmod>2025-08-07</lastmod>
   <changefreq>monthly</changefreq>
@@ -579,6 +609,12 @@
 <url>
   <loc>https://uxcomic.github.io/post/ux-as-a-cupid</loc>
   <lastmod>2025-03-27</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://uxcomic.github.io/blog/other/tai-chinh</loc>
+  <lastmod>2026-07-15</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
