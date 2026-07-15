@@ -3,7 +3,7 @@
     <h5 class="post-content__title px-[16px]">{{postContent.title}}</h5>
     <p class="post-content__created-date">{{postContent.createdDate | date:'longDate'}}</p>
   </div>
-  <article class="overflow-x-hidden overflow-y-visible">
+  <article class="overflow-hidden">
     <app-post-content-detail-section
       [content]="postContent.content"
       [fullscreen]="fullscreen"
