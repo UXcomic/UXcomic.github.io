@@ -40,6 +40,8 @@ export class PostContentSection implements OnInit, OnChanges, AfterViewInit {
   @Input() postContent?: PostContent
   @Input() hideTitle?: boolean
   @Input() hideActions?: boolean
+  @Input() hideRelevantPosts?: boolean
+  @Input() fullscreen?: boolean
 
   protected config = environment
   protected relevantPosts?: any[] = []

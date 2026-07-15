@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { NotionCalloutComponent } from './notion-callout-component';
+import { NotionCalloutComponent } from './notion-callout-component'
 
 describe('NotionCalloutComponent', () => {
-  let component: NotionCalloutComponent;
-  let fixture: ComponentFixture<NotionCalloutComponent>;
+  let component: NotionCalloutComponent
+  let fixture: ComponentFixture<NotionCalloutComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotionCalloutComponent]
-    })
-    .compileComponents();
+      imports: [NotionCalloutComponent],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(NotionCalloutComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(NotionCalloutComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

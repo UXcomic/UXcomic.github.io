@@ -44,6 +44,7 @@ register()
 export class PostContentDetailSection {
   @Input() content?: any
   @Input() slider?: boolean
+  @Input() fullscreen?: boolean
 
   protected swiperConfig: SwiperOptions = {
     effect: 'cards',

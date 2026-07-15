@@ -1,16 +1,20 @@
-import { Component, inject, Input, OnInit, PLATFORM_ID } from '@angular/core'
+import { Component, ElementRef, inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { isPlatformBrowser } from '@angular/common'
+import { CommonModule, isPlatformBrowser } from '@angular/common'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-notion-embed-component',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './notion-embed-component.html',
   styleUrl: './notion-embed-component.sass',
 })
 export class NotionEmbedComponent implements OnInit {
   @Input() data?: any
+  @Input() fullscreen?: boolean
+
+  @ViewChild('embedIframe', { read: ElementRef }) embedIframe?: ElementRef<HTMLIFrameElement>
 
   protected embedHtml: SafeHtml | null = null
   protected loading = false
@@ -38,6 +42,47 @@ export class NotionEmbedComponent implements OnInit {
         this.error = true
         this.loading = false
       },
+    })
+  }
+
+  onIframeLoad(): void {
+    if (this.fullscreen) return
+    this.resizeIframe()
+  }
+
+  private resizeIframe(): void {
+    const iframe = this.embedIframe?.nativeElement
+    if (!iframe?.contentWindow?.document) return
+
+    const doc = iframe.contentWindow.document
+    const height = Math.max(
+      doc.documentElement.scrollHeight,
+      doc.body.scrollHeight,
+      doc.documentElement.offsetHeight,
+      doc.body.offsetHeight,
+    )
+
+    if (height > 0) {
+      iframe.style.height = `${height}px`
+    }
+
+    // Watch for dynamic content changes (e.g. images loading)
+    const observer = new MutationObserver(() => {
+      const updatedHeight = Math.max(
+        doc.documentElement.scrollHeight,
+        doc.body.scrollHeight,
+        doc.documentElement.offsetHeight,
+        doc.body.offsetHeight,
+      )
+      if (updatedHeight > 0 && updatedHeight !== height) {
+        iframe.style.height = `${updatedHeight}px`
+      }
+    })
+
+    observer.observe(doc.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
     })
   }
 }

@@ -1,13 +1,13 @@
 @if (loading) {
-  <div class="notion-embed notion-embed--loading">
-    <div class="notion-embed__spinner"></div>
-  </div>
+<div class="notion-embed notion-embed--loading" [ngClass]="{'notion-embed--fullscreen': fullscreen}">
+  <div class="notion-embed__spinner"></div>
+</div>
 } @else if (error) {
-  <div class="notion-embed notion-embed--error">
-    <p>Không thể tải nội dung.</p>
-  </div>
+<div class="notion-embed notion-embed--error" [ngClass]="{'notion-embed--fullscreen': fullscreen}">
+  <p>Không thể tải nội dung.</p>
+</div>
 } @else if (embedHtml) {
-  <div class="notion-embed">
-    <iframe [srcdoc]="embedHtml" title="Embedded content"></iframe>
-  </div>
+<div class="notion-embed" [ngClass]="{'notion-embed--fullscreen': fullscreen}">
+  <iframe #embedIframe [srcdoc]="embedHtml" title="Embedded content" (load)="onIframeLoad()"></iframe>
+</div>
 }

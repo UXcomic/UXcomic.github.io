@@ -46,7 +46,7 @@
       <app-post-content-detail-section [content]="c.children"></app-post-content-detail-section>
     </app-notion-numbered-list-item-component>
     } @case ('embed') {
-    <app-notion-embed-component [data]="c"></app-notion-embed-component>
+    <app-notion-embed-component [data]="c" [fullscreen]="fullscreen"></app-notion-embed-component>
     } @case ('toggle') {
     <app-notion-carousel-component [data]="c">
       <app-post-content-detail-section [content]="c.children" [slider]="true"></app-post-content-detail-section>

@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { NotionVideoComponent } from './notion-video-component';
+import { NotionVideoComponent } from './notion-video-component'
 
 describe('NotionVideoComponent', () => {
-  let component: NotionVideoComponent;
-  let fixture: ComponentFixture<NotionVideoComponent>;
+  let component: NotionVideoComponent
+  let fixture: ComponentFixture<NotionVideoComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotionVideoComponent]
-    })
-    .compileComponents();
+      imports: [NotionVideoComponent],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(NotionVideoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(NotionVideoComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
