@@ -79,6 +79,12 @@ async function fetchTags() {
       block_id: categoryData.id,
     })
     const childDatabase = block.results.filter((item) => item.type == 'child_database')[0]
+
+    if (!childDatabase) {
+      console.warn(`⚠️ No child database found for category "${categoryData.name}" (${categoryData.id}), skipping tags.`)
+      continue
+    }
+
     const databaseInfo = await notion.databases.retrieve({
       database_id: childDatabase.id,
     })
