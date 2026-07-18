@@ -6,7 +6,14 @@
     "icon": "👾",
     "order": 6,
     "created_time": "2026-07-15T00:59:00.000Z",
-    "tags": []
+    "tags": [
+      {
+        "id": "715a3f1f-8d2e-426b-a2d8-86f0e34dfc02",
+        "name": "Tài chính",
+        "slug": "tai-chinh",
+        "order": 1
+      }
+    ]
   },
   {
     "id": "11a5d164-78d8-80c5-95ab-ebc19da12022",
