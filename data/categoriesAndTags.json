@@ -12,6 +12,12 @@
         "name": "Tài chính",
         "slug": "tai-chinh",
         "order": 1
+      },
+      {
+        "id": "5b23efe9-2fa7-4d0d-9ad4-8c25a146e2c5",
+        "name": "Design",
+        "slug": "design",
+        "order": 2
       }
     ]
   },
