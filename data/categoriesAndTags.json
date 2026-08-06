@@ -18,6 +18,12 @@
         "name": "Design",
         "slug": "design",
         "order": 2
+      },
+      {
+        "id": "492225b3-52b5-4c16-87b6-1e23085bedbc",
+        "name": "For Fun",
+        "slug": "for-fun",
+        "order": 3
       }
     ]
   },
