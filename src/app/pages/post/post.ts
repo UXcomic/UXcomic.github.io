@@ -24,6 +24,11 @@ export class Post implements OnInit, OnDestroy {
   protected hasEmbed = false
   protected config = environment
 
+  protected get coverUrl(): string {
+    const image = this.post?.cover?.image
+    return image?.file?.url || image?.external?.url || ''
+  }
+
   private slugParam: string | null = null
 
   private router = inject(Router)

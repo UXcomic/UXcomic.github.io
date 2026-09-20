@@ -1,17 +1,19 @@
-# Spec: Notion Embed HTML Viewer Component
+# Spec: Title + Thumbnail cho post embed trên trang bài viết
 
-## Mục tiêu
+## Objective
 
-Xây dựng component Angular để hiển thị Notion `embed` block chứa file HTML (đã upload lên Cloudinary dạng raw). Component dùng iframe để hiển thị nội dung HTML với kích thước responsive.
+Bổ sung **title** và **hình ảnh thumbnail** của bài viết vào trang `/post/:slug` **chỉ khi `hasEmbed === true`** (chế độ fullscreen embed). Title + thumbnail hiển thị ngay trong **top header 64px** hiện có, nằm bên trái nút close.
 
-**Người dùng:** Độc giả xem nội dung HTML được nhúng trong bài viết Notion.
+**Người dùng:** Độc giả đang xem một bài viết dạng embed fullscreen — lướt nhanh nội dung, cần nhìn thấy ngay bài viết đang đọc là gì.
+
+**Lý do:** Ở chế độ embed, post-card bị ẩn và title bị hide nên người đọc không còn ngữ cảnh về bài viết đang xem. Header hiện chỉ có nút X → bổ sung title + thumbnail để nhận diện bài viết trong khi giữ header gọn.
 
 **Tiêu chí thành công:**
-- Embed block render dưới dạng iframe trỏ tới Cloudinary raw URL
-- Width: 100% container cha (hiện tại max 600px trên desktop, full width trên mobile)
-- Height: `100dvh` (full viewport height)
-- Tích hợp vào PostContentDetailSection block dispatcher
-- Hoạt động với SSR (không truy cập `window` trực tiếp nếu không có platform check)
+- Khi `hasEmbed`, header hiển thị thumbnail (40x40px) + title (style `%title-1`, 1 dòng, truncate) ở bên trái, nút close giữ nguyên bên phải
+- Khi `!hasEmbed`, header giữ nguyên hành vi hiện tại (chỉ nút close bên phải, `justify-end`)
+- Nếu post không có cover, chỉ hiển thị title (ẩn thumbnail)
+- Title + thumbnail là phần hiển thị tĩnh, không phải link
+- Không thay đổi hành vi / route của nút close
 
 ## Tech Stack
 
@@ -19,106 +21,145 @@ Xây dựng component Angular để hiển thị Notion `embed` block chứa fil
 |-------|-----------|
 | Framework | Angular 20 (standalone components) |
 | Styling | Tailwind CSS + SASS (`.sass`) |
-| SSR | Angular SSR với hydration |
+| Typography | `%title-1` từ `src/app/styles/_typography.sass` (Inter bold, 22px/32px) |
+| Ảnh | Plain `<img>` (không qua Cloudinary) — cover of embed post là external URL (codia.ai) không có `public_id` |
+| SSR | Angular SSR — header thuần static, không truy cập `window` |
 | Test | Karma + Jasmine |
 
 ## Commands
 
 ```
-Build:  ng build
-Test:   ng test
-Lint:   prettier --check "./src/**/*.{ts,html,sass,json}"
-Format: prettier --write "./src/**/*.{ts,html,sass,json}"
+Build:  pnpm build
+Test:   pnpm test
+Lint:   pnpm prettier:check
+Format: pnpm prettier
+Dev:    pnpm start
 ```
 
 ## Project Structure
 
+Thay đổi nằm trong component `Post` duy nhất. Không tạo component/helper mới.
+
 ```
-src/app/
-  components/
-    notion-embed-component/
-      notion-embed-component.ts       → Class component
-      notion-embed-component.html     → Template (iframe)
-      notion-embed-component.sass     → Style (height 100dvh)
-      notion-embed-component.spec.ts  → Unit test
-  sections/
-    post-content-detail-section/
-      post-content-detail-section.html → Thêm @case('embed')
+src/app/pages/post/
+  post.html   → Thêm block title + thumbnail bên trái header (chỉ khi hasEmbed)
+  post.sass   → Style title dùng %title-1 (`@use '../../styles/typography'`)
+  post.ts     → Thêm method/property nhỏ để expose cover URL (file.url || external.url)
+  post.spec.ts→ Thêm test cho block title + thumbnail khi hasEmbed
 ```
 
 ## Code Style
 
-Tuân theo convention hiện tại:
+Trong `post.html`, header chuyển từ `justify-end` sang điều kiện: khi `hasEmbed` dùng `justify-between`, ngược lại giữ `justify-end`. Block trái chỉ render khi `hasEmbed`:
 
-```typescript
-@Component({
-  selector: 'app-notion-embed-component',
-  standalone: true,
-  templateUrl: './notion-embed-component.html',
-  styleUrl: './notion-embed-component.sass',
-})
-export class NotionEmbedComponent implements OnInit {
-  @Input() data?: any
-
-  embedUrl: SafeResourceUrl | null = null
-  private sanitizer = inject(DomSanitizer)
-
-  ngOnInit(): void {
-    const url = this.data?.embed?.url
-    if (url) this.embedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url)
+```html
+<header
+  class="top-header sticky top-0 z-50 h-[64px] pl-[16px] pr-[16px] flex items-center"
+  [class.justify-between]="hasEmbed"
+  [class.justify-end]="!hasEmbed"
+>
+  @if (hasEmbed) {
+  <div class="flex items-center gap-x-[12px] min-w-0">
+    <img
+      *ngIf="coverUrl"
+      [src]="coverUrl"
+      [alt]="post?.title"
+      class="w-[40px] h-[40px] rounded-[8px] object-cover shrink-0"
+      width="40"
+      height="40"
+    />
+    <h1 class="post__embed-title truncate min-w-0">{{ post?.title }}</h1>
+  </div>
   }
+  <a
+    [routerLink]="`/blog/${post.category?.slug}/${post.tag?.slug}`"
+    aria-label="Close article"
+    class="w-[48px] h-[48px] bg-white/75 border-[2px] border-white rounded-full flex items-center justify-center shrink-0"
+  >
+    ... SVG close giữ nguyên ...
+  </a>
+</header>
+```
+
+Trong `post.ts`, expose cover URL hỗ trợ cả hai dạng file/external:
+
+```ts
+protected get coverUrl(): string {
+  const image = this.post?.cover?.image
+  return image?.file?.url || image?.external?.url || ''
 }
 ```
 
-Template:
+Trong `post.sass`:
 
-```html
-@if (embedUrl) {
-  <div class="notion-embed">
-    <iframe [src]="embedUrl" title="Embedded content" loading="lazy" />
-  </div>
-}
+```sass
+@use '../../styles/colors'
+@use '../../styles/typography'
+
+.top-header
+  background-color: colors.$color-bg
+
+.post
+  &__embed-title
+    @extend %title-1
 ```
 
 Quy tắc:
-- `standalone: true`
-- `inject()` DI, không dùng constructor injection
-- File đặt tên kebab-case
-- `styleUrl` (số ít)
+- Dùng Tailwind utility (`w-[40px] h-[40px]`, `truncate`, `gap-x-[12px]`...) cho layout; chỉ dùng SASS cho typography (`%title-1`) không làm được bằng utility
+- Không hardcode màu hex; không dùng Cloudinary cho thumbnail embed
+- Title dùng `@extend %title-1` + `truncate` (1 dòng, line-height 32px phù hợp header 64px)
+- Không thêm link/click cho thumbnail–title block
 
 ## Testing Strategy
 
 | Cấp độ | Công cụ | Vị trí |
 |--------|---------|--------|
-| Unit | Karma + Jasmine | `notion-embed-component.spec.ts` |
+| Unit | Karma + Jasmine | `src/app/pages/post/post.spec.ts` |
 
-Test coverage:
-- Render iframe khi có URL
-- Không render gì khi URL rỗng/null
+Test coverage tối thiểu:
+- Khi `hasEmbed=true` và post có cover: `<img>` thumbnail render (src = cover URL, kích thước 40x40) và title hiển thị
+- Khi `hasEmbed=true` và post không có cover (`cover: null`): không render `<img>`, title vẫn hiển thị
+- Khi `hasEmbed=false`: block title + thumbnail không render, header vẫn chỉ có nút close
+- Existing tests (close link, header hiển thị khi embed) vẫn pass — không regression
 
 ## Boundaries
 
 - **Luôn làm:**
-  - Dùng `DomSanitizer.bypassSecurityTrustResourceUrl()` cho Cloudinary raw URLs
-  - Check `isPlatformBrowser` trước khi truy cập `window`/`document`
-  - Dùng `height: 100dvh` (dynamic viewport height) qua CSS
-  - Thêm `@case('embed')` vào PostContentDetailSection
-  - Thêm `loading="lazy"` trên iframe
-  - Style với Tailwind + SASS component-specific
+  - Chỉ render title + thumbnail khi `hasEmbed === true`
+  - Thumbnail 40x40px (`w-[40px] h-[40px]`), bo tròn, `object-cover`
+  - Title dùng `%title-1` qua `@extend` trong `post.sass`, 1 dòng `truncate`
+  - Hỗ trợ cả `image.file.url` và `image.external.url` cho cover
+  - Nếu không có cover → ẩn thumbnail, chỉ title
+  - Giữ nguyên nút close, route, và header trong mọi chế độ
+  - Update `post.spec.ts` song song với template
 
 - **Hỏi trước:**
-  - Thêm dependencies mới
-  - Thay đổi data model (`post-content.ts`)
-  - Thay đổi cấu trúc block dispatch
+  - Đổi vị trí title/thumbnail ra ngoài header (block riêng)
+  - Cho title/thumbnail thành link điều hướng
+  - Đổi kích thước thumbnail / style title khác `%title-1`
+  - Hiển thị title + thumbnail ở cả chế độ không embed
+  - Dùng Cloudinary/CDN xử lý ảnh thumbnail thay vì `<img>` trực tiếp
 
 - **Không bao giờ:**
-  - Hardcode height px
-  - Truy cập `window` không có `isPlatformBrowser` guard
-  - Bind `[src]` trực tiếp — luôn dùng `SafeResourceUrl` qua `DomSanitizer`
-  - Bỏ qua tests
+  - Truy cập `window`/`document` (SSR-safe)
+  - Thêm data model mới / sửa `PostContent`
+  - Hardcode màu hex qua biến ngoài `_colors.sass`
+  - Bỏ qua/cập nhật `post.spec.ts`
+  - Render title + thumbnail khi `!hasEmbed` (thay đổi layout mặc định ngoài phạm vi)
 
-## Open Questions (đã giải quyết)
+## Success Criteria
 
-- [x] Embed URLs đến từ Cloudinary (raw resource type)
-- [x] Width: 100% container (giữ trong container max 600px của post page)
-- [x] Height: `100dvh` (không trừ header vì post page không có fixed header)
+- [ ] Khi mở `/post/:slug` của embed post: header hiện thumbnail 40x40 bên trái + title truncate 1 dòng, nút X bên phải
+- [ ] Khi `hasEmbed=true` nhưng post không có cover: chỉ hiện title, không có `<img>`
+- [ ] Khi `!hasEmbed`: header giữ nguyên chỉ nút close, không có title/thumbnail
+- [ ] Title dùng đúng typography `%title-1` (Inter bold 22px/32px)
+- [ ] `pnpm test` pass (spec mới + không regression)
+- [ ] `pnpm prettier:check` pass trên các file thay đổi
+- [ ] `pnpm build` (SSR) không lỗi
+
+## Open Questions
+
+- [x] Vị trí: trong top header, bên trái nút close
+- [x] Nguồn ảnh: `post.cover` (cả `file.url` lẫn `external.url`); không cover → ẩn ảnh
+- [x] Title: `%title-1`, 1 dòng truncate
+- [x] Có phải link không: không, chỉ hiển thị tĩnh

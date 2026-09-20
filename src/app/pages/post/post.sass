@@ -1,3 +1,15 @@
+@use '../../styles/colors'
+@use '../../styles/typography'
+
+.top-header
+  background-color: colors.$color-bg
+
+.post
+  &__embed-title
+    @extend %title-1
+  &__embed-thumbnail
+    border: 0.5px solid colors.$color-text-disabled
+
 .post--embed
   max-width: none !important
   margin: 0 !important

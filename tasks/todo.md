@@ -1,22 +1,32 @@
-# Tasks: Fullscreen Embed Mode
+# Todo: Title + Thumbnail cho post embed
 
-## Phase 1: Post Page Layout
+## Task 1: Thêm coverUrl getter + template title/thumbnail + style
 
-- [ ] Task 1: Wire hideTitle + hideRelevantPosts + post--embed CSS class
-  - Acceptance: Khi `hasEmbed=true`, title/date ẩn, relevant posts ẩn, section mở rộng full width
-  - Verify: `ng build` thành công
-  - Files: `src/app/pages/post/post.html`, `src/app/pages/post/post.sass`, `post-content-section.html`, `post-content-section.ts`
+- [ ] Header dùng `justify-between` khi `hasEmbed`, `justify-end` khi không
+- [ ] `hasEmbed=true` + có cover: render img 40x40 + title truncate 1 dòng
+- [ ] `hasEmbed=true` + không cover: không render img, vẫn hiện title
+- [ ] `coverUrl` resolver trả đúng URL từ cả `file.url` lẫn `external.url`
+- [ ] Title dùng `%title-1` (Inter bold 22px/32px) qua `@extend`
 
-## Phase 2: Embed Component Fullscreen
+**Verify:** `pnpm build`; `pnpm prettier:check`; manual check header ở 2 chế độ
 
-- [ ] Task 2: Add fullscreen mode to NotionEmbedComponent
-  - Acceptance: Khi `fullscreen=true`, iframe dùng `100vw x 100dvh`; mặc định giữ auto-height cũ
-  - Verify: `ng build` thành công
-  - Files: `notion-embed-component.ts`, `.html`, `.sass`, `post-content-detail-section.html`, `post-content-detail-section.ts`
+**Files:** `post.ts`, `post.html`, `post.sass`
 
-## Checkpoint
+## Task 2: Test title + thumbnail behavior
 
-- [ ] Build thành công: `pnpm build`
-- [ ] Title/date ẩn trên page có embed
-- [ ] Iframe full width + height trên page có embed
-- [ ] Notion components khác (paragraph, image, video...) không bị ảnh hưởng
+- [ ] Test case embed + có cover pass (img src = cover URL, title present)
+- [ ] Test case embed + `cover:null` pass (không img, title present)
+- [ ] Test case non-embed pass (không title/thumb, close link vẫn đúng)
+- [ ] Toàn bộ suite `post.spec.ts` pass, không regression
+
+**Verify:** `pnpm test`; `pnpm prettier:check`
+
+**Files:** `post.spec.ts`
+
+## Checkpoint: Hoàn thành
+
+- [ ] Acceptance criteria Task 1 + Task 2 đạt
+- [ ] `pnpm test` pass (không regression)
+- [ ] `pnpm prettier:check` pass
+- [ ] `pnpm build` (SSR) thành công
+- [ ] Review human trước khi merge (Definition of Done)
